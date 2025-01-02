@@ -36,7 +36,7 @@ extension FoldersCoordinatorState {
         }
         
         func newRememberItem(for category: Int) {
-            state.nextItem = .editWordRememberItem(id: nil, categoriesIds: [category])
+            state.presentedItem = .editWordRememberItem(id: nil, categoriesIds: [category])
         }
         
         func editRememberItem(id: Int) {
