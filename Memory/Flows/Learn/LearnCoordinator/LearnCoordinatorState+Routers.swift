@@ -34,5 +34,13 @@ extension LearnCoordinatorState {
         func learnFolders() {
             state.nextItem = .learnFolders
         }
+
+        func learnFolder(id: Int) {
+            state.nextItem = .learnNewCards(folderId: id)
+        }
+
+        func reviewFolder(id: Int) {
+            state.nextItem = .reviewCards(folderId: id)
+        }
     }
 }

@@ -18,7 +18,7 @@ struct SelectFolderLearningModeView<T: MemorizeStore>: View where T.ViewState ==
             List {
                 Section("Remember Items") {
                     LearnRow(
-                        systemName: "plus.app",
+                        imageSystemName: "plus.app",
                         imageColor: Colors.actionColor,
                         title: "Learn new items",
                         description: "Learned today: \(store.viewState.learnedNewItemsTodayCount)"
@@ -28,7 +28,7 @@ struct SelectFolderLearningModeView<T: MemorizeStore>: View where T.ViewState ==
                     .listRowInsets(EdgeInsets())
 
                     LearnRow(
-                        systemName: "repeat.circle",
+                        imageSystemName: "repeat.circle",
                         imageColor: Colors.actionColor,
                         title: "Review items",
                         description: "Items to review: \(store.viewState.itemToReviewCount) (reviewed today: \(store.viewState.reviewedItemsTodayCount))"

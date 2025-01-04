@@ -9,5 +9,7 @@ enum LearnMainEvent {
     case showAllFolders
     case folderSelected(id: Int)
     case foldersExist(Result<Bool, Error>)
-    case favoriteFoldersFetched(Result<[FolderModel], Error>)
+    case favoriteFoldersFetched(Result<[LearnMainState.FavoriteFolderModel], Error>)
+    case learnNewItemsTapped(folderId: Int)
+    case reviewItemsTapped(folderId: Int)
 }

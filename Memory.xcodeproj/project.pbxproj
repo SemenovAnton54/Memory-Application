@@ -106,6 +106,9 @@
 		688C30E52D04F3FC00ECDEB6 /* FolderDetailsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C30DB2D04F3FC00ECDEB6 /* FolderDetailsFactory.swift */; };
 		688C30E62D04F3FC00ECDEB6 /* FolderDetailsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C30D82D04F3FC00ECDEB6 /* FolderDetailsReducer.swift */; };
 		688C30E72D04F3FC00ECDEB6 /* FolderDetailsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688C30DE2D04F3FC00ECDEB6 /* FolderDetailsViewState.swift */; };
+		6890F9222D29417200BBB87A /* LearnMainFavoriteFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6890F9212D29416400BBB87A /* LearnMainFavoriteFolderView.swift */; };
+		6890F9242D29450B00BBB87A /* FavoriteFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6890F9232D29450900BBB87A /* FavoriteFolderViewModel.swift */; };
+		6890F9262D2958D200BBB87A /* PressButtonStyleWithCustomPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6890F9252D2958CE00BBB87A /* PressButtonStyleWithCustomPadding.swift */; };
 		68B9624A2CDFE057003CF644 /* Publishers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B962492CDFE04D003CF644 /* Publishers+Extensions.swift */; };
 		68BA3FD52D0C910A006A86FE /* EditCategoryEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BA3FCC2D0C910A006A86FE /* EditCategoryEvent.swift */; };
 		68BA3FD62D0C910A006A86FE /* EditCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BA3FCD2D0C910A006A86FE /* EditCategoryPresenter.swift */; };
@@ -324,6 +327,9 @@
 		688C30DC2D04F3FC00ECDEB6 /* FolderDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailsState.swift; sourceTree = "<group>"; };
 		688C30DD2D04F3FC00ECDEB6 /* FolderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailsView.swift; sourceTree = "<group>"; };
 		688C30DE2D04F3FC00ECDEB6 /* FolderDetailsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailsViewState.swift; sourceTree = "<group>"; };
+		6890F9212D29416400BBB87A /* LearnMainFavoriteFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMainFavoriteFolderView.swift; sourceTree = "<group>"; };
+		6890F9232D29450900BBB87A /* FavoriteFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFolderViewModel.swift; sourceTree = "<group>"; };
+		6890F9252D2958CE00BBB87A /* PressButtonStyleWithCustomPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressButtonStyleWithCustomPadding.swift; sourceTree = "<group>"; };
 		68B962492CDFE04D003CF644 /* Publishers+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publishers+Extensions.swift"; sourceTree = "<group>"; };
 		68BA3FCC2D0C910A006A86FE /* EditCategoryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryEvent.swift; sourceTree = "<group>"; };
 		68BA3FCD2D0C910A006A86FE /* EditCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryPresenter.swift; sourceTree = "<group>"; };
@@ -514,7 +520,6 @@
 			isa = PBXGroup;
 			children = (
 				6827E1232D26C2AA00C69638 /* Mocks */,
-				6827E1222D26C2A500C69638 /* Helpers */,
 				6827E1212D26C29D00C69638 /* Tests */,
 			);
 			path = MemoryTests;
@@ -701,13 +706,6 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		6827E1222D26C2A500C69638 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
 		6827E1232D26C2AA00C69638 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -847,6 +845,15 @@
 				688C30DE2D04F3FC00ECDEB6 /* FolderDetailsViewState.swift */,
 			);
 			path = FolderDetails;
+			sourceTree = "<group>";
+		};
+		6890F9202D29415700BBB87A /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				6890F9232D29450900BBB87A /* FavoriteFolderViewModel.swift */,
+				6890F9212D29416400BBB87A /* LearnMainFavoriteFolderView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		68B962482CDFE044003CF644 /* Extensions */ = {
@@ -1031,7 +1038,7 @@
 		68CDC0042D0380EA0042CE81 /* LearnMain */ = {
 			isa = PBXGroup;
 			children = (
-				68CDC0522D047A7F0042CE81 /* Subviews */,
+				6890F9202D29415700BBB87A /* Subviews */,
 				68CDC0052D0380FC0042CE81 /* LearnMainEvent.swift */,
 				68CDC0062D0380FC0042CE81 /* LearnMainPresenter.swift */,
 				68CDC0072D0380FC0042CE81 /* LearnMainReducer.swift */,
@@ -1073,6 +1080,7 @@
 		68CDC03C2D046CF80042CE81 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				6890F9252D2958CE00BBB87A /* PressButtonStyleWithCustomPadding.swift */,
 				68CDC03D2D046CFD0042CE81 /* PressButtonStyle.swift */,
 			);
 			path = Buttons;
@@ -1092,13 +1100,6 @@
 				68CDC0482D047A5F0042CE81 /* FoldersListViewState.swift */,
 			);
 			path = FoldersList;
-			sourceTree = "<group>";
-		};
-		68CDC0522D047A7F0042CE81 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		68CDC0552D047A9D0042CE81 /* Subviews */ = {
@@ -1420,6 +1421,7 @@
 				683A17442D0F57A1003CD1BF /* LearnCoordinatorView.swift in Sources */,
 				683A17452D0F57A1003CD1BF /* LearnCoordinatorFactory.swift in Sources */,
 				6827E0D92D1EF88D00C69638 /* ImageViewModel.swift in Sources */,
+				6890F9242D29450B00BBB87A /* FavoriteFolderViewModel.swift in Sources */,
 				683A17462D0F57A1003CD1BF /* LearnRoute.swift in Sources */,
 				683A17472D0F57A1003CD1BF /* LearnCoordinatorState.swift in Sources */,
 				68D8E19E2CE522E600660E24 /* Character+Extensions.swift in Sources */,
@@ -1517,6 +1519,7 @@
 				68BA40122D0CCC68006A86FE /* RememberItemRow.swift in Sources */,
 				688C30E72D04F3FC00ECDEB6 /* FolderDetailsViewState.swift in Sources */,
 				680A85932CCEA2A5004EFC40 /* FeedbackRequest.swift in Sources */,
+				6890F9222D29417200BBB87A /* LearnMainFavoriteFolderView.swift in Sources */,
 				68CDC0492D047A5F0042CE81 /* FoldersListReducer.swift in Sources */,
 				68BA400F2D0CB4E7006A86FE /* RememberCardItemViewModel.swift in Sources */,
 				68CDC04A2D047A5F0042CE81 /* FoldersListPresenter.swift in Sources */,
@@ -1526,6 +1529,7 @@
 				6827E0C32D1DBEB700C69638 /* File.swift in Sources */,
 				6827E09A2D1C2D8F00C69638 /* ReviewCardsService.swift in Sources */,
 				68CDC04E2D047A5F0042CE81 /* FoldersListEvent.swift in Sources */,
+				6890F9262D2958D200BBB87A /* PressButtonStyleWithCustomPadding.swift in Sources */,
 				68CDC04F2D047A5F0042CE81 /* FoldersListRouterProtocol.swift in Sources */,
 				6827E1002D23FA8F00C69638 /* CorrectAnswerRoundedRectangle.swift in Sources */,
 				68CDC0502D047A5F0042CE81 /* FoldersListState.swift in Sources */,

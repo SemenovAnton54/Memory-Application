@@ -22,13 +22,12 @@ struct LearnMainView<T: MemorizeStore>: View where T.ViewState == LearnMainViewS
                             MainText("No favorite folders")
                         } else {
                             ForEach(store.viewState.favoriteFolders) { folder in
-                                FolderRow(
-                                    icon: folder.icon,
-                                    name: folder.name,
-                                    description: folder.description
-                                ) {
-                                    store.event(.folderSelected(id: folder.id))
-                                }
+                                LearnMainFavoriteFolderView(
+                                    favoriteFolderViewModel: folder,
+                                    event: { [weak store] in
+                                        store?.event($0)
+                                    }
+                                )
                                 .listRowInsets(EdgeInsets())
                             }
                         }
@@ -65,28 +64,47 @@ struct LearnMainView_Previews: PreviewProvider {
 
         init() {
             self.viewState = .init(
-                favoriteFolders: [.init(
-                    id: 1,
-                    name: "English",
-                    description: "Learning words of English, i want to know every word which i know",
-                    isFavorite: true,
-                    icon: "😆",
-                    image: nil
-                ),.init(
-                    id: 2,
-                    name: "Programming",
-                    description: "Programming is the art of building software",
-                    isFavorite: true,
-                    icon: "😱",
-                    image: nil
-                ),.init(
-                    id: 3,
-                    name: "Programming",
-                    description: "Programming is the art of building software",
-                    isFavorite: true,
-                    icon: "",
-                    image: nil
-                )],
+                favoriteFolders: [
+                    .init(
+                        folder: .init(
+                            id: 1,
+                            name: "English",
+                            description: "Learning words of English, i want to know every word which i know",
+                            isFavorite: true,
+                            icon: "😆",
+                            image: nil
+                        ),
+                        learnedNewItemsTodayCount: 1,
+                        itemToReviewCount: 2,
+                        reviewedItemsTodayCount: 3
+                    ),
+                    .init(
+                        folder: .init(
+                            id: 2,
+                            name: "Programming",
+                            description: "Programming is the art of building software",
+                            isFavorite: true,
+                            icon: "😱",
+                            image: nil
+                        ),
+                        learnedNewItemsTodayCount: 1,
+                        itemToReviewCount: 4,
+                        reviewedItemsTodayCount: 2
+                    ),
+                    .init(
+                        folder: .init(
+                            id: 3,
+                            name: "Programming",
+                            description: "Programming is the art of building software",
+                            isFavorite: true,
+                            icon: "",
+                            image: nil
+                        ),
+                        learnedNewItemsTodayCount: 5,
+                        itemToReviewCount: 1,
+                        reviewedItemsTodayCount: 2
+                    )
+                ],
                 isFoldersExists: true
             )
         }

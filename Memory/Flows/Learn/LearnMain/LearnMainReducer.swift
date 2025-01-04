@@ -18,6 +18,10 @@ struct LearnMainReducer {
             onAppear(state: &state)
         case let .foldersExist(result):
             onFoldersExist(result: result, state: &state)
+        case let .learnNewItemsTapped(folderId):
+            onLearnNewCardsTapped(folderId: folderId, state: &state)
+        case let .reviewItemsTapped(folderId):
+            onReviewCardsTapped(folderId: folderId, state: &state)
         }
     }
 }
@@ -27,6 +31,18 @@ struct LearnMainReducer {
 private extension LearnMainReducer {
     func onAppear(state: inout LearnMainState) {
         state.foldersExistsRequest = FeedbackRequest()
+    }
+
+    func onLearnNewCardsTapped(folderId: Int, state: inout LearnMainState) {
+        state.requestRoute {
+            $0.learnFolder(id: folderId)
+        }
+    }
+
+    func onReviewCardsTapped(folderId: Int, state: inout LearnMainState) {
+        state.requestRoute {
+            $0.reviewFolder(id: folderId)
+        }
     }
 
     func onFolderSelected(id: Int, state: inout LearnMainState) {
@@ -45,7 +61,7 @@ private extension LearnMainReducer {
         state.fetchFavoriteFoldersRequest = FeedbackRequest()
     }
 
-    func onFavoriteFoldersFetched(result: Result<[FolderModel], Error>, state: inout LearnMainState) {
+    func onFavoriteFoldersFetched(result: Result<[LearnMainState.FavoriteFolderModel], Error>, state: inout LearnMainState) {
         state.fetchFavoriteFoldersRequest = nil
 
         switch result {

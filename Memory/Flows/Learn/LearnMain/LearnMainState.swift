@@ -4,7 +4,13 @@
 //
 
 struct LearnMainState {
-    var favoriteFolders: [FolderModel] = []
+    struct FavoriteFolderModel {
+        let folder: FolderModel
+        let newCardsStatistics: LearnStatisticsModel
+        let reviewCardsStatistics: LearnStatisticsModel
+    }
+
+    var favoriteFolders: [FavoriteFolderModel] = []
     var foldersExists: Bool = false
 
     var fetchFavoriteFoldersRequest: FeedbackRequest<()>?

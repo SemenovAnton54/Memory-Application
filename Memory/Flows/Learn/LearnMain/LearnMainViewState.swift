@@ -4,6 +4,6 @@
 //
 
 struct LearnMainViewState {
-    let favoriteFolders: [FolderViewModel]
+    let favoriteFolders: [FavoriteFolderViewModel]
     let isFoldersExists: Bool
 }

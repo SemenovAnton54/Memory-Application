@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct LearnRow: View {
-    let systemName: String
+    let imageSystemName: String
     let imageColor: Color
     let title: String
     let description: String
@@ -16,7 +16,7 @@ struct LearnRow: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 20) {
-                Image(systemName: systemName)
+                Image(systemName: imageSystemName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity)
