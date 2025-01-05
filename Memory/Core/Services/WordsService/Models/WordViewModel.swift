@@ -20,7 +20,7 @@ struct WordViewModel: Equatable {
         transcription = model.transcription
         translation = model.translation
         examples = model.examples
-        images = model.images.enumerated().map { ImageViewModel(id: $0.offset, imageObject: $0.element) }
+        images = model.images.enumerated().map { ImageViewModel(id: $0.offset, imageType: $0.element) }
     }
 
     init(id: Int, word: String, transcription: String, translation: String, examples: [WordExampleModel], images: [ImageViewModel]) {

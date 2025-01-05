@@ -12,7 +12,7 @@ struct FolderModel {
     var desc: String?
     var isFavorite: Bool
     var icon: String?
-    var image: ImageObject?
+    var image: ImageType?
 
     init(from entity: FolderEntity) {
         id = entity.id
@@ -29,7 +29,7 @@ struct FolderModel {
         desc: String?,
         isFavorite: Bool,
         icon: String?,
-        image: ImageObject?
+        image: ImageType?
     ) {
         self.id = id
         self.name = name

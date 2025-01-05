@@ -12,7 +12,7 @@ struct WordModel: Equatable, Identifiable {
     let transcription: String
     let translation: String
     let examples: [WordExampleModel]
-    let images: [ImageObject]
+    let images: [ImageType]
 
     init(from object: WordEntity) {
         id = object.id
@@ -23,7 +23,7 @@ struct WordModel: Equatable, Identifiable {
         images = object.images
     }
 
-    init(id: Int, word: String, transcription: String, translation: String, examples: [WordExampleModel], images: [ImageObject]) {
+    init(id: Int, word: String, transcription: String, translation: String, examples: [WordExampleModel], images: [ImageType]) {
         self.id = id
         self.word = word
         self.transcription = transcription

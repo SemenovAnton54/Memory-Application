@@ -10,7 +10,7 @@ struct EditCategoryPresenter {
             title: state.name,
             description: state.description,
             icon: state.icon,
-            image: state.image.flatMap { ImageViewModel(id: 1, imageObject: $0) }
+            image: state.image.flatMap { ImageViewModel(id: 1, imageType: $0) }
         )
     }
 }

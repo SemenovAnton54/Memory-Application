@@ -29,10 +29,12 @@ struct LearnCoordinatorView: View {
         case .main:
             LearnMainView(store: state.learnMainStore())
         case let .editRememberItem(id):
-            EditWordRememberItemView(
-                store: state.editWordRememberItemStore(
-                    id: id,
-                    categoriesIds: nil
+            RememberItemCoordinatorFactory().makeView(
+                for: state.rememberItemCoordinatorState(
+                    router: .editWordRememberItem(
+                        id: id,
+                        categoriesIds: nil
+                    )
                 )
             )
         default:
@@ -50,15 +52,10 @@ struct LearnCoordinatorView: View {
             LearnCardView(store: state.learnNewCards(folderId: folderId))
         case let .reviewCards(folderId):
             LearnCardView(store: state.reviewCards(folderId: folderId))
-        case let .editRememberItem(id):
-            EditWordRememberItemView(
-                store: state.editWordRememberItemStore(
-                    id: id,
-                    categoriesIds: nil
-                )
-            )
         case .learnFolders:
             LearnFoldersListFactory.makeView(for: state.learnFoldersListStore())
+        case .editRememberItem:
+            EmptyView()
         }
     }
 }

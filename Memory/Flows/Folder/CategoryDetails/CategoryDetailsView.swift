@@ -22,7 +22,7 @@ struct CategoryDetailsView<T: MemorizeStore>: View where T.ViewState == Category
                 Section("Category") {
                     if let category = store.viewState.category {
                         DetailsSectionHeaderView(
-                            image: category.image.flatMap { ImageViewModel(imageObject: $0) },
+                            image: category.image.flatMap { ImageViewModel(imageType: $0) },
                             name: category.name,
                             icon: category.icon,
                             description: category.description

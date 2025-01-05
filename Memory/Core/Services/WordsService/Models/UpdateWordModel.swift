@@ -10,7 +10,7 @@ struct UpdateWordModel: Equatable {
     let word: String
     let translation: String
     let transcription: String
-    let images: [ImageObject]
+    let images: [ImageType]
     let examples: [WordExampleModel]
 
     init(
@@ -18,7 +18,7 @@ struct UpdateWordModel: Equatable {
         word: String,
         translation: String,
         transcription: String,
-        images: [ImageObject],
+        images: [ImageType],
         examples: [WordExampleModel]
     ) {
         self.id = id

@@ -12,7 +12,7 @@ struct CategoryModel {
     var name: String
     var desc: String?
     var icon: String?
-    var image: ImageObject?
+    var image: ImageType?
 
     init(from entity: CategoryEntity) {
         id = entity.id

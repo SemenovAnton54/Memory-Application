@@ -18,9 +18,9 @@ enum EditWordRememberItemEvent {
     case transcriptionDidChange(String)
     case isLearningChanged(Bool)
 
-    case addImage(PhotosPickerItem?)
+    case addImage
     case removeImage(id: Int)
-    case imageLoaded(Result<Data, Error>)
+    case imagesSelected([ImageType])
 
     case cancel
     case save

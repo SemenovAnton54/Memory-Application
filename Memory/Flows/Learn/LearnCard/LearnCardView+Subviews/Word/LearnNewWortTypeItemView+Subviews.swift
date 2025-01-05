@@ -110,8 +110,9 @@ extension LearnNewWortTypeItemView {
                         expandedExamples.toggleExistence(of: example)
                     }
 
-                    Divider()
-                        .background(Colors.actionColor)
+                    if example != examples.last {
+                        Divider()
+                    }
                 }
             }
         }

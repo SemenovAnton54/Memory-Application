@@ -18,6 +18,10 @@ struct MemoryApp: App {
         SpeechUtteranceService()
     }
 
+    static var imagePickerService: ImagePickerServiceProtocol {
+        PixabayImagePickerService()
+    }
+
     static var foldersService: FoldersServiceProtocol {
         FoldersServiceDecorator(
             dependencies: FoldersServiceDecorator.Dependencies(

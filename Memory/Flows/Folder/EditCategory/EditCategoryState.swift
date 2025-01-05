@@ -13,7 +13,7 @@ struct EditCategoryState {
     var name: String = ""
     var description: String = ""
     var icon: String = ""
-    var image: ImageObject?
+    var image: ImageType?
 
     var fetchCategoryRequest: FeedbackRequest<Int>?
     var createNewCategoryRequest: FeedbackRequest<NewCategoryModel>?

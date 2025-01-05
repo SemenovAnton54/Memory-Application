@@ -14,14 +14,14 @@ final class WordEntity {
     var transcription: String
     var translation: String
     var examples: [WordExampleModel]
-    var images: [ImageObject]
+    var images: [ImageType]
 
     init(
         id: Int,
         word: String,
         translation: String,
         transcription: String,
-        images: [ImageObject],
+        images: [ImageType],
         examples: [WordExampleModel]
     ) {
         self.id = id

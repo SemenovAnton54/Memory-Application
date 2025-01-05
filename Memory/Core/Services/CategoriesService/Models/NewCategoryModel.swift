@@ -10,9 +10,9 @@ struct NewCategoryModel {
     let name: String
     let desc: String?
     let icon: String
-    let image: ImageObject?
+    let image: ImageType?
 
-    init?(folderId: Int?, name: String, desc: String?, icon: String, image: ImageObject?) {
+    init?(folderId: Int?, name: String, desc: String?, icon: String, image: ImageType?) {
         guard !name.isEmpty else {
             return nil
         }

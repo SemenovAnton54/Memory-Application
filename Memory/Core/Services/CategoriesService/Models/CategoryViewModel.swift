@@ -10,7 +10,7 @@ struct CategoryViewModel: Identifiable {
     let name: String
     let description: String
     let icon: String
-    let image: ImageObject?
+    let image: ImageType?
 
     init(from model: CategoryModel) {
         id = model.id
@@ -20,7 +20,7 @@ struct CategoryViewModel: Identifiable {
         image = model.image
     }
 
-    init(id: Int, name: String, description: String, icon: String, image: ImageObject?) {
+    init(id: Int, name: String, description: String, icon: String, image: ImageType?) {
         self.id = id
         self.name = name
         self.description = description

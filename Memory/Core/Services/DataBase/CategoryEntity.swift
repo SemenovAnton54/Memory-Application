@@ -15,7 +15,7 @@ final class CategoryEntity {
     var isFavorite: Bool = false
     var desc: String?
     var icon: String?
-    var image: ImageObject?
+    var image: ImageType?
 
     init(
         id: Int,
@@ -23,7 +23,7 @@ final class CategoryEntity {
         name: String,
         desc: String? = nil,
         icon: String?,
-        image: ImageObject? = nil
+        image: ImageType? = nil
     ) {
         self.id = id
         self.folderId = folderId

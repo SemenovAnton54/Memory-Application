@@ -8,8 +8,6 @@ import SwiftUI
 import PhotosUI
 
 struct EditWordRememberItemReducer {
-    typealias LoadImageRequest = EditWordRememberItemState.LoadImageRequest
-
     func reduce(state: inout EditWordRememberItemState, event: EditWordRememberItemEvent) {
         switch event {
         case .save:
@@ -32,10 +30,10 @@ struct EditWordRememberItemReducer {
             onExampleTranslationChanged(id: id, translation: translation, state: &state)
         case let .deleteExample(id):
             onDeleteExample(id: id, state: &state)
-        case let .addImage(item):
-            onAddImage(item: item, state: &state)
-        case let .imageLoaded(result):
-            onImageLoaded(result: result, state: &state)
+        case .addImage:
+            onAddImage(state: &state)
+        case let .imagesSelected(images):
+            onImagesSelected(images: images, state: &state)
         case let .removeImage(id):
             onRemoveImage(id: id, state: &state)
         case let .itemFetched(result):
@@ -85,7 +83,7 @@ private extension EditWordRememberItemReducer {
         state.updateRequest = FeedbackRequest(
             UpdateRememberItemModel(
                 id: id,
-                categoryIds: state.categoriesIds,
+                categoryIds: state.rememberItem?.categoryIds ?? [],
                 type: .word,
                 word: UpdateWordModel(
                     id: id,
@@ -165,23 +163,18 @@ private extension EditWordRememberItemReducer {
         state.examples.removeAll(where: { $0.id == id })
     }
 
-    func onAddImage(item: PhotosPickerItem?, state: inout EditWordRememberItemState) {
-        guard let item else {
-            return
-        }
+    func onAddImage(state: inout EditWordRememberItemState) {
+        let word = state.word
 
-        state.loadImageRequest = FeedbackRequest(LoadImageRequest(loadImageRequest: item))
+        state.requestRoute { router, onEvent in
+            router.imagePicker(text: word) {
+                onEvent(.imagesSelected($0))
+            }
+        }
     }
 
-    func onImageLoaded(result: Result<Data, Error>, state: inout EditWordRememberItemState) {
-        state.loadImageRequest = nil
-
-        switch result {
-        case let .success(data):
-            state.images.append(.data(data))
-        case .failure:
-            break
-        }
+    func onImagesSelected(images: [ImageType], state: inout EditWordRememberItemState) {
+        state.images.append(contentsOf: images)
     }
 
     func onRemoveImage(id: Int, state: inout EditWordRememberItemState) {

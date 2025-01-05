@@ -29,10 +29,12 @@ struct FoldersCoordinatorView: View {
         case let .editFolder(id):
             EditFolderView(store: state.folderStore(id: id))
         case let .editWordRememberItem(id, categoriesIds):
-            EditWordRememberItemView(
-                store: state.editWordRememberItemStore(
-                    id: id,
-                    categoriesIds: categoriesIds
+            RememberItemCoordinatorFactory().makeView(
+                for: state.rememberItemCoordinatorState(
+                    router: .editWordRememberItem(
+                        id: id,
+                        categoriesIds: categoriesIds
+                    )
                 )
             )
         case let .editCategory(id, folderId):

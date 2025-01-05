@@ -1,11 +1,11 @@
 //
-//  ImageObject.swift
+//  ImageType.swift
 //  Memory
 //
 
 import Foundation
 
-enum ImageObject: Hashable, Codable {
+enum ImageType: Hashable, Codable {
     case remote(URL)
     case systemName(String)
     case local(String)

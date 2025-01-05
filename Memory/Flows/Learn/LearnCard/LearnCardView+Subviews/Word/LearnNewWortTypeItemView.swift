@@ -39,7 +39,7 @@ struct LearnNewWortTypeItemView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(wordViewModel.images) {
-                            ImageView(imageObject: $0)
+                            ImageView(imageViewModel: $0)
                                 .scaledToFit()
                                 .frame(height: 150)
                                 .cornerRadius(12)

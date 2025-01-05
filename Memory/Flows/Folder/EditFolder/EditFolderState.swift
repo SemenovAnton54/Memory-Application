@@ -13,7 +13,7 @@ struct EditFolderState {
     var description: String = ""
     var icon: String = ""
     var isFavorite: Bool = false
-    var image: ImageObject?
+    var image: ImageType?
 
     var fetchFolderRequest: FeedbackRequest<Int>?
     var createNewFolderRequest: FeedbackRequest<NewFolderModel>?

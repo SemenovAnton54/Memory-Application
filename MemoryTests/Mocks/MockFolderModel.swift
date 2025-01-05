@@ -12,7 +12,7 @@ enum MockFolderModel {
         desc: String? = "Description",
         isFavorite: Bool = false,
         icon: String? = "🥹",
-        image: ImageObject? = .systemName("Mock Image")
+        image: ImageType? = .systemName("Mock Image")
     ) -> FolderModel {
         FolderModel(
             id: id,
@@ -29,7 +29,7 @@ enum MockFolderModel {
         desc: String? = "Mock Description",
         isFavorite: Bool = false,
         icon: String = "😇",
-        image: ImageObject? = .systemName("Mock image")
+        image: ImageType? = .systemName("Mock image")
     ) -> NewFolderModel {
         NewFolderModel(
             name: name,
@@ -46,7 +46,7 @@ enum MockFolderModel {
         desc: String? = "Mock Description",
         isFavorite: Bool = false,
         icon: String = "😇",
-        image: ImageObject? = .systemName("Mock image")
+        image: ImageType? = .systemName("Mock image")
     ) -> UpdateFolderModel {
         UpdateFolderModel(
             id: id,

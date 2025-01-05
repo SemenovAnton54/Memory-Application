@@ -11,7 +11,7 @@ struct EditWordRememberItemPresenter {
             word: state.word,
             translation: state.translation,
             transcription: state.transcription,
-            images: state.images.enumerated().map { ImageViewModel(id: $0.offset, imageObject: $0.element) },
+            images: state.images.enumerated().map { ImageViewModel(id: $0.offset, imageType: $0.element) },
             isLearning: state.isLearning,
             examples: state.examples
         )

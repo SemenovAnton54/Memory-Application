@@ -11,7 +11,7 @@ struct EditFolderPresenter {
             description: state.description,
             icon: state.icon,
             isFavorite: state.isFavorite,
-            image: state.image.flatMap(ImageViewModel.init(imageObject:))
+            image: state.image.flatMap(ImageViewModel.init(imageType:))
         )
     }
 }

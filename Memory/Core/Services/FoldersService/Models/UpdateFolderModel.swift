@@ -12,9 +12,9 @@ struct UpdateFolderModel {
     let desc: String?
     let isFavorite: Bool
     let icon: String
-    let image: ImageObject?
+    let image: ImageType?
 
-    init?(id: Int, name: String, desc: String?, isFavorite: Bool, icon: String, image: ImageObject?) {
+    init?(id: Int, name: String, desc: String?, isFavorite: Bool, icon: String, image: ImageType?) {
         guard !name.isEmpty else {
             return nil
         }

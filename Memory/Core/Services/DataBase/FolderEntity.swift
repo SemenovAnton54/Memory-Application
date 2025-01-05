@@ -14,7 +14,7 @@ final class FolderEntity {
     var desc: String?
     var isFavorite: Bool = false
     var icon: String?
-    var image: ImageObject?
+    var image: ImageType?
 
     @Relationship(deleteRule: .deny)
     var categories: [CategoryEntity] = []
@@ -25,7 +25,7 @@ final class FolderEntity {
         desc: String? = nil,
         isFavorite: Bool = false,
         icon: String?,
-        image: ImageObject? = nil
+        image: ImageType? = nil
     ) {
         self.id = id
         self.name = name

@@ -8,10 +8,6 @@ import Foundation
 struct EditWordRememberItemFactory {
     typealias RememberItemRequest = EditWordRememberItemState.RememberItemRequest
 
-    enum EditWordRememberItemError: Error {
-        case imageNotFound
-    }
-
     struct Arguments {
         let id: Int?
         let categoriesIds: [Int]?
@@ -42,7 +38,6 @@ struct EditWordRememberItemFactory {
             present: EditWordRememberItemPresenter().present,
             feedback: [
                 makeRoutingLoop(router: router),
-                makeLoadImageRequestLoop(),
                 makeCreateRememberItemRequestLoop(),
                 makeUpdateRememberItemRequestLoop(),
                 makeFetchRememberItemRequest(),
@@ -58,20 +53,6 @@ struct EditWordRememberItemFactory {
 typealias EditWordRememberItemFeedbackLoop = FeedbackLoop<EditWordRememberItemState, EditWordRememberItemEvent>
 
 extension EditWordRememberItemFactory {
-    func makeLoadImageRequestLoop() -> EditWordRememberItemFeedbackLoop {
-        react(request: \.loadImageRequest) { request in
-            do {
-                guard let data = try await request.loadImageRequest.loadTransferable(type: Data.self) else {
-                    return .imageLoaded(.failure(EditWordRememberItemError.imageNotFound))
-                }
-                
-                return .imageLoaded(.success(data))
-            } catch {
-                return .imageLoaded(.failure(error))
-            }
-        }
-    }
-
     func makeFetchRememberItemRequest() -> EditWordRememberItemFeedbackLoop {
         react(request: \.fetchRequest) { request in
             do {

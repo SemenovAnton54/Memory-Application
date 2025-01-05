@@ -10,7 +10,7 @@ struct WordExampleModel: Codable, Hashable, Identifiable {
 
     var example: String
     var translation: String
-    var imageObject: ImageObject?
+    var imageObject: ImageType?
 
     init(example: String, translation: String) {
         id = UUID()

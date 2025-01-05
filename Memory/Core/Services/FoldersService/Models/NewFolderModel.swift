@@ -10,9 +10,9 @@ struct NewFolderModel {
     let desc: String?
     let isFavorite: Bool
     let icon: String
-    let image: ImageObject?
+    let image: ImageType?
 
-    init?(name: String, desc: String?, isFavorite: Bool, icon: String, image: ImageObject?) {
+    init?(name: String, desc: String?, isFavorite: Bool, icon: String, image: ImageType?) {
         guard !name.isEmpty else {
             return nil
         }

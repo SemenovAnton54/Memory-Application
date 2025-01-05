@@ -14,7 +14,7 @@ struct DetailsSectionHeaderView: View {
     var body: some View {
         if let image {
             HStack(alignment: .center) {
-                ImageView(imageObject: image)
+                ImageView(imageViewModel: image)
                     .aspectRatio(contentMode: .fill)
                     .frame(maxHeight: 150, alignment: .center)
             }

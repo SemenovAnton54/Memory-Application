@@ -11,7 +11,7 @@ struct FolderViewModel: Identifiable {
     let description: String
     let isFavorite: Bool
     let icon: String
-    let image: ImageObject?
+    let image: ImageType?
 
     init(from model: FolderModel) {
         id = model.id
@@ -22,7 +22,7 @@ struct FolderViewModel: Identifiable {
         image = model.image
     }
 
-    init(id: Int, name: String, description: String, isFavorite: Bool, icon: String, image: ImageObject?) {
+    init(id: Int, name: String, description: String, isFavorite: Bool, icon: String, image: ImageType?) {
         self.id = id
         self.name = name
         self.description = description

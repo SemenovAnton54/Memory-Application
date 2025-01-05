@@ -5,15 +5,20 @@
 
 struct ImageViewModel: Identifiable, Equatable {
     let id: Int
-    let imageObject: ImageObject
+    let imageType: ImageType
 
-    init(id: Int, imageObject: ImageObject) {
+    init(id: Int, imageType: ImageType) {
         self.id = id
-        self.imageObject = imageObject
+        self.imageType = imageType
     }
 
-    init(imageObject: ImageObject) {
+    init(imageType: ImageType) {
         id = -1
-        self.imageObject = imageObject
+        self.imageType = imageType
+    }
+
+    init(from: ImageModel) {
+        id = from.id
+        imageType = from.imageType
     }
 }

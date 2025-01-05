@@ -41,7 +41,7 @@ struct EditFolderView<T: MemorizeStore>: View where T.ViewState == EditFolderVie
                         ) {
                             ZStack(alignment: .topTrailing) {
                                 if let image = store.viewState.image {
-                                    ImageView(imageObject: image)
+                                    ImageView(imageViewModel: image)
                                         .aspectRatio(contentMode: .fit)
                                         .frame(maxHeight: 150)
 

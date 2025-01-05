@@ -12,7 +12,7 @@ extension EditWordRememberItemView {
 
         var body: some View {
             ZStack(alignment: .topTrailing) {
-                ImageView(imageObject: imageModel)
+                ImageView(imageViewModel: imageModel)
                     .scaledToFit()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxHeight: 150)

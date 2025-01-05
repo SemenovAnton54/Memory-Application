@@ -18,8 +18,8 @@ final class LearnCoordinatorState: ObservableObject {
     private weak var _startFolderLearningModeStore: DefaultMemorizeStore<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState>? = nil
     private weak var _learnNewCardsStore: DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState>? = nil
     private weak var _reviewCardsStore: DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState>? = nil
-    private weak var _editWordRememberItemStore: DefaultMemorizeStore<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState>? = nil
     private weak var _learnFoldersListStore: DefaultMemorizeStore<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState>? = nil
+    private weak var _rememberItemCoordinatorState: RememberItemCoordinatorState?
 
     let onClose: () -> Void
     
@@ -138,27 +138,21 @@ final class LearnCoordinatorState: ObservableObject {
         return nextCoordinatorState
     }
 
-    func editWordRememberItemStore(id: Int?, categoriesIds: [Int]?) -> DefaultMemorizeStore<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState> {
-        guard let _editWordRememberItemStore else {
-            let store = EditWordRememberItemFactory(
-                dependencies: EditWordRememberItemFactory.Dependencies(rememberItemsService: MemoryApp.rememberItemsService)
-            ).makeStore(
-                arguments: EditWordRememberItemFactory.Arguments(
-                    id: id,
-                    categoriesIds: categoriesIds
-                ),
-                router: self
-            )
-            _editWordRememberItemStore = store
+    func rememberItemCoordinatorState(router: RememberItemRouter) -> RememberItemCoordinatorState {
+        guard let _rememberItemCoordinatorState else {
+            let store = RememberItemCoordinatorState(route: router) { [weak self] in
+                self?.presentedItem = nil
+            }
+            _rememberItemCoordinatorState = store
 
             return store
         }
 
-        return _editWordRememberItemStore
+        return _rememberItemCoordinatorState
     }
 }
 
-extension LearnCoordinatorState: SelectFolderLearningModeRouterProtocol, EditWordRememberItemRouterProtocol {
+extension LearnCoordinatorState: SelectFolderLearningModeRouterProtocol {
     func learnNewCards(folderId: Int) {
         nextItem = .learnNewCards(folderId: folderId)
     }

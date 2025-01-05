@@ -10,7 +10,7 @@ struct NewWordModel: Equatable {
     let repeatLevel: RepeatLevel
     let translation: String
     let transcription: String
-    let images: [ImageObject]
+    let images: [ImageType]
     let examples: [WordExampleModel]
 
     init(
@@ -18,7 +18,7 @@ struct NewWordModel: Equatable {
         repeatLevel: RepeatLevel,
         translation: String,
         transcription: String,
-        images: [ImageObject],
+        images: [ImageType],
         examples: [WordExampleModel]
     ) {
         self.word = word.trimmingCharacters(in: .whitespacesAndNewlines)

@@ -64,7 +64,7 @@ extension EditFolderReducer {
             return
         }
 
-        state.loadImageRequest = .init(image)
+        state.loadImageRequest = FeedbackRequest(image)
     }
 
     func onImageLoaded(_ result: Result<Data, Error>, state: inout EditFolderState) {

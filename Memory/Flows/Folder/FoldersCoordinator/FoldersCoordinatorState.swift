@@ -16,15 +16,15 @@ final class FoldersCoordinatorState: ObservableObject {
 
     private weak var _nextCoordinatorState: FoldersCoordinatorState?
 
-    private weak var _foldersListStore: (DefaultMemorizeStore<FoldersListState, FoldersListEvent, FoldersListViewState>)? = nil
+    private weak var _foldersListStore: (DefaultMemorizeStore<FoldersListState, FoldersListEvent, FoldersListViewState>)?
 
-    private weak var _editFolderStore: (DefaultMemorizeStore<EditFolderState, EditFolderEvent, EditFolderViewState>)? = nil
-    private weak var _editCategoryStore: (DefaultMemorizeStore<EditCategoryState, EditCategoryEvent, EditCategoryViewState>)? = nil
+    private weak var _editFolderStore: (DefaultMemorizeStore<EditFolderState, EditFolderEvent, EditFolderViewState>)?
+    private weak var _editCategoryStore: (DefaultMemorizeStore<EditCategoryState, EditCategoryEvent, EditCategoryViewState>)?
 
-    private weak var _folderDetailsStore: DefaultMemorizeStore<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState>? = nil
-    private weak var _categoryDetailsStore: DefaultMemorizeStore<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState>? = nil
+    private weak var _folderDetailsStore: DefaultMemorizeStore<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState>?
+    private weak var _categoryDetailsStore: DefaultMemorizeStore<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState>?
 
-    private weak var _editWordRememberItemStore: DefaultMemorizeStore<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState>? = nil
+    private weak var _rememberItemCoordinatorState: RememberItemCoordinatorState?
 
     init(route: FoldersRoute, onClose: @escaping () -> Void) {
         self.onClose = onClose
@@ -118,23 +118,17 @@ final class FoldersCoordinatorState: ObservableObject {
         return _categoryDetailsStore
     }
 
-    func editWordRememberItemStore(id: Int?, categoriesIds: [Int]?) -> DefaultMemorizeStore<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState> {
-        guard let _editWordRememberItemStore else {
-            let store = EditWordRememberItemFactory(
-                dependencies: EditWordRememberItemFactory.Dependencies(rememberItemsService: MemoryApp.rememberItemsService)
-            ).makeStore(
-                arguments: EditWordRememberItemFactory.Arguments(
-                    id: id,
-                    categoriesIds: categoriesIds
-                ),
-                router: self
-            )
-            _editWordRememberItemStore = store
+    func rememberItemCoordinatorState(router: RememberItemRouter) -> RememberItemCoordinatorState {
+        guard let _rememberItemCoordinatorState else {
+            let store = RememberItemCoordinatorState(route: router) { [weak self] in
+                self?.presentedItem = nil
+            }
+            _rememberItemCoordinatorState = store
 
             return store
         }
 
-        return _editWordRememberItemStore
+        return _rememberItemCoordinatorState
     }
 
     func nextItemCoordinatorState(for route: FoldersRoute) -> FoldersCoordinatorState? {
@@ -158,8 +152,7 @@ final class FoldersCoordinatorState: ObservableObject {
 
 extension FoldersCoordinatorState: FoldersListRouterProtocol,
         EditFolderRouterProtocol,
-        EditCategoryRouterProtocol,
-        EditWordRememberItemRouterProtocol {
+        EditCategoryRouterProtocol {
     func editCategory(id: Int) {
         presentedItem = .editCategory(id: id, folderId: nil)
     }

@@ -22,7 +22,7 @@ struct FolderDetailsView<T: MemorizeStore>: View where T.ViewState == FolderDeta
                 Section("Folder") {
                     if let folder = store.viewState.folder {
                         DetailsSectionHeaderView(
-                            image: folder.image.flatMap { ImageViewModel(imageObject: $0) },
+                            image: folder.image.flatMap { ImageViewModel(imageType: $0) },
                             name: folder.name,
                             icon: folder.icon,
                             description: folder.description

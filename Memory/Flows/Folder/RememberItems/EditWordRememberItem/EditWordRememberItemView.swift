@@ -56,11 +56,11 @@ struct EditWordRememberItemView<T: MemorizeStore>: View where T.ViewState == Edi
                         ZStack {
                             HStack {
                                 Spacer()
-                                PhotosPicker(
-                                    selection: binding(nil) { store.event(.addImage($0)) } ,
-                                    matching: .images
-                                ) {
-                                    HStack() {
+//                                PhotosPicker(
+//                                    selection: binding(nil) { store.event(.addImage($0)) } ,
+//                                    matching: .images
+//                                ) {
+//                                    HStack() {
                                         ForEach(store.viewState.images) { image in
                                             SelectedImage(
                                                 removeImage: { [weak store] in
@@ -78,8 +78,13 @@ struct EditWordRememberItemView<T: MemorizeStore>: View where T.ViewState == Edi
                                             .foregroundStyle(Colors.actionColor)
                                             .background(Colors.backgroundSecondary)
                                             .cornerRadius(20)
-                                    }
-                                }
+                                            .onTapGesture {
+                                                store.event(.addImage)
+                                            }
+//                                    }
+//                                }
+
+
                                 Spacer()
                             }
                         }
@@ -190,7 +195,7 @@ struct EditWordRememberItemView_Previews: PreviewProvider {
 
         init() {
             self.viewState = .init(
-                isLoading: true,
+                isLoading: false,
                 isNewRememberItem: true,
                 word: "Repeat",
                 translation: "Повторить",

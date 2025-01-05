@@ -9,15 +9,18 @@ import Kingfisher
 struct ImageView: View {
     let imageViewModel: ImageViewModel
 
-    init(imageObject: ImageViewModel) {
-        self.imageViewModel = imageObject
+    init(imageViewModel: ImageViewModel) {
+        self.imageViewModel = imageViewModel
     }
 
     var body: some View {
         ZStack {
-            switch imageViewModel.imageObject {
+            switch imageViewModel.imageType {
             case .remote(let url):
                 KFImage.url(url)
+                    .placeholder {
+                        ProgressView()
+                    }
                     .resizable()
             case .systemName(let string):
                 Image(systemName: string)
