@@ -10,3 +10,13 @@
 Whether you're studying for exams, learning a new language, or just trying to remember important details, **Memory** is your go-to tool for effective learning.  
 
 ![Demo of Memory app](gitAssets/memory-demo.gif)
+
+## Installation
+
+To use this app, you need to add a file named `APIKeys.swift` to your project and include your API keys.
+
+```swift
+enum APIKeys {
+    static let pixabay: String = "<YOUR_API_KEY>"
+}
+
