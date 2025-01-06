@@ -26,8 +26,8 @@ struct CategoryDetailsFactory {
         let store = DefaultMemorizeStore(
             initialState: CategoryDetailsState(
                 id: arguments.id,
-                categoryRequest: FeedbackRequest(CategoryRequest(id: arguments.id)),
-                rememberItemsRequest: FeedbackRequest(RememberItemsRequest(categoryId: arguments.id))
+                fetchCategoryRequest: FeedbackRequest(CategoryRequest(id: arguments.id)),
+                fetchRememberItemsRequest: FeedbackRequest(RememberItemsRequest(categoryId: arguments.id))
             ),
             reduce: CategoryDetailsReducer().reduce,
             present: CategoryDetailsPresenter().present,
@@ -52,7 +52,7 @@ typealias CategoryDetailsFeedbackLoop = FeedbackLoop<CategoryDetailsState, Categ
 
 extension CategoryDetailsFactory {
     func makeFetchCategoryRequestLoop() -> CategoryDetailsFeedbackLoop {
-        react(request: \.categoryRequest) { request in
+        react(request: \.fetchCategoryRequest) { request in
             do {
                 let model = try await dependencies.categoriesService.fetchCategory(id: request.id)
 
@@ -119,7 +119,7 @@ extension CategoryDetailsFactory {
     }
 
     func makeFetchRememberItemsRequestLoop() -> CategoryDetailsFeedbackLoop {
-        react(request: \.rememberItemsRequest) { request in
+        react(request: \.fetchRememberItemsRequest) { request in
             do {
                 let models = try await dependencies.rememberItemsService.fetchItems(for: request.categoryId)
 

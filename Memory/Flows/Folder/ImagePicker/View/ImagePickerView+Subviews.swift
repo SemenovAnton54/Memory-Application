@@ -25,4 +25,33 @@ extension ImagePickerView {
             }
         }
     }
+
+    struct ImagesSectionView: View {
+        let title: String
+        let emptyListTitle: String
+        let isLoading: Bool
+        let imagesStates: [ImagePickerViewState.ImageViewState]
+        let onImageTap: (ImageViewModel) -> Void
+
+        var body: some View {
+            VStack {
+                SecondText(title)
+                LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 0) {
+                    ForEach(imagesStates) { image in
+                        GridImageView(image: image.imageViewModel, isSelected: image.isSelected)
+                            .onTapGesture {
+                                onImageTap(image.imageViewModel)
+                            }
+                    }
+                }
+
+                if isLoading {
+                    ProgressView()
+                } else if imagesStates.isEmpty {
+                    MainText(emptyListTitle)
+                        .padding(.bottom, 20)
+                }
+            }
+        }
+    }
 }

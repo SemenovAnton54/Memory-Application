@@ -55,34 +55,10 @@ struct LearnCardView<T: MemorizeStore>: View where T.ViewState == LearnCardViewS
 
                             Bottom(
                                 rememberAction: {
-                                    withAnimation(.easeIn(duration: 0.2)) {
-                                        cardXOffset = -500
-                                    } completion: {
-                                        showAnimation = true
-                                    }
-
-                                    withAnimation(.easeIn(duration: 0.05).delay(0.2)) {
-                                        cardScaleEffect = 0.7
-                                        cardOpacityEffect = 0
-                                    } completion: {
-                                        cardXOffset = 0
-                                        store.event(.remember)
-                                    }
+                                    swipeAnimation(offset: -500)
                                 },
                                 repeatAction: {
-                                    withAnimation(.easeIn(duration: 0.2)) {
-                                        cardXOffset = 500
-                                    } completion: {
-                                        showAnimation = true
-                                    }
-
-                                    withAnimation(.easeIn(duration: 0.05).delay(0.2)) {
-                                        cardScaleEffect = 0.7
-                                        cardOpacityEffect = 0
-                                    } completion: {
-                                        cardXOffset = 0
-                                        store.event(.notRemember)
-                                    }
+                                    swipeAnimation(offset: 500)
                                 }
                             )
                             .frame(maxHeight: .infinity, alignment: .bottom)
@@ -132,6 +108,22 @@ struct LearnCardView<T: MemorizeStore>: View where T.ViewState == LearnCardViewS
             withAnimation {
                 showAnimation = false
             }
+        }
+    }
+
+    func swipeAnimation(offset: CGFloat) {
+        withAnimation(.easeIn(duration: 0.2)) {
+            cardXOffset = offset
+        } completion: {
+            showAnimation = true
+        }
+
+        withAnimation(.easeIn(duration: 0.05).delay(0.2)) {
+            cardScaleEffect = 0.7
+            cardOpacityEffect = 0
+        } completion: {
+            cardXOffset = 0
+            store.event(.remember)
         }
     }
 }

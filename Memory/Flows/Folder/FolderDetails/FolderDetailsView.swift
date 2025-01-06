@@ -43,7 +43,7 @@ struct FolderDetailsView<T: MemorizeStore>: View where T.ViewState == FolderDeta
                                 name: category.name,
                                 description: category.description
                             ) {
-                                store.event(.categoryDetailsTapped(id: category.id))
+                                store.event(.categoryDetails(id: category.id))
                             }
                             .listRowInsets(EdgeInsets())
                         }
@@ -66,7 +66,7 @@ struct FolderDetailsView<T: MemorizeStore>: View where T.ViewState == FolderDeta
                 }
                 .confirmationDialog("Select option", isPresented: $showingOptions, titleVisibility: .visible) {
                     Button("Edit") {
-                        store.event(.editFolderTapped)
+                        store.event(.editFolder)
                     }
 
                     Button("Delete", role: .destructive) {
@@ -75,7 +75,7 @@ struct FolderDetailsView<T: MemorizeStore>: View where T.ViewState == FolderDeta
                 }
                 .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
                     Button("Yes", role: .destructive) {
-                        store.event(.deleteFolderTapped)
+                        store.event(.deleteFolder)
                     }
 
                     Button("No") {
@@ -86,7 +86,7 @@ struct FolderDetailsView<T: MemorizeStore>: View where T.ViewState == FolderDeta
 
             VStack {
                 Spacer()
-                Button(action: { store.event(.addCategoryTapped) }) {
+                Button(action: { store.event(.addCategory) }) {
                     HStack {
                         Image(systemName: "plus")
                             .foregroundStyle(.white)

@@ -56,34 +56,26 @@ struct EditWordRememberItemView<T: MemorizeStore>: View where T.ViewState == Edi
                         ZStack {
                             HStack {
                                 Spacer()
-//                                PhotosPicker(
-//                                    selection: binding(nil) { store.event(.addImage($0)) } ,
-//                                    matching: .images
-//                                ) {
-//                                    HStack() {
-                                        ForEach(store.viewState.images) { image in
-                                            SelectedImage(
-                                                removeImage: { [weak store] in
-                                                    store?.event(.removeImage(id: image.id))
-                                                },
-                                                imageModel: image
-                                            )
-                                        }
+                                ForEach(store.viewState.images) { image in
+                                    SelectedImage(
+                                        removeImage: { [weak store] in
+                                            store?.event(.removeImage(id: image.id))
+                                        },
+                                        imageModel: image
+                                    )
+                                }
 
-                                        Image(systemName: "plus.app")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 40, height: 40)
-                                            .padding()
-                                            .foregroundStyle(Colors.actionColor)
-                                            .background(Colors.backgroundSecondary)
-                                            .cornerRadius(20)
-                                            .onTapGesture {
-                                                store.event(.addImage)
-                                            }
-//                                    }
-//                                }
-
+                                Image(systemName: "plus.app")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                    .padding()
+                                    .foregroundStyle(Colors.actionColor)
+                                    .background(Colors.backgroundSecondary)
+                                    .cornerRadius(20)
+                                    .onTapGesture {
+                                        store.event(.addImage)
+                                    }
 
                                 Spacer()
                             }
@@ -177,7 +169,8 @@ extension EditWordRememberItemView {
                     Button(action: delete) {
                         ZStack {
                             Image(systemName: "xmark.circle.fill")
-                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                     .frame(width: 50, height: 50, alignment: .trailing)
                     .padding(.top, -25)

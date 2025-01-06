@@ -21,36 +21,30 @@ struct ImagePickerView<T: MemorizeStore>: View where T.ViewState == ImagePickerV
     var body: some View {
         ZStack {
             ScrollView {
-                SecondText("Images from Gallery")
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 0) {
-                    ForEach(store.viewState.customImages) { image in
-                        GridImageView(image: image, isSelected: true)
-                            .onTapGesture {
-                                store.event(.removeImageFromGallery(id: image.id))
-                            }
+                ImagesSectionView(
+                    title: "Images from Gallery",
+                    emptyListTitle: "No images selected",
+                    isLoading: false,
+                    imagesStates: store.viewState.customImages.map {
+                        .init(
+                            imageViewModel: $0,
+                            isSelected: true
+                        )
+                    },
+                    onImageTap: {
+                        store.event(.removeImageFromGallery(id: $0.id))
                     }
-                }
+                )
 
-                if store.viewState.customImages.isEmpty {
-                    MainText("No images selected")
-                        .padding(.bottom, 20)
-                }
-
-                SecondText("Images from Bypixel")
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 0) {
-                    ForEach(store.viewState.imagesStates) { imageState in
-                        GridImageView(image: imageState.imageViewModel, isSelected: imageState.isSelected)
-                            .onTapGesture {
-                                store.event(.toggleImageSelection(id: imageState.imageViewModel.id))
-                            }
+                ImagesSectionView(
+                    title: "Images from Bypixel",
+                    emptyListTitle: "No images found",
+                    isLoading: store.viewState.isLoading,
+                    imagesStates: store.viewState.imagesStates,
+                    onImageTap: {
+                        store.event(.removeImageFromGallery(id: $0.id))
                     }
-                }
-
-                if store.viewState.isLoading {
-                    ProgressView()
-                } else if store.viewState.imagesStates.isEmpty {
-                    MainText("No images found")
-                }
+                )
             }
 
             VStack {

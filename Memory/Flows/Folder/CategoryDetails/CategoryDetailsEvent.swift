@@ -6,15 +6,16 @@
 enum CategoryDetailsEvent {
     case categoryFetched(Result<CategoryModel, Error>)
     case categoryDeleted(Result<CategoryModel, Error>)
+    
     case rememberItemsFetched(Result<[RememberCardItemModel], Error>)
     case rememberItemDeleted(Result<RememberCardItemModel, Error>)
 
-    case addRememberItemTapped
-    case editCategoryTapped
-    case deleteCategoryTapped
+    case addRememberItem
+    case editCategory
+    case deleteCategory
 
     case categoryChanged
 
-    case editRememberItemTapped(id: Int)
-    case deleteRememberItemTapped(id: Int)
+    case editRememberItem(id: Int)
+    case deleteRememberItem(id: Int)
 }

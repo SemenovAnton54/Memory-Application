@@ -79,6 +79,7 @@ extension EditCategoryReducer {
             state.name = model.name
             state.description = model.desc ?? ""
             state.icon = model.icon ?? ""
+            state.folderId = model.folderId
             state.image = model.image
         case let .failure(error):
             break
@@ -113,6 +114,7 @@ extension EditCategoryReducer {
             state.description = model.desc ?? ""
             state.icon = model.icon ?? ""
             state.image = model.image
+            state.folderId = model.folderId
             state.requestRoute {
                 $0.close()
             }

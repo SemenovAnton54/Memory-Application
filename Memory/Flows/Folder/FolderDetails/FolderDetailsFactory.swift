@@ -23,7 +23,7 @@ struct FolderDetailsFactory {
             initialState: FolderDetailsState(
                 id: id,
                 fetchFolderRequest: FeedbackRequest(FolderRequest(id: id)),
-                categoriesRequest: FeedbackRequest(CategoriesRequest(folderId: id))
+                fetchCategoriesRequest: FeedbackRequest(CategoriesRequest(folderId: id))
             ),
             reduce: FolderDetailsReducer().reduce,
             present: FolderDetailsPresenter().present,
@@ -82,7 +82,7 @@ extension FolderDetailsFactory {
     }
 
     func makeFetchCategoriesRequestLoop() -> FolderDetailsFeedbackLoop {
-        react(request: \.categoriesRequest) { request in
+        react(request: \.fetchCategoriesRequest) { request in
             do {
                 let models = try await dependencies.categoriesService.fetchCategories(for: request.folderId)
 

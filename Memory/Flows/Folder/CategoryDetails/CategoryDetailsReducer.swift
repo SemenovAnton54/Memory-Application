@@ -12,22 +12,22 @@ struct CategoryDetailsReducer {
         switch event {
         case let .categoryFetched(result):
             onCategoryFetched(result: result, state: &state)
-        case .addRememberItemTapped:
-            onAddRememberTapped(state: &state)
-        case let .editRememberItemTapped(id):
-            onEditRememberItemTapped(id: id, state: &state)
-        case .editCategoryTapped:
-            onEditCategoryTapped(state: &state)
+        case .addRememberItem:
+            onAddRemember(state: &state)
+        case let .editRememberItem(id):
+            onEditRememberItem(id: id, state: &state)
+        case .editCategory:
+            onEditCategory(state: &state)
         case let .rememberItemsFetched(result):
             onRememberItemsFetched(result: result, state: &state)
         case .categoryChanged:
             onCategoryChanged(state: &state)
-        case .deleteCategoryTapped:
-            onDeleteCategoryTapped(state: &state)
+        case .deleteCategory:
+            onDeleteCategory(state: &state)
         case let .categoryDeleted(result):
             onCategoryDeleted(result: result, state: &state)
-        case let .deleteRememberItemTapped(id):
-            onDeleteRememberItemTapped(id: id, state: &state)
+        case let .deleteRememberItem(id):
+            onDeleteRememberItem(id: id, state: &state)
         case let .rememberItemDeleted(result):
             onRememberItemDeleted(result: result, state: &state)
         }
@@ -37,7 +37,7 @@ struct CategoryDetailsReducer {
 // MARK: - Event handlers
 
 private extension CategoryDetailsReducer {
-    func onEditCategoryTapped(state: inout CategoryDetailsState) {
+    func onEditCategory(state: inout CategoryDetailsState) {
         let id = state.id
 
         state.requestRoute {
@@ -45,7 +45,7 @@ private extension CategoryDetailsReducer {
         }
     }
 
-    func onAddRememberTapped(state: inout CategoryDetailsState) {
+    func onAddRemember(state: inout CategoryDetailsState) {
         let id = state.id
 
         state.requestRoute {
@@ -53,27 +53,27 @@ private extension CategoryDetailsReducer {
         }
     }
 
-    func onEditRememberItemTapped(id: Int, state: inout CategoryDetailsState) {
+    func onEditRememberItem(id: Int, state: inout CategoryDetailsState) {
         state.requestRoute {
             $0.editRememberItem(id: id)
         }
     }
 
-    func onDeleteRememberItemTapped(id: Int, state: inout CategoryDetailsState) {
+    func onDeleteRememberItem(id: Int, state: inout CategoryDetailsState) {
         state.deleteRememberItemRequest = FeedbackRequest(RememberItemRequest(id: id))
     }
 
-    func onDeleteCategoryTapped(state: inout CategoryDetailsState) {
+    func onDeleteCategory(state: inout CategoryDetailsState) {
         state.deleteCategoryRequest = FeedbackRequest(CategoryRequest(id: state.id))
     }
 
     func onCategoryChanged(state: inout CategoryDetailsState) {
-        state.categoryRequest = FeedbackRequest(CategoryRequest(id: state.id))
-        state.rememberItemsRequest = FeedbackRequest(RememberItemsRequest(categoryId: state.id))
+        state.fetchCategoryRequest = FeedbackRequest(CategoryRequest(id: state.id))
+        state.fetchRememberItemsRequest = FeedbackRequest(RememberItemsRequest(categoryId: state.id))
     }
 
     func onCategoryFetched(result: Result<CategoryModel, Error>, state: inout CategoryDetailsState) {
-        state.categoryRequest = nil
+        state.fetchCategoryRequest = nil
 
         switch result {
         case let .success(category):
@@ -92,7 +92,7 @@ private extension CategoryDetailsReducer {
     }
 
     func onRememberItemsFetched(result: Result<[RememberCardItemModel], Error>, state: inout CategoryDetailsState) {
-        state.rememberItemsRequest = nil
+        state.fetchRememberItemsRequest = nil
 
         switch result {
         case let .success(rememberItems):
@@ -103,13 +103,13 @@ private extension CategoryDetailsReducer {
     }
 
     func onRememberItemDeleted(result: Result<RememberCardItemModel, Error>, state: inout CategoryDetailsState) {
-        state.rememberItemsRequest = nil
+        state.deleteRememberItemRequest = nil
 
         switch result {
         case let .success(rememberItem):
             state.rememberItems.removeAll(where: { $0.id == rememberItem.id })
         case .failure:
-            state.rememberItemsRequest = FeedbackRequest(RememberItemsRequest(categoryId: state.id))
+            state.fetchRememberItemsRequest = FeedbackRequest(RememberItemsRequest(categoryId: state.id))
         }
     }
 }

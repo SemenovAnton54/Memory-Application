@@ -32,4 +32,24 @@ struct RememberCardItemModel {
             word = nil
         }
     }
+
+    init(
+        id: Int,
+        categoryIds: [Int],
+        type: RememberCardItemType,
+        repeatLevel: RepeatLevel,
+        createdAt: Date,
+        updatedAt: Date?,
+        lastIncreasedLevelAt: Date?,
+        word: WordModel?
+    ) {
+        self.id = id
+        self.categoryIds = categoryIds
+        self.type = type
+        self.repeatLevel = repeatLevel
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.lastIncreasedLevelAt = lastIncreasedLevelAt
+        self.word = word
+    }
 }

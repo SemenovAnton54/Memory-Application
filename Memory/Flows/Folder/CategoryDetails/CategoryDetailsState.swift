@@ -23,8 +23,8 @@ struct CategoryDetailsState {
 
     var deleteCategoryRequest: FeedbackRequest<CategoryRequest>?
     var deleteRememberItemRequest: FeedbackRequest<RememberItemRequest>?
-    var categoryRequest: FeedbackRequest<CategoryRequest>?
-    var rememberItemsRequest: FeedbackRequest<RememberItemsRequest>?
+    var fetchCategoryRequest: FeedbackRequest<CategoryRequest>?
+    var fetchRememberItemsRequest: FeedbackRequest<RememberItemsRequest>?
 
     var routingRequest: RoutingFeedbackRequest<CategoryDetailsRouterProtocol, CategoryDetailsEvent>?
 }

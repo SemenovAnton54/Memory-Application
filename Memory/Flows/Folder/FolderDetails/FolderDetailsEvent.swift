@@ -9,11 +9,11 @@ enum FolderDetailsEvent {
 
     case categoriesFetched(Result<[CategoryModel], Error>)
 
-    case addCategoryTapped
-    case editFolderTapped
-    case deleteFolderTapped
+    case addCategory
+    case editFolder
+    case deleteFolder
 
-    case categoryDetailsTapped(id: Int)
+    case categoryDetails(id: Int)
 
     case categoriesChanged
 }

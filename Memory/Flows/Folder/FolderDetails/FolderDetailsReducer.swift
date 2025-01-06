@@ -13,18 +13,18 @@ struct FolderDetailsReducer {
             onFolderFetched(result: result, state: &state)
         case let .folderDeleted(result):
             onFolderDeleted(result: result, state: &state)
-        case .addCategoryTapped:
-            onAddCategoryTapped(state: &state)
-        case let .categoryDetailsTapped(id):
-            onCategoryDetailsTapped(id: id, state: &state)
-        case .editFolderTapped:
-            onEditFolderTapped(state: &state)
+        case .addCategory:
+            onAddCategory(state: &state)
+        case let .categoryDetails(id):
+            onCategoryDetails(id: id, state: &state)
+        case .editFolder:
+            onEditFolder(state: &state)
         case let .categoriesFetched(result):
             onCategoriesFetched(result: result, state: &state)
         case .categoriesChanged:
             onCategoriesChanged(state: &state)
-        case .deleteFolderTapped:
-            onDeleteFolderTapped(state: &state)
+        case .deleteFolder:
+            onDeleteFolder(state: &state)
         }
     }
 }
@@ -32,7 +32,7 @@ struct FolderDetailsReducer {
 // MARK: - Event handlers
 
 private extension FolderDetailsReducer {
-    func onEditFolderTapped(state: inout FolderDetailsState) {
+    func onEditFolder(state: inout FolderDetailsState) {
         let id = state.id
         
         state.requestRoute {
@@ -40,13 +40,13 @@ private extension FolderDetailsReducer {
         }
     }
 
-    func onDeleteFolderTapped(state: inout FolderDetailsState) {
+    func onDeleteFolder(state: inout FolderDetailsState) {
         let id = state.id
         
         state.deleteFolderRequest = FeedbackRequest(FolderRequest(id: id))
     }
 
-    func onAddCategoryTapped(state: inout FolderDetailsState) {
+    func onAddCategory(state: inout FolderDetailsState) {
         let id = state.id
 
         state.requestRoute {
@@ -54,14 +54,14 @@ private extension FolderDetailsReducer {
         }
     }
 
-    func onCategoryDetailsTapped(id: Int, state: inout FolderDetailsState) {
+    func onCategoryDetails(id: Int, state: inout FolderDetailsState) {
         state.requestRoute {
             $0.categoryDetails(id: id)
         }
     }
 
     func onCategoriesChanged(state: inout FolderDetailsState) {
-        state.categoriesRequest = FeedbackRequest(CategoriesRequest(folderId: state.id))
+        state.fetchCategoriesRequest = FeedbackRequest(CategoriesRequest(folderId: state.id))
     }
 
     func onFolderFetched(result: Result<FolderModel, Error>, state: inout FolderDetailsState) {
@@ -89,7 +89,7 @@ private extension FolderDetailsReducer {
     }
 
     func onCategoriesFetched(result: Result<[CategoryModel], Error>, state: inout FolderDetailsState) {
-        state.categoriesRequest = nil
+        state.fetchCategoriesRequest = nil
 
         switch result {
         case let .success(categories):

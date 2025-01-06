@@ -45,10 +45,10 @@ struct CategoryDetailsView<T: MemorizeStore>: View where T.ViewState == Category
                                     word: word.word,
                                     translation: word.translation,
                                     editAction: { [weak store] in
-                                        store?.event(.editRememberItemTapped(id: rememberItem.id))
+                                        store?.event(.editRememberItem(id: rememberItem.id))
                                     },
                                     deleteAction: { [weak store] in
-                                        store?.event(.deleteRememberItemTapped(id: rememberItem.id))
+                                        store?.event(.deleteRememberItem(id: rememberItem.id))
                                     }
                                 )
                                 .listRowInsets(EdgeInsets(top: -10, leading: 0, bottom: -10, trailing: -10))
@@ -67,7 +67,7 @@ struct CategoryDetailsView<T: MemorizeStore>: View where T.ViewState == Category
                 }
                 .confirmationDialog("Select option", isPresented: $showingOptions, titleVisibility: .visible) {
                     Button("Edit") {
-                        store.event(.editCategoryTapped)
+                        store.event(.editCategory)
                     }
 
                     Button("Delete", role: .destructive) {
@@ -76,7 +76,7 @@ struct CategoryDetailsView<T: MemorizeStore>: View where T.ViewState == Category
                 }
                 .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
                     Button("Yes", role: .destructive) {
-                        store.event(.deleteCategoryTapped)
+                        store.event(.deleteCategory)
                     }
 
                     Button("No") {
@@ -87,7 +87,7 @@ struct CategoryDetailsView<T: MemorizeStore>: View where T.ViewState == Category
 
             VStack {
                 Spacer()
-                Button(action: { store.event(.addRememberItemTapped) }) {
+                Button(action: { store.event(.addRememberItem) }) {
                     HStack {
                         Image(systemName: "plus")
                             .foregroundStyle(.white)

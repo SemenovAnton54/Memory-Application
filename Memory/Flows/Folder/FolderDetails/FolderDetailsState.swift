@@ -19,7 +19,7 @@ struct FolderDetailsState {
 
     var deleteFolderRequest: FeedbackRequest<FolderRequest>?
     var fetchFolderRequest: FeedbackRequest<FolderRequest>?
-    var categoriesRequest: FeedbackRequest<CategoriesRequest>?
+    var fetchCategoriesRequest: FeedbackRequest<CategoriesRequest>?
     var routingRequest: RoutingFeedbackRequest<FolderDetailsRouterProtocol, FolderDetailsEvent>?
 }
 

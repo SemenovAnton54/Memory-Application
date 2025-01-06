@@ -1,5 +1,5 @@
 //
-//  EditFolderReducerTests.swift
+//  EditCategoryReducerTests.swift
 //  Memory
 //
 
@@ -10,12 +10,12 @@ import PhotosUI
 @testable import Memory
 
 @Suite
-final class EditFolderReducerTests {
-    let reducer = EditFolderReducer()
+final class EditCategoryReducerTests {
+    let reducer = EditCategoryReducer()
 
-    var state = EditFolderState()
+    var state = EditCategoryState()
 
-    var router = EditFolderRouterMock()
+    var router = EditCategoryRouterMock()
 
     @Test("Test nameDidChange event", arguments: ["New name", "Another name"])
     func testSendEventNameDidChangeOutputStateNameArgumentChanged(name: String) {
@@ -47,14 +47,6 @@ final class EditFolderReducerTests {
 
         reducer.reduce(state: &state, event: .iconDidChanged(icon))
         #expect(state.icon != icon)
-    }
-
-    @Test("Test isFavoriteChanged event", arguments: [true, false])
-    func testSendEventIsFavoriteChangedOutputStateIsFavoriteArgumentChanged(value: Bool) {
-        #expect(state.isFavorite == false)
-
-        reducer.reduce(state: &state, event: .isFavoriteChanged(value))
-        #expect(state.isFavorite == value)
     }
 
     @Test("Test addImage event", arguments: [PhotosPickerItem(itemIdentifier: "itemIdentifier"), PhotosPickerItem(itemIdentifier: "itemIdentifier two")])
@@ -98,78 +90,77 @@ final class EditFolderReducerTests {
         #expect(state.image == nil)
     }
 
-    @Test("Test folderFetched event success result")
+    @Test("Test categoryFetched event success result")
     func testSendEventFolderFetchedOutputStateFolderArgumentsChanged() {
         let id = 1
+        let folderId = 2
         state.id = id
-        state.fetchFolderRequest = FeedbackRequest(id)
+        state.fetchCategoryRequest = FeedbackRequest(id)
 
         #expect(state.id == id)
         #expect(state.name == "")
         #expect(state.description == "")
         #expect(state.icon == "")
-        #expect(state.isFavorite == false)
         #expect(state.image == nil)
+        #expect(state.folderId == nil)
 
-        let folder = MockFolderModel.mockFolder()
+        let category = MockCategoryModel.mockCategory(id: id, folderId: folderId)
 
-        reducer.reduce(state: &state, event: .folderFetched(.success(folder)))
+        reducer.reduce(state: &state, event: .categoryFetched(.success(category)))
 
         #expect(state.id == id)
-        #expect(state.name == folder.name)
-        #expect(state.description == folder.desc)
-        #expect(state.icon == folder.icon)
-        #expect(state.isFavorite == folder.isFavorite)
-        #expect(state.image == folder.image)
-        #expect(state.fetchFolderRequest == nil)
+        #expect(state.name == category.name)
+        #expect(state.description == category.desc)
+        #expect(state.icon == category.icon)
+        #expect(state.image == category.image)
+        #expect(state.folderId == category.folderId)
+        #expect(state.fetchCategoryRequest == nil)
     }
 
-    @Test("Test folderFetched event failure result")
+    @Test("Test categoryFetched event failure result")
     func testSendEventFolderFetchedOutputStateFolderArgumentsNotChanged() {
         let id = 1
-        state.fetchFolderRequest = FeedbackRequest(id)
+        state.fetchCategoryRequest = FeedbackRequest(id)
 
         #expect(state.name == "")
         #expect(state.description == "")
         #expect(state.icon == "")
-        #expect(state.isFavorite == false)
         #expect(state.image == nil)
-        #expect(state.fetchFolderRequest != nil)
+        #expect(state.fetchCategoryRequest != nil)
 
-        reducer.reduce(state: &state, event: .folderFetched(.failure(MockError.mockError)))
+        reducer.reduce(state: &state, event: .categoryFetched(.failure(MockError.mockError)))
 
         #expect(state.name == "")
         #expect(state.description == "")
         #expect(state.icon == "")
-        #expect(state.isFavorite == false)
         #expect(state.image == nil)
-        #expect(state.fetchFolderRequest == nil)
+        #expect(state.folderId == nil)
+        #expect(state.fetchCategoryRequest == nil)
     }
 
-    @Test("Test folderCreated event success result")
+    @Test("Test categoryCreated event success result")
     func testSendEventFolderCreatedOutputStateFolderArgumentsChanged() {
         #expect(state.id == nil)
         #expect(state.name == "")
         #expect(state.description == "")
         #expect(state.icon == "")
-        #expect(state.isFavorite == false)
         #expect(state.image == nil)
+        #expect(state.folderId == nil)
 
         let id = 1
-        let mockNewModel = MockFolderModel.mockNewFolderModel()
+        let mockNewModel = MockCategoryModel.mockNewCategoryModel()
 
-        state.createNewFolderRequest = FeedbackRequest(mockNewModel)
+        state.createNewCategoryRequest = FeedbackRequest(mockNewModel)
 
-        let folder = MockFolderModel.mockFolder(id: id)
-        reducer.reduce(state: &state, event: .folderCreated(.success(folder)))
+        let category = MockCategoryModel.mockCategory(id: id)
+        reducer.reduce(state: &state, event: .categoryCreated(.success(category)))
 
         #expect(state.id == id)
-        #expect(state.createNewFolderRequest == nil)
-        #expect(state.name == folder.name)
-        #expect(state.description == folder.desc)
-        #expect(state.icon == folder.icon)
-        #expect(state.isFavorite == folder.isFavorite)
-        #expect(state.image == folder.image)
+        #expect(state.createNewCategoryRequest == nil)
+        #expect(state.name == category.name)
+        #expect(state.description == category.desc)
+        #expect(state.icon == category.icon)
+        #expect(state.image == category.image)
         #expect(state.routingRequest != nil)
 
         performRouterRequest(from: state, to: router)
@@ -177,28 +168,28 @@ final class EditFolderReducerTests {
         #expect(router.didClose == true)
     }
 
-    @Test("Test folderUpdated event success result")
+    @Test("Test categoryUpdated event success result")
     func testSendEventFolderUpdatedOutputStateFolderArgumentsChanged() {
         #expect(state.name == "")
         #expect(state.description == "")
         #expect(state.icon == "")
-        #expect(state.isFavorite == false)
         #expect(state.image == nil)
+        #expect(state.folderId == nil)
 
         let id = 1
-        let mockUpdateModel = MockFolderModel.mockUpdateFolderModel()
+        let mockUpdateModel = MockCategoryModel.mockUpdateCategoryModel(id: id)
 
-        state.updateFolderRequest = FeedbackRequest(mockUpdateModel)
+        state.updateCategoryRequest = FeedbackRequest(mockUpdateModel)
 
-        let folder = MockFolderModel.mockFolder(id: id)
-        reducer.reduce(state: &state, event: .folderUpdated(.success(folder)))
+        let category = MockCategoryModel.mockCategory(id: id)
+        reducer.reduce(state: &state, event: .categoryUpdated(.success(category)))
 
-        #expect(state.updateFolderRequest == nil)
-        #expect(state.name == folder.name)
-        #expect(state.description == folder.desc)
-        #expect(state.icon == folder.icon)
-        #expect(state.isFavorite == folder.isFavorite)
-        #expect(state.image == folder.image)
+        #expect(state.updateCategoryRequest == nil)
+        #expect(state.name == category.name)
+        #expect(state.description == category.desc)
+        #expect(state.icon == category.icon)
+        #expect(state.image == category.image)
+        #expect(state.folderId == category.folderId)
         #expect(state.routingRequest != nil)
 
         performRouterRequest(from: state, to: router)
@@ -218,75 +209,74 @@ final class EditFolderReducerTests {
 
     @Test("Test save event with id")
     func testSendEventSaveOutputStateUpdateRequestChanged() {
-        let id = 2
-        state.id = id
+        state.id = 2
+        state.folderId = 78
         state.name = "Test"
         state.description = "Test Description"
         state.icon = "😫"
-        state.isFavorite = true
         state.image = .systemName("mock image")
 
-        #expect(state.updateFolderRequest == nil)
+        #expect(state.updateCategoryRequest == nil)
 
         reducer.reduce(state: &state, event: .save)
 
-        #expect(state.updateFolderRequest != nil)
-        #expect(state.updateFolderRequest?.payload.name == state.name)
-        #expect(state.updateFolderRequest?.payload.desc == state.description)
-        #expect(state.updateFolderRequest?.payload.icon == state.icon)
-        #expect(state.updateFolderRequest?.payload.isFavorite == state.isFavorite)
-        #expect(state.updateFolderRequest?.payload.image == state.image)
+        #expect(state.updateCategoryRequest != nil)
+        #expect(state.updateCategoryRequest?.payload.id == state.id)
+        #expect(state.updateCategoryRequest?.payload.folderId == state.folderId)
+        #expect(state.updateCategoryRequest?.payload.name == state.name)
+        #expect(state.updateCategoryRequest?.payload.desc == state.description)
+        #expect(state.updateCategoryRequest?.payload.icon == state.icon)
+        #expect(state.updateCategoryRequest?.payload.image == state.image)
     }
 
-    @Test("Test save event with id with empty name")
+    @Test("Test save event with id but empty name not requested")
     func testSendEventSaveOutputStateUpdateRequestNotChanged() {
-        let id = 2
-        state.id = id
+        state.id = 2
+        state.folderId = 78
         state.name = ""
         state.description = "Test Description"
         state.icon = "😫"
-        state.isFavorite = true
         state.image = .systemName("mock image")
 
-        #expect(state.updateFolderRequest == nil)
+        #expect(state.updateCategoryRequest == nil)
 
         reducer.reduce(state: &state, event: .save)
 
-        #expect(state.updateFolderRequest == nil)
+        #expect(state.updateCategoryRequest == nil)
     }
 
-    @Test("Test save event without id")
+    @Test("Test save event without id create new element")
     func testSendEventSaveOutputStateCreateRequestChanged() {
+        state.folderId = 78
         state.name = "Test"
         state.description = "Test Description"
         state.icon = "😫"
-        state.isFavorite = true
         state.image = .systemName("mock image")
 
-        #expect(state.createNewFolderRequest == nil)
+        #expect(state.createNewCategoryRequest == nil)
 
         reducer.reduce(state: &state, event: .save)
 
-        #expect(state.createNewFolderRequest != nil)
-        #expect(state.createNewFolderRequest?.payload.name == state.name)
-        #expect(state.createNewFolderRequest?.payload.desc == state.description)
-        #expect(state.createNewFolderRequest?.payload.icon == state.icon)
-        #expect(state.createNewFolderRequest?.payload.isFavorite == state.isFavorite)
-        #expect(state.createNewFolderRequest?.payload.image == state.image)
+        #expect(state.createNewCategoryRequest != nil)
+        #expect(state.createNewCategoryRequest?.payload.name == state.name)
+        #expect(state.createNewCategoryRequest?.payload.desc == state.description)
+        #expect(state.createNewCategoryRequest?.payload.icon == state.icon)
+        #expect(state.createNewCategoryRequest?.payload.image == state.image)
+        #expect(state.createNewCategoryRequest?.payload.folderId == state.folderId)
     }
 
-    @Test("Test save event without id and empty name")
+    @Test("Test save event without id not create new element")
     func testSendEventSaveOutputStateCreateRequestNotChanged() {
+        state.folderId = 78
         state.name = ""
         state.description = "Test Description"
         state.icon = "😫"
-        state.isFavorite = true
         state.image = .systemName("mock image")
 
-        #expect(state.createNewFolderRequest == nil)
+        #expect(state.createNewCategoryRequest == nil)
 
         reducer.reduce(state: &state, event: .save)
 
-        #expect(state.createNewFolderRequest == nil)
+        #expect(state.createNewCategoryRequest == nil)
     }
 }
