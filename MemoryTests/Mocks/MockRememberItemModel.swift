@@ -42,37 +42,54 @@ enum MockRememberItemModel {
         )
     }
 
-//    static func mockNewCategoryModel(
-//        folderId: Int? = 1,
-//        name: String = "Mock Name",
-//        desc: String? = "Mock Description",
-//        icon: String = "😇",
-//        image: ImageType? = .systemName("Mock image")
-//    ) -> NewCategoryModel {
-//        NewCategoryModel(
-//            folderId: folderId,
-//            name: name,
-//            desc: desc,
-//            icon: icon,
-//            image: image
-//        )!
-//    }
-//
-//    static func mockUpdateCategoryModel(
-//        id: Int = 1,
-//        folderId: Int? = 1,
-//        name: String = "Mock Name",
-//        desc: String? = "Mock Description",
-//        icon: String = "😇",
-//        image: ImageType? = .systemName("Mock image")
-//    ) -> UpdateCategoryModel {
-//        UpdateCategoryModel(
-//            id: id,
-//            folderId: folderId,
-//            name: name,
-//            desc: desc,
-//            icon: icon,
-//            image: image
-//        )!
-//    }
+    static func mockNewRememberItemModel(
+        categoriesIds: [Int] = [1],
+        type: RememberCardItemType = .word,
+        repeatLevel: RepeatLevel = .learning,
+        createdAt: Date = Date(),
+        word: NewWordModel? = NewWordModel(
+            word: "Word",
+            translation: "Слово",
+            transcription: "woorrrdd",
+            images: [.systemName("test"), .systemName("text2")],
+            examples: [
+                .init(example: "Example one", translation: "Пример первый"),
+                .init(example: "Example two", translation: "Пример второй"),
+            ]
+        )
+    ) -> NewRememberItemModel {
+        NewRememberItemModel(
+            categoryIds: [],
+            type: type,
+            repeatLevel: repeatLevel,
+            createdAt: createdAt,
+            word: word
+        )
+    }
+
+    static func mockUpdateRememberItemModel(
+        id: Int = 1,
+        categoriesIds: [Int] = [1],
+        type: RememberCardItemType = .word,
+        repeatLevel: RepeatLevel = .learning,
+        createdAt: Date = Date(),
+        word: UpdateWordModel? = UpdateWordModel(
+            id: 1,
+            word: "Word",
+            translation: "Слово",
+            transcription: "woorrrdd",
+            images: [.systemName("test"), .systemName("text2")],
+            examples: [
+                .init(example: "Example one", translation: "Пример первый"),
+                .init(example: "Example two", translation: "Пример второй"),
+            ]
+        )
+    ) -> UpdateRememberItemModel {
+        UpdateRememberItemModel(
+            id: id,
+            categoryIds: [],
+            type: type,
+            word: word
+        )
+    }
 }

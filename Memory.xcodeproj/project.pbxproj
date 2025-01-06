@@ -139,6 +139,8 @@
 		6890F9912D2C15BC00BBB87A /* MockRememberItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6890F9902D2C15BC00BBB87A /* MockRememberItemModel.swift */; };
 		6890F9972D2C23F600BBB87A /* FoldersListRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6890F9962D2C23F600BBB87A /* FoldersListRouterMock.swift */; };
 		6890F9992D2C245100BBB87A /* FoldersListReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6890F9982D2C245100BBB87A /* FoldersListReducerTests.swift */; };
+		6890F99F2D2C3B0700BBB87A /* EditWordRememberItemReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6890F99E2D2C3B0400BBB87A /* EditWordRememberItemReducerTests.swift */; };
+		6890F9A22D2C3B1500BBB87A /* EditWordRememberItemRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6890F9A12D2C3B1500BBB87A /* EditWordRememberItemRouterMock.swift */; };
 		68B9624A2CDFE057003CF644 /* Publishers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B962492CDFE04D003CF644 /* Publishers+Extensions.swift */; };
 		68BA3FD52D0C910A006A86FE /* EditCategoryEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BA3FCC2D0C910A006A86FE /* EditCategoryEvent.swift */; };
 		68BA3FD62D0C910A006A86FE /* EditCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BA3FCD2D0C910A006A86FE /* EditCategoryPresenter.swift */; };
@@ -390,6 +392,8 @@
 		6890F9902D2C15BC00BBB87A /* MockRememberItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRememberItemModel.swift; sourceTree = "<group>"; };
 		6890F9962D2C23F600BBB87A /* FoldersListRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersListRouterMock.swift; sourceTree = "<group>"; };
 		6890F9982D2C245100BBB87A /* FoldersListReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersListReducerTests.swift; sourceTree = "<group>"; };
+		6890F99E2D2C3B0400BBB87A /* EditWordRememberItemReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordRememberItemReducerTests.swift; sourceTree = "<group>"; };
+		6890F9A12D2C3B1500BBB87A /* EditWordRememberItemRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordRememberItemRouterMock.swift; sourceTree = "<group>"; };
 		68B962492CDFE04D003CF644 /* Publishers+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publishers+Extensions.swift"; sourceTree = "<group>"; };
 		68BA3FCC2D0C910A006A86FE /* EditCategoryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryEvent.swift; sourceTree = "<group>"; };
 		68BA3FCD2D0C910A006A86FE /* EditCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryPresenter.swift; sourceTree = "<group>"; };
@@ -746,6 +750,7 @@
 		6827E11D2D26A4BB00C69638 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
+				6890F99A2D2C3AE700BBB87A /* RememberItems */,
 				6890F9922D2C23C100BBB87A /* FoldersList */,
 				6890F9882D2C142200BBB87A /* CategoryDetails */,
 				6890F9822D2C09B300BBB87A /* FolderDetails */,
@@ -1035,6 +1040,31 @@
 			isa = PBXGroup;
 			children = (
 				6890F9962D2C23F600BBB87A /* FoldersListRouterMock.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6890F99A2D2C3AE700BBB87A /* RememberItems */ = {
+			isa = PBXGroup;
+			children = (
+				6890F99B2D2C3AEE00BBB87A /* EditWordRememberItem */,
+			);
+			path = RememberItems;
+			sourceTree = "<group>";
+		};
+		6890F99B2D2C3AEE00BBB87A /* EditWordRememberItem */ = {
+			isa = PBXGroup;
+			children = (
+				6890F9A02D2C3B0D00BBB87A /* Helpers */,
+				6890F99E2D2C3B0400BBB87A /* EditWordRememberItemReducerTests.swift */,
+			);
+			path = EditWordRememberItem;
+			sourceTree = "<group>";
+		};
+		6890F9A02D2C3B0D00BBB87A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6890F9A12D2C3B1500BBB87A /* EditWordRememberItemRouterMock.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1778,6 +1808,7 @@
 				6827E12A2D26C6F400C69638 /* PerformRouterRequest.swift in Sources */,
 				6890F98E2D2C142D00BBB87A /* CategoryDetailsRouterMock.swift in Sources */,
 				6890F98F2D2C142D00BBB87A /* CategoryDetailsReducerTests.swift in Sources */,
+				6890F9A22D2C3B1500BBB87A /* EditWordRememberItemRouterMock.swift in Sources */,
 				6827E1202D26A4E600C69638 /* EditFolderReducerTests.swift in Sources */,
 				6890F9812D2C045600BBB87A /* MockCategoryModel.swift in Sources */,
 				6890F9852D2C09D900BBB87A /* FolderDetailsRouterMock.swift in Sources */,
@@ -1788,6 +1819,7 @@
 				6890F97D2D2C038600BBB87A /* EditCategoryRouterMock.swift in Sources */,
 				6890F9972D2C23F600BBB87A /* FoldersListRouterMock.swift in Sources */,
 				6890F97E2D2C038600BBB87A /* EditCategoryReducerTests.swift in Sources */,
+				6890F99F2D2C3B0700BBB87A /* EditWordRememberItemReducerTests.swift in Sources */,
 				6827E1282D26C37700C69638 /* MockFolderModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

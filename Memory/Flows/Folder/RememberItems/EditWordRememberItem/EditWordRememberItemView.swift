@@ -59,7 +59,7 @@ struct EditWordRememberItemView<T: MemorizeStore>: View where T.ViewState == Edi
                                 ForEach(store.viewState.images) { image in
                                     SelectedImage(
                                         removeImage: { [weak store] in
-                                            store?.event(.removeImage(id: image.id))
+                                            store?.event(.removeImage(index: image.id))
                                         },
                                         imageModel: image
                                     )

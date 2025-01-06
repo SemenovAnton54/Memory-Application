@@ -7,7 +7,6 @@ import Foundation
 
 struct NewWordModel: Equatable {
     let word: String
-    let repeatLevel: RepeatLevel
     let translation: String
     let transcription: String
     let images: [ImageType]
@@ -15,14 +14,12 @@ struct NewWordModel: Equatable {
 
     init(
         word: String,
-        repeatLevel: RepeatLevel,
         translation: String,
         transcription: String,
         images: [ImageType],
         examples: [WordExampleModel]
     ) {
         self.word = word.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.repeatLevel = repeatLevel
         self.translation = translation.trimmingCharacters(in: .whitespacesAndNewlines)
         self.transcription = transcription.trimmingCharacters(in: .whitespacesAndNewlines)
         self.images = images

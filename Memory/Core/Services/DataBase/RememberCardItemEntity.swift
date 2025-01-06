@@ -42,7 +42,7 @@ final class RememberCardItemEntity {
 
     init(model: RememberCardItemModel) {
         id = model.id
-        categoryIds = model.categoryIds
+        categoryIds = model.categoriesIds
         type = model.type
         repeatLevel = model.repeatLevel
         createdAt = model.createdAt

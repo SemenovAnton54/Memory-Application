@@ -8,7 +8,7 @@ import Foundation
 struct RememberCardItemModel {
     let id: Int
 
-    let categoryIds: [Int]
+    let categoriesIds: [Int]
     let type: RememberCardItemType
     let repeatLevel: RepeatLevel
     let createdAt: Date
@@ -19,7 +19,7 @@ struct RememberCardItemModel {
 
     init(from entity: RememberCardItemEntity) {
         id = entity.id
-        categoryIds = entity.categoryIds
+        categoriesIds = entity.categoryIds
         type = entity.type
         repeatLevel = entity.repeatLevel
         createdAt = entity.createdAt
@@ -44,7 +44,7 @@ struct RememberCardItemModel {
         word: WordModel?
     ) {
         self.id = id
-        self.categoryIds = categoryIds
+        self.categoriesIds = categoryIds
         self.type = type
         self.repeatLevel = repeatLevel
         self.createdAt = createdAt

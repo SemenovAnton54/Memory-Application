@@ -34,8 +34,8 @@ struct EditWordRememberItemReducer {
             onAddImage(state: &state)
         case let .imagesSelected(images):
             onImagesSelected(images: images, state: &state)
-        case let .removeImage(id):
-            onRemoveImage(id: id, state: &state)
+        case let .removeImage(index):
+            onRemoveImage(at: index, state: &state)
         case let .itemFetched(result):
             onItemFetched(result: result, state: &state)
         case let .isLearningChanged(value):
@@ -68,7 +68,6 @@ private extension EditWordRememberItemReducer {
                     repeatLevel: .newItem,
                     word: NewWordModel(
                         word: state.word,
-                        repeatLevel: .newItem,
                         translation: state.translation,
                         transcription: state.transcription,
                         images: state.images,
@@ -83,7 +82,7 @@ private extension EditWordRememberItemReducer {
         state.updateRequest = FeedbackRequest(
             UpdateRememberItemModel(
                 id: id,
-                categoryIds: state.rememberItem?.categoryIds ?? [],
+                categoryIds: state.categoriesIds,
                 type: .word,
                 word: UpdateWordModel(
                     id: id,
@@ -177,12 +176,12 @@ private extension EditWordRememberItemReducer {
         state.images.append(contentsOf: images)
     }
 
-    func onRemoveImage(id: Int, state: inout EditWordRememberItemState) {
-        guard id < state.images.count else {
+    func onRemoveImage(at index: Int, state: inout EditWordRememberItemState) {
+        guard index < state.images.count else {
             return
         }
 
-        state.images.remove(at: id)
+        state.images.remove(at: index)
     }
 
     func onItemFetched(result: Result<RememberCardItemModel, Error>, state: inout EditWordRememberItemState) {
@@ -191,6 +190,7 @@ private extension EditWordRememberItemReducer {
         switch result {
         case let .success(rememberItem):
             state.rememberItem = rememberItem
+            state.categoriesIds = rememberItem.categoriesIds
 
             guard let wordModel = rememberItem.word else {
                 return
