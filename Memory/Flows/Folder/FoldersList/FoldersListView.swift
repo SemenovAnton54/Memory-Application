@@ -16,7 +16,7 @@ struct FoldersListView<T: MemorizeStore>: View where T.ViewState == FoldersListV
     var body: some View {
         List {
             Section() {
-                Button(action: { store.event(.newFolderTapped) }) {
+                Button(action: { store.event(.newFolder) }) {
                     HStack {
                         Spacer()
                         Image(systemName: "plus")

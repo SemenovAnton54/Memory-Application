@@ -10,8 +10,8 @@ struct FoldersListReducer {
             onFolderSelected(id: id, state: &state)
         case let .foldersFetched(result):
             onFoldersFetched(result: result, state: &state)
-        case .newFolderTapped:
-            onNewFolderTapped(state: &state)
+        case .newFolder:
+            onNewFolder(state: &state)
         case .contentAppeared:
             onContentAppeared(state: &state)
         case .folderChanged:
@@ -29,7 +29,7 @@ private extension FoldersListReducer {
         }
     }
 
-    func onNewFolderTapped(state: inout FoldersListState) {
+    func onNewFolder(state: inout FoldersListState) {
         state.requestRoute {
             $0.newFolder()
         }
