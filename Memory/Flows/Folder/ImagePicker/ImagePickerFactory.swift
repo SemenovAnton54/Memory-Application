@@ -52,6 +52,7 @@ struct ImagePickerFactory {
         return store
     }
 
+    @MainActor
     static func makeView(for store: DefaultMemorizeStore<ImagePickerState, ImagePickerEvent, ImagePickerViewState>) -> some View {
         ImagePickerView(store: store)
     }

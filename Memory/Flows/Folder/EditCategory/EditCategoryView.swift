@@ -37,32 +37,13 @@ struct EditCategoryView<T: MemorizeStore>: View where T.ViewState == EditCategor
                         PhotosPicker(
                             selection: binding(nil) { store.event(.addImage($0)) },
                             matching: .images
-                        ) {
-                            ZStack(alignment: .topTrailing) {
-                                if let image = store.viewState.image {
-                                    ImageView(imageViewModel: image)
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(maxHeight: 150)
-
-                                    Button(action: { store.event(.removeImage) }) {
-                                        ZStack {
-                                            Image(systemName: "xmark.circle.fill")
-                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    }
-                                    .frame(width: 25, height: 25)
-                                    .padding(.top, -15)
-                                    .padding(.trailing, -15)
-                                } else {
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 100, height: 100)
-                                        .padding()
-                                        .background(Colors.backgroundSecondary)
-                                        .tint(Color.white)
-                                        .cornerRadius(8)
+                        ) { [image = store.viewState.image] in
+                            ImagePickerView(
+                                imageViewModel: nil,
+                                deleteImageAction: {
+//                                    store.event(.removeImage)
                                 }
-                            }
+                            )
                         }
                         Spacer()
                     }

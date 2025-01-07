@@ -52,7 +52,7 @@ struct LearnCoordinatorView: View {
             LearnCardView(store: state.learnNewCards(folderId: folderId))
         case let .reviewCards(folderId):
             LearnCardView(store: state.reviewCards(folderId: folderId))
-        case .learnFolders:
+        case .allFolders:
             LearnFoldersListFactory.makeView(for: state.learnFoldersListStore())
         case .editRememberItem:
             EmptyView()

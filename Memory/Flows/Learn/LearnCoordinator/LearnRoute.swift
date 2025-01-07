@@ -9,7 +9,7 @@ import SwiftUI
 
 enum LearnRoute: Hashable, Identifiable {
     case main
-    case learnFolders
+    case allFolders
     case selectMode(folderId: Int)
     case learnNewCards(folderId: Int)
     case reviewCards(folderId: Int)
@@ -19,8 +19,8 @@ enum LearnRoute: Hashable, Identifiable {
         switch self {
         case .main:
             "main"
-        case .learnFolders:
-            "learnFolders"
+        case .allFolders:
+            "allFolders"
         case let .selectMode(folderId):
             "selectMode_(\(folderId))"
         case let .learnNewCards(folderId):

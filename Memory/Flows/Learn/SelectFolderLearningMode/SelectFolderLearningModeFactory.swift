@@ -14,6 +14,7 @@ struct SelectFolderLearningModeFactory {
 
     let dependencies: Dependencies
 
+    @MainActor
     func makeStore(
         arguments: Arguments,
         router: SelectFolderLearningModeRouterProtocol

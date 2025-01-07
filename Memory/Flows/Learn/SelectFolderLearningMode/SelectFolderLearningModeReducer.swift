@@ -33,7 +33,7 @@ private extension SelectFolderLearningModeReducer {
         let folderId = state.folderId
 
         state.requestRoute {
-            $0.reviewCrds(folderId: folderId)
+            $0.reviewCards(folderId: folderId)
         }
     }
 

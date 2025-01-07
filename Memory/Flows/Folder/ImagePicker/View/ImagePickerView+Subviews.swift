@@ -54,4 +54,22 @@ extension ImagePickerView {
             }
         }
     }
+
+    struct ImagePickerViewButton: View {
+        var body: some View {
+            HStack {
+                Spacer()
+
+                Image(systemName: "plus.app")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+                    .padding()
+                    .foregroundStyle(Colors.actionColor)
+                    .background(Colors.backgroundSecondary)
+                    .cornerRadius(20)
+                    .padding(20)
+            }
+        }
+    }
 }

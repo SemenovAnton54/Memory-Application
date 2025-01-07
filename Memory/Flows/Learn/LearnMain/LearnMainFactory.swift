@@ -20,7 +20,7 @@ struct LearnMainFactory {
         let reviewCardItemsService = MemoryApp.reviewItemsService
 
         let store = DefaultMemorizeStore(
-            initialState: LearnMainState(fetchFavoriteFoldersRequest: FeedbackRequest()),
+            initialState: LearnMainState(),
             reduce: LearnMainReducer().reduce,
             present: LearnMainPresenter().present,
             feedback: [

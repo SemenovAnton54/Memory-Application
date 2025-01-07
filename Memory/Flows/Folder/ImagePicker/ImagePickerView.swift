@@ -53,19 +53,7 @@ struct ImagePickerView<T: MemorizeStore>: View where T.ViewState == ImagePickerV
                     selection: binding(nil) { store.event(.addImagesFromGallery($0)) },
                     matching: .images
                 ) {
-                    HStack {
-                        Spacer()
-
-                        Image(systemName: "plus.app")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
-                            .padding()
-                            .foregroundStyle(Colors.actionColor)
-                            .background(Colors.backgroundSecondary)
-                            .cornerRadius(20)
-                            .padding(20)
-                    }
+                    ImagePickerViewButton()
                 }
             }
         }

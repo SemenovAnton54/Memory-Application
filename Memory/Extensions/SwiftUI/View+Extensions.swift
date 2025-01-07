@@ -13,8 +13,8 @@ extension View {
 
     func binding<U>(
         _ value: @autoclosure @escaping () -> U,
-        _ event: @escaping (U) -> ()) -> Binding<U>
-    {
+        _ event: @escaping (U) -> ()
+    ) -> Binding<U> {
         Binding(
             get: value,
             set: event

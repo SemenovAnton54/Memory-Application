@@ -6,6 +6,7 @@
 import SwiftUI
 
 extension TextField {
+    @MainActor
     func defaultStyle() -> some View {
         focusablePadding()
         .background(Colors.backgroundSecondary)

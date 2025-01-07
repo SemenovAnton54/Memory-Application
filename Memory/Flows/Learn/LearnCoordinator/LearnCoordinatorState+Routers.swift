@@ -31,8 +31,8 @@ extension LearnCoordinatorState {
             state.nextItem = .selectMode(folderId: folder)
         }
 
-        func learnFolders() {
-            state.nextItem = .learnFolders
+        func allFolders() {
+            state.nextItem = .allFolders
         }
 
         func learnFolder(id: Int) {

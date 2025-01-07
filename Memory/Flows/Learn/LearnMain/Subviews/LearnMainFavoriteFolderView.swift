@@ -28,7 +28,7 @@ struct LearnMainFavoriteFolderView: View {
                     title: "Learn new items",
                     description: "Learned today: \(favoriteFolderViewModel.learnedNewItemsTodayCount)"
                 ) {
-                    event(.learnNewItemsTapped(folderId: favoriteFolderViewModel.folder.id))
+                    event(.learnNewItems(folderId: favoriteFolderViewModel.folder.id))
                 }
                 
                 LearnRow(
@@ -37,7 +37,7 @@ struct LearnMainFavoriteFolderView: View {
                     title: "Review items",
                     description: "Items to review: \(favoriteFolderViewModel.itemToReviewCount) (reviewed today: \(favoriteFolderViewModel.reviewedItemsTodayCount))"
                 ) {
-                    event(.reviewItemsTapped(folderId: favoriteFolderViewModel.folder.id))
+                    event(.reviewItems(folderId: favoriteFolderViewModel.folder.id))
                 }
             }
         }

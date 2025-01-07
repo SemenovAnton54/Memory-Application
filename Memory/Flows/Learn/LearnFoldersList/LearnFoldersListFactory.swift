@@ -28,6 +28,7 @@ struct LearnFoldersListFactory {
         return store
     }
 
+    @MainActor
     static func makeView(for store: DefaultMemorizeStore<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState>) -> some View {
         LearnFoldersListView(store: store)
     }

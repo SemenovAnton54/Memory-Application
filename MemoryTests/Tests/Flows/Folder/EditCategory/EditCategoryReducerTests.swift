@@ -198,7 +198,7 @@ final class EditCategoryReducerTests {
     }
 
     @Test("Test cancel event")
-    func testSendEventCancelOutputStateCloseRequestChanged() {
+    func testSendEventCancelOutputStateCloseRoutingRequestChanged() {
         reducer.reduce(state: &state, event: .cancel)
         #expect(state.routingRequest != nil)
 

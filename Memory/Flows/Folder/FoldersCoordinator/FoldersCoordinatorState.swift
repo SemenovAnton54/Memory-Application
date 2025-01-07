@@ -31,6 +31,7 @@ final class FoldersCoordinatorState: ObservableObject {
         self.route = route
     }
 
+    @MainActor
     func foldersListStore() -> DefaultMemorizeStore<FoldersListState, FoldersListEvent, FoldersListViewState> {
         guard let _foldersListStore else {
             let store = FoldersListScreenFactory(
@@ -48,6 +49,7 @@ final class FoldersCoordinatorState: ObservableObject {
         return _foldersListStore
     }
 
+    @MainActor
     func folderStore(id: Int?) -> DefaultMemorizeStore<EditFolderState, EditFolderEvent, EditFolderViewState> {
         guard let _editFolderStore else {
             let store = EditFolderFactory(
@@ -64,6 +66,7 @@ final class FoldersCoordinatorState: ObservableObject {
         return _editFolderStore
     }
 
+    @MainActor
     func categoryStore(id: Int?, folderId: Int?) -> DefaultMemorizeStore<EditCategoryState, EditCategoryEvent, EditCategoryViewState> {
         guard let _editCategoryStore else {
             let store = EditCategoryFactory(
@@ -84,6 +87,7 @@ final class FoldersCoordinatorState: ObservableObject {
         return _editCategoryStore
     }
 
+    @MainActor
     func folderDetailsStore(id: Int) -> DefaultMemorizeStore<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState> {
         guard let _folderDetailsStore else {
             let store = FolderDetailsFactory(
@@ -101,6 +105,7 @@ final class FoldersCoordinatorState: ObservableObject {
         return _folderDetailsStore
     }
 
+    @MainActor
     func categoryDetailsStore(id: Int) -> DefaultMemorizeStore<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState> {
         guard let _categoryDetailsStore else {
             let store = CategoryDetailsFactory(
@@ -118,6 +123,7 @@ final class FoldersCoordinatorState: ObservableObject {
         return _categoryDetailsStore
     }
 
+    @MainActor
     func rememberItemCoordinatorState(router: RememberItemRouter) -> RememberItemCoordinatorState {
         guard let _rememberItemCoordinatorState else {
             let store = RememberItemCoordinatorState(route: router) { [weak self] in

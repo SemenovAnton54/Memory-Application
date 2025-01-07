@@ -28,6 +28,7 @@ final class LearnCoordinatorState: ObservableObject {
         self.onClose = onClose
     }
 
+    @MainActor
     func learnMainStore() -> DefaultMemorizeStore<LearnMainState, LearnMainEvent, LearnMainViewState> {
         guard let _learnMainStore else {
             let store = LearnMainFactory(
@@ -45,6 +46,7 @@ final class LearnCoordinatorState: ObservableObject {
         return _learnMainStore
     }
 
+    @MainActor
     func startFolderLearningModeStore(folderId: Int) -> DefaultMemorizeStore<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState> {
         guard let _startFolderLearningModeStore else {
             let store = SelectFolderLearningModeFactory(
@@ -61,6 +63,7 @@ final class LearnCoordinatorState: ObservableObject {
         return _startFolderLearningModeStore
     }
 
+    @MainActor
     func learnFoldersListStore() -> DefaultMemorizeStore<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState> {
         guard let _learnFoldersListStore else {
             let store = LearnFoldersListFactory(
@@ -78,6 +81,7 @@ final class LearnCoordinatorState: ObservableObject {
         return _learnFoldersListStore
     }
 
+    @MainActor
     func learnNewCards(folderId: Int) -> DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState> {
         guard let _learnNewCardsStore else {
             let store = LearnCardFactory(
@@ -101,6 +105,7 @@ final class LearnCoordinatorState: ObservableObject {
         return _learnNewCardsStore
     }
 
+    @MainActor
     func reviewCards(folderId: Int) -> DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState> {
         guard let _reviewCardsStore else {
             let store = LearnCardFactory(
@@ -124,6 +129,7 @@ final class LearnCoordinatorState: ObservableObject {
         return _reviewCardsStore
     }
 
+    @MainActor
     func nextItemCoordinatorState(for route: LearnRoute) -> LearnCoordinatorState? {
         guard let nextCoordinatorState else {
             let state = LearnCoordinatorFactory().makeState(route: route) { [weak self] in
@@ -138,6 +144,7 @@ final class LearnCoordinatorState: ObservableObject {
         return nextCoordinatorState
     }
 
+    @MainActor
     func rememberItemCoordinatorState(router: RememberItemRouter) -> RememberItemCoordinatorState {
         guard let _rememberItemCoordinatorState else {
             let store = RememberItemCoordinatorState(route: router) { [weak self] in
@@ -157,7 +164,7 @@ extension LearnCoordinatorState: SelectFolderLearningModeRouterProtocol {
         nextItem = .learnNewCards(folderId: folderId)
     }
     
-    func reviewCrds(folderId: Int) {
+    func reviewCards(folderId: Int) {
         nextItem = .reviewCards(folderId: folderId)
     }
     

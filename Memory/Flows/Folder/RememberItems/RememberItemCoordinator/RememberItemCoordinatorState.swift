@@ -26,6 +26,7 @@ final class RememberItemCoordinatorState: ObservableObject {
         self.route = route
     }
 
+    @MainActor
     func editWordRememberItemStore(id: Int?, categoriesIds: [Int]?) -> DefaultMemorizeStore<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState> {
         guard let _editWordRememberItemStore else {
             let store = EditWordRememberItemFactory(
@@ -45,6 +46,7 @@ final class RememberItemCoordinatorState: ObservableObject {
         return _editWordRememberItemStore
     }
 
+    @MainActor
     func imagePickerStore(text: String?, completion: HashableWrapper<([ImageType]) -> ()>) -> DefaultMemorizeStore<ImagePickerState, ImagePickerEvent, ImagePickerViewState> {
         guard let _imagePickerStore else {
             let store = ImagePickerFactory(
