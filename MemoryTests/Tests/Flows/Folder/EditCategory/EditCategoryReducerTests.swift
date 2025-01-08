@@ -91,7 +91,7 @@ final class EditCategoryReducerTests {
     }
 
     @Test("Test categoryFetched event success result")
-    func testSendEventFolderFetchedOutputStateFolderArgumentsChanged() {
+    func testSendEventCategoryFetchedOutputStateCategoryArgumentsChanged() {
         let id = 1
         let folderId = 2
         state.id = id
@@ -115,10 +115,20 @@ final class EditCategoryReducerTests {
         #expect(state.image == category.image)
         #expect(state.folderId == category.folderId)
         #expect(state.fetchCategoryRequest == nil)
+
+        state.id = id
+        state.fetchCategoryRequest = FeedbackRequest(id)
+
+        let categoryTwo = MockCategoryModel.mockCategory(id: id, folderId: folderId, desc: nil, icon: nil)
+
+        reducer.reduce(state: &state, event: .categoryFetched(.success(categoryTwo)))
+
+        #expect(state.icon == "")
+        #expect(state.description == "")
     }
 
     @Test("Test categoryFetched event failure result")
-    func testSendEventFolderFetchedOutputStateFolderArgumentsNotChanged() {
+    func testSendEventCategoryFetchedOutputStateCategoryArgumentsNotChanged() {
         let id = 1
         state.fetchCategoryRequest = FeedbackRequest(id)
 
@@ -139,7 +149,7 @@ final class EditCategoryReducerTests {
     }
 
     @Test("Test categoryCreated event success result")
-    func testSendEventFolderCreatedOutputStateFolderArgumentsChanged() {
+    func testSendEventCategoryCreatedOutputStateCategoryArgumentsChanged() {
         #expect(state.id == nil)
         #expect(state.name == "")
         #expect(state.description == "")
@@ -166,10 +176,20 @@ final class EditCategoryReducerTests {
         performRouterRequest(from: state, to: router)
 
         #expect(router.didClose == true)
+
+        state.id = id
+        state.fetchCategoryRequest = FeedbackRequest(id)
+
+        let categoryTwo = MockCategoryModel.mockCategory(id: id, desc: nil, icon: nil)
+
+        reducer.reduce(state: &state, event: .categoryCreated(.success(categoryTwo)))
+
+        #expect(state.icon == "")
+        #expect(state.description == "")
     }
 
     @Test("Test categoryUpdated event success result")
-    func testSendEventFolderUpdatedOutputStateFolderArgumentsChanged() {
+    func testSendEventCategoryUpdatedOutputStateCategoryArgumentsChanged() {
         #expect(state.name == "")
         #expect(state.description == "")
         #expect(state.icon == "")
@@ -195,6 +215,16 @@ final class EditCategoryReducerTests {
         performRouterRequest(from: state, to: router)
 
         #expect(router.didClose == true)
+
+        state.id = id
+        state.fetchCategoryRequest = FeedbackRequest(id)
+
+        let categoryTwo = MockCategoryModel.mockCategory(id: id, desc: nil, icon: nil)
+
+        reducer.reduce(state: &state, event: .categoryUpdated(.success(categoryTwo)))
+
+        #expect(state.icon == "")
+        #expect(state.description == "")
     }
 
     @Test("Test cancel event")

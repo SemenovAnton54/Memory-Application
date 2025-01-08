@@ -7,10 +7,6 @@ extension LearnCoordinatorState {
     struct LearnCardRouter: LearnCardRouterProtocol {
         let state: LearnCoordinatorState
 
-        func close() {
-            state.onClose()
-        }
-        
         func editRememberItem(id: Int) {
             state.presentedItem = .editRememberItem(id: id)
         }

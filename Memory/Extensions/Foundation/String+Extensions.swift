@@ -8,3 +8,9 @@ extension String {
         return self.filter({ $0.isEmoji })
     }
 }
+
+extension Substring {
+    func toString() -> String {
+        String(self)
+    }
+}

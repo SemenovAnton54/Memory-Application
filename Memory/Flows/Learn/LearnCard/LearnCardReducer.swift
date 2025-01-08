@@ -102,13 +102,7 @@ extension LearnCardReducer {
         switch result {
         case let .success(item):
             state.rememberCardItemModel = item
-            
-            switch item?.type {
-            case .word:
-                state.wordCardState = .init()
-            default:
-                break
-            }
+            state.wordCardState = .init()
         case .failure:
             break
         }

@@ -75,17 +75,17 @@ extension LearnCardReducer {
     }
 
     func onCheckAnswer(state: inout LearnCardState) {
-        guard state.wordCardState?.enteringWord.lowercased() == state.rememberCardItemModel?.word?.word.lowercased() else {
+        guard let wordCardState = state.wordCardState else {
+            state.wordCardState = .init()
+            return
+        }
+
+        guard wordCardState.enteringWord.lowercased() == state.rememberCardItemModel?.word?.word.lowercased() else {
             state.wordCardState?.wrongAnswersCount += 1
             return
         }
 
-        guard let actionStyle = state.wordCardState?.actionStyle else {
-            state.wordCardState?.actionStyle = .answer
-            return
-        }
-
-        state.wordCardState?.actionStyle = .correctAnswerAnimation(from: actionStyle)
+        state.wordCardState?.actionStyle = .correctAnswerAnimation(from: wordCardState.actionStyle)
     }
 
     func onEnteringWord(word: String, state: inout LearnCardState) {
