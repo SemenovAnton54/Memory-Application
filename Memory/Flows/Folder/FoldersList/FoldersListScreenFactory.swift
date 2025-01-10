@@ -13,8 +13,8 @@ struct FoldersListScreenFactory {
 
     func makeStore(
         router: FoldersListRouterProtocol
-    ) -> DefaultMemorizeStore<FoldersListState, FoldersListEvent, FoldersListViewState> {
-        let store = DefaultMemorizeStore(
+    ) -> DefaultStateMachine<FoldersListState, FoldersListEvent, FoldersListViewState> {
+        let store = DefaultStateMachine(
             initialState: FoldersListState(),
             reduce: FoldersListReducer().reduce,
             present: FoldersListPresenter().present,

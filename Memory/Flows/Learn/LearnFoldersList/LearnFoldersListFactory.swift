@@ -14,8 +14,8 @@ struct LearnFoldersListFactory {
 
     func makeStore(
         router: LearnFoldersListRouterProtocol
-    ) -> DefaultMemorizeStore<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState> {
-        let store = DefaultMemorizeStore(
+    ) -> DefaultStateMachine<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState> {
+        let store = DefaultStateMachine(
             initialState: LearnFoldersListState(),
             reduce: LearnFoldersListReducer().reduce,
             present: LearnFoldersListPresenter().present,
@@ -29,7 +29,7 @@ struct LearnFoldersListFactory {
     }
 
     @MainActor
-    static func makeView(for store: DefaultMemorizeStore<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState>) -> some View {
+    static func makeView(for store: DefaultStateMachine<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState>) -> some View {
         LearnFoldersListView(store: store)
     }
 }

@@ -6,7 +6,7 @@
 import SwiftUI
 import Combine
 
-struct CategoryDetailsView<T: MemorizeStore>: View where T.ViewState == CategoryDetailsViewState, T.Event == CategoryDetailsEvent {
+struct CategoryDetailsView<T: StateMachine>: View where T.ViewState == CategoryDetailsViewState, T.Event == CategoryDetailsEvent {
     @ObservedObject var store: T
 
     @State private var showingOptions = false
@@ -106,7 +106,7 @@ struct CategoryDetailsView<T: MemorizeStore>: View where T.ViewState == Category
 }
 
 struct CategoryDetailsView_Previews: PreviewProvider {
-    class MemorizeMockStore: MemorizeStore {
+    class MemorizeMockStore: StateMachine {
         @Published var viewState: CategoryDetailsViewState
 
         init() {

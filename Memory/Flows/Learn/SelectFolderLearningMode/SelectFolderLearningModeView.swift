@@ -6,7 +6,7 @@
 import SwiftUI
 import Combine
 
-struct SelectFolderLearningModeView<T: MemorizeStore>: View where T.ViewState == SelectFolderLearningModeViewState, T.Event == SelectFolderLearningModeEvent {
+struct SelectFolderLearningModeView<T: StateMachine>: View where T.ViewState == SelectFolderLearningModeViewState, T.Event == SelectFolderLearningModeEvent {
     @ObservedObject var store: T
 
     init(store: T) {
@@ -47,7 +47,7 @@ struct SelectFolderLearningModeView<T: MemorizeStore>: View where T.ViewState ==
 }
 
 struct SelectFolderLearningModeView_Previews: PreviewProvider {
-    class MemorizeMockStore: MemorizeStore {
+    class MemorizeMockStore: StateMachine {
         @Published var viewState: SelectFolderLearningModeViewState
 
         init() {

@@ -18,8 +18,8 @@ struct FolderDetailsFactory {
     func makeStore(
         id: Int,
         router: FolderDetailsRouterProtocol
-    ) -> DefaultMemorizeStore<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState> {
-        let store = DefaultMemorizeStore(
+    ) -> DefaultStateMachine<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState> {
+        let store = DefaultStateMachine(
             initialState: FolderDetailsState(
                 id: id,
                 fetchFolderRequest: FeedbackRequest(FolderRequest(id: id)),

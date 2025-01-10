@@ -18,8 +18,8 @@ final class RememberItemCoordinatorState: ObservableObject {
 
     private weak var _nextCoordinatorState: RememberItemCoordinatorState?
 
-    private weak var _imagePickerStore: DefaultMemorizeStore<ImagePickerState, ImagePickerEvent, ImagePickerViewState>?
-    private weak var _editWordRememberItemStore: DefaultMemorizeStore<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState>?
+    private weak var _imagePickerStore: DefaultStateMachine<ImagePickerState, ImagePickerEvent, ImagePickerViewState>?
+    private weak var _editWordRememberItemStore: DefaultStateMachine<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState>?
 
     init(route: RememberItemRouter, onClose: @escaping () -> Void) {
         self.onClose = onClose
@@ -27,7 +27,7 @@ final class RememberItemCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func editWordRememberItemStore(id: Int?, categoriesIds: [Int]?) -> DefaultMemorizeStore<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState> {
+    func editWordRememberItemStore(id: Int?, categoriesIds: [Int]?) -> DefaultStateMachine<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState> {
         guard let _editWordRememberItemStore else {
             let store = EditWordRememberItemFactory(
                 dependencies: EditWordRememberItemFactory.Dependencies(rememberItemsService: MemoryApp.rememberItemsService)
@@ -47,7 +47,7 @@ final class RememberItemCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func imagePickerStore(text: String?, completion: HashableWrapper<([ImageType]) -> ()>) -> DefaultMemorizeStore<ImagePickerState, ImagePickerEvent, ImagePickerViewState> {
+    func imagePickerStore(text: String?, completion: HashableWrapper<([ImageType]) -> ()>) -> DefaultStateMachine<ImagePickerState, ImagePickerEvent, ImagePickerViewState> {
         guard let _imagePickerStore else {
             let store = ImagePickerFactory(
                 dependencies: ImagePickerFactory.Dependencies(imagePickerService: MemoryApp.imagePickerService)

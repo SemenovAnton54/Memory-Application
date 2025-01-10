@@ -6,7 +6,7 @@
 import SwiftUI
 import Combine
 
-struct LearnFoldersListView<T: MemorizeStore>: View where T.ViewState == LearnFoldersListViewState, T.Event == LearnFoldersListEvent {
+struct LearnFoldersListView<T: StateMachine>: View where T.ViewState == LearnFoldersListViewState, T.Event == LearnFoldersListEvent {
     @ObservedObject var store: T
 
     init(store: T) {

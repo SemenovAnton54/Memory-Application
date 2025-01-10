@@ -7,7 +7,7 @@ import SwiftUI
 import Combine
 import PhotosUI
 
-struct EditWordRememberItemView<T: MemorizeStore>: View where T.ViewState == EditWordRememberItemViewState, T.Event == EditWordRememberItemEvent {
+struct EditWordRememberItemView<T: StateMachine>: View where T.ViewState == EditWordRememberItemViewState, T.Event == EditWordRememberItemEvent {
     @ObservedObject var store: T
 
     init(store: T) {
@@ -183,7 +183,7 @@ extension EditWordRememberItemView {
 }
 
 struct EditWordRememberItemView_Previews: PreviewProvider {
-    class MemorizeMockStore: MemorizeStore {
+    class MemorizeMockStore: StateMachine {
         @Published var viewState: EditWordRememberItemViewState
 
         init() {

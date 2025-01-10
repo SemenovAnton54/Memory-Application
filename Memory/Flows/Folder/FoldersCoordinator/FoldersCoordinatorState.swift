@@ -16,13 +16,13 @@ final class FoldersCoordinatorState: ObservableObject {
 
     private weak var _nextCoordinatorState: FoldersCoordinatorState?
 
-    private weak var _foldersListStore: (DefaultMemorizeStore<FoldersListState, FoldersListEvent, FoldersListViewState>)?
+    private weak var _foldersListStore: (DefaultStateMachine<FoldersListState, FoldersListEvent, FoldersListViewState>)?
 
-    private weak var _editFolderStore: (DefaultMemorizeStore<EditFolderState, EditFolderEvent, EditFolderViewState>)?
-    private weak var _editCategoryStore: (DefaultMemorizeStore<EditCategoryState, EditCategoryEvent, EditCategoryViewState>)?
+    private weak var _editFolderStore: (DefaultStateMachine<EditFolderState, EditFolderEvent, EditFolderViewState>)?
+    private weak var _editCategoryStore: (DefaultStateMachine<EditCategoryState, EditCategoryEvent, EditCategoryViewState>)?
 
-    private weak var _folderDetailsStore: DefaultMemorizeStore<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState>?
-    private weak var _categoryDetailsStore: DefaultMemorizeStore<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState>?
+    private weak var _folderDetailsStore: DefaultStateMachine<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState>?
+    private weak var _categoryDetailsStore: DefaultStateMachine<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState>?
 
     private weak var _rememberItemCoordinatorState: RememberItemCoordinatorState?
 
@@ -32,7 +32,7 @@ final class FoldersCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func foldersListStore() -> DefaultMemorizeStore<FoldersListState, FoldersListEvent, FoldersListViewState> {
+    func foldersListStore() -> DefaultStateMachine<FoldersListState, FoldersListEvent, FoldersListViewState> {
         guard let _foldersListStore else {
             let store = FoldersListScreenFactory(
                 dependencies: FoldersListScreenFactory.Dependencies(
@@ -50,7 +50,7 @@ final class FoldersCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func folderStore(id: Int?) -> DefaultMemorizeStore<EditFolderState, EditFolderEvent, EditFolderViewState> {
+    func folderStore(id: Int?) -> DefaultStateMachine<EditFolderState, EditFolderEvent, EditFolderViewState> {
         guard let _editFolderStore else {
             let store = EditFolderFactory(
                 dependencies: EditFolderFactory.Dependencies(
@@ -67,7 +67,7 @@ final class FoldersCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func categoryStore(id: Int?, folderId: Int?) -> DefaultMemorizeStore<EditCategoryState, EditCategoryEvent, EditCategoryViewState> {
+    func categoryStore(id: Int?, folderId: Int?) -> DefaultStateMachine<EditCategoryState, EditCategoryEvent, EditCategoryViewState> {
         guard let _editCategoryStore else {
             let store = EditCategoryFactory(
                 dependencies: EditCategoryFactory.Dependencies(categoriesService: MemoryApp.categoriesService)
@@ -88,7 +88,7 @@ final class FoldersCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func folderDetailsStore(id: Int) -> DefaultMemorizeStore<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState> {
+    func folderDetailsStore(id: Int) -> DefaultStateMachine<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState> {
         guard let _folderDetailsStore else {
             let store = FolderDetailsFactory(
                 dependencies: FolderDetailsFactory.Dependencies(
@@ -106,7 +106,7 @@ final class FoldersCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func categoryDetailsStore(id: Int) -> DefaultMemorizeStore<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState> {
+    func categoryDetailsStore(id: Int) -> DefaultStateMachine<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState> {
         guard let _categoryDetailsStore else {
             let store = CategoryDetailsFactory(
                 dependencies: .init(

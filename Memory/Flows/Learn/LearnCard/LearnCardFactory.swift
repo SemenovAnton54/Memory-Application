@@ -27,7 +27,7 @@ struct LearnCardFactory {
     func makeStore(
         arguments: Arguments,
         router: LearnCardRouterProtocol
-    ) -> DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState> {
+    ) -> DefaultStateMachine<LearnCardState, LearnCardEvent, LearnCardViewState> {
         let learnService: LearnCardsServiceProtocol
 
         switch arguments.mode {
@@ -37,7 +37,7 @@ struct LearnCardFactory {
             learnService = MemoryApp.reviewItemsService
         }
 
-        let store = DefaultMemorizeStore(
+        let store = DefaultStateMachine(
             initialState: LearnCardState(nextCardRequest: FeedbackRequest(), statisticsRequest: FeedbackRequest()),
             reduce: LearnCardReducer().reduce,
             present: LearnCardPresenter().present,

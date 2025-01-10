@@ -6,7 +6,7 @@
 import SwiftUI
 import Combine
 
-struct LearnMainView<T: MemorizeStore>: View where T.ViewState == LearnMainViewState, T.Event == LearnMainEvent {
+struct LearnMainView<T: StateMachine>: View where T.ViewState == LearnMainViewState, T.Event == LearnMainEvent {
     @ObservedObject var store: T
 
     init(store: T) {
@@ -59,7 +59,7 @@ struct LearnMainView<T: MemorizeStore>: View where T.ViewState == LearnMainViewS
 }
 
 struct LearnMainView_Previews: PreviewProvider {
-    class MemorizeMockStore: MemorizeStore {
+    class MemorizeMockStore: StateMachine {
         @Published var viewState: LearnMainViewState
 
         init() {

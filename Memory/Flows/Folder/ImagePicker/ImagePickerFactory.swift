@@ -27,14 +27,14 @@ struct ImagePickerFactory {
     func makeStore(
         arguments: Arguments,
         router: ImagePickerRouterProtocol
-    ) -> DefaultMemorizeStore<ImagePickerState, ImagePickerEvent, ImagePickerViewState> {
+    ) -> DefaultStateMachine<ImagePickerState, ImagePickerEvent, ImagePickerViewState> {
         var request: FeedbackRequest<ImagePickerState.ImagesRequest>?
 
         if let text = arguments.text, !text.isEmpty {
             request = FeedbackRequest(ImagePickerState.ImagesRequest(text: text))
         }
 
-        let store = DefaultMemorizeStore(
+        let store = DefaultStateMachine(
             initialState: ImagePickerState(
                 text: arguments.text,
                 fetchImagesRequest: request
@@ -53,7 +53,7 @@ struct ImagePickerFactory {
     }
 
     @MainActor
-    static func makeView(for store: DefaultMemorizeStore<ImagePickerState, ImagePickerEvent, ImagePickerViewState>) -> some View {
+    static func makeView(for store: DefaultStateMachine<ImagePickerState, ImagePickerEvent, ImagePickerViewState>) -> some View {
         ImagePickerView(store: store)
     }
 }

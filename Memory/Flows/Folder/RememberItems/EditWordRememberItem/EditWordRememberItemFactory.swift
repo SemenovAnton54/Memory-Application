@@ -22,14 +22,14 @@ struct EditWordRememberItemFactory {
     func makeStore(
         arguments: Arguments,
         router: EditWordRememberItemRouterProtocol
-    ) -> DefaultMemorizeStore<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState> {
+    ) -> DefaultStateMachine<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState> {
         var request: FeedbackRequest<RememberItemRequest>?
 
         if let id = arguments.id {
             request = FeedbackRequest(RememberItemRequest(id: id))
         }
 
-        let store = DefaultMemorizeStore(
+        let store = DefaultStateMachine(
             initialState: EditWordRememberItemState(
                 categoriesIds: arguments.categoriesIds ?? [],
                 fetchRequest: request

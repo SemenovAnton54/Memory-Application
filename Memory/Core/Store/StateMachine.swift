@@ -1,11 +1,11 @@
 //
-//  MemorizeStore.swift
+//  StateMachine.swift
 //  Memory
 //
 
 import Combine
 
-protocol MemorizeStore: ObservableObject {
+protocol StateMachine: ObservableObject {
     associatedtype ViewState
     associatedtype Event
 

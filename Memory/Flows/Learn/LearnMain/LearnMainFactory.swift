@@ -15,11 +15,11 @@ struct LearnMainFactory {
 
     func makeStore(
         router: LearnMainRouterProtocol
-    ) -> DefaultMemorizeStore<LearnMainState, LearnMainEvent, LearnMainViewState> {
+    ) -> DefaultStateMachine<LearnMainState, LearnMainEvent, LearnMainViewState> {
         let newCardItemsService = MemoryApp.learnNewItemsService
         let reviewCardItemsService = MemoryApp.reviewItemsService
 
-        let store = DefaultMemorizeStore(
+        let store = DefaultStateMachine(
             initialState: LearnMainState(),
             reduce: LearnMainReducer().reduce,
             present: LearnMainPresenter().present,

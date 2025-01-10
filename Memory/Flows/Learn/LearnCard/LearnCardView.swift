@@ -6,7 +6,7 @@
 import SwiftUI
 import Combine
 
-struct LearnCardView<T: MemorizeStore>: View where T.ViewState == LearnCardViewState, T.Event == LearnCardEvent {
+struct LearnCardView<T: StateMachine>: View where T.ViewState == LearnCardViewState, T.Event == LearnCardEvent {
     @State private var keyboardHeight: CGFloat = 0
     @State var cardXOffset: CGFloat = 0
     @State var notRememberedItem = false
@@ -55,10 +55,14 @@ struct LearnCardView<T: MemorizeStore>: View where T.ViewState == LearnCardViewS
 
                             Bottom(
                                 rememberAction: {
-                                    swipeAnimation(offset: -500)
+                                    swipeAnimation(offset: -500) {
+                                        store.event(.remember)
+                                    }
                                 },
                                 repeatAction: {
-                                    swipeAnimation(offset: 500)
+                                    swipeAnimation(offset: 500) {
+                                        store.event(.notRemember)
+                                    }
                                 }
                             )
                             .frame(maxHeight: .infinity, alignment: .bottom)
@@ -111,7 +115,7 @@ struct LearnCardView<T: MemorizeStore>: View where T.ViewState == LearnCardViewS
         }
     }
 
-    func swipeAnimation(offset: CGFloat) {
+    func swipeAnimation(offset: CGFloat, completion: @escaping () -> Void) {
         withAnimation(.easeIn(duration: 0.2)) {
             cardXOffset = offset
         } completion: {
@@ -123,13 +127,13 @@ struct LearnCardView<T: MemorizeStore>: View where T.ViewState == LearnCardViewS
             cardOpacityEffect = 0
         } completion: {
             cardXOffset = 0
-            store.event(.remember)
+            completion()
         }
     }
 }
 
 struct LearnNewItemView_Previews: PreviewProvider {
-    class MemorizeMockStore: MemorizeStore {
+    class MemorizeMockStore: StateMachine {
         @Published var viewState: LearnCardViewState
 
         init() {

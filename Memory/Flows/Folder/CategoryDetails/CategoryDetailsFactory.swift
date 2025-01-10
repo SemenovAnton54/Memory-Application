@@ -22,8 +22,8 @@ struct CategoryDetailsFactory {
     func makeStore(
         arguments: Arguments,
         router: CategoryDetailsRouterProtocol
-    ) -> DefaultMemorizeStore<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState> {
-        let store = DefaultMemorizeStore(
+    ) -> DefaultStateMachine<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState> {
+        let store = DefaultStateMachine(
             initialState: CategoryDetailsState(
                 id: arguments.id,
                 fetchCategoryRequest: FeedbackRequest(CategoryRequest(id: arguments.id)),

@@ -32,7 +32,7 @@ class LearnNewItemsService: LearnCardsServiceProtocol {
         let today = Date()
         let items = try await fetchItems(for: folder)
         let newItems = items.filter { $0.repeatLevel == .newItem || $0.repeatLevel == .learning }
-        let learnedTodayItems = items.filter { $0.lastIncreasedLevelAt?.isInSameDay(as: today) == true }
+        let learnedTodayItems = items.filter { $0.repeatLevel == .first && $0.lastIncreasedLevelAt?.isInSameDay(as: today) == true }
 
         return LearnStatisticsModel(
             learnedCount: learnedTodayItems.count,

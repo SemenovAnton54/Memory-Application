@@ -14,11 +14,11 @@ final class LearnCoordinatorState: ObservableObject {
 
     private weak var nextCoordinatorState: LearnCoordinatorState?
 
-    private weak var _learnMainStore: DefaultMemorizeStore<LearnMainState, LearnMainEvent, LearnMainViewState>? = nil
-    private weak var _startFolderLearningModeStore: DefaultMemorizeStore<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState>? = nil
-    private weak var _learnNewCardsStore: DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState>? = nil
-    private weak var _reviewCardsStore: DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState>? = nil
-    private weak var _learnFoldersListStore: DefaultMemorizeStore<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState>? = nil
+    private weak var _learnMainStore: DefaultStateMachine<LearnMainState, LearnMainEvent, LearnMainViewState>? = nil
+    private weak var _startFolderLearningModeStore: DefaultStateMachine<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState>? = nil
+    private weak var _learnNewCardsStore: DefaultStateMachine<LearnCardState, LearnCardEvent, LearnCardViewState>? = nil
+    private weak var _reviewCardsStore: DefaultStateMachine<LearnCardState, LearnCardEvent, LearnCardViewState>? = nil
+    private weak var _learnFoldersListStore: DefaultStateMachine<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState>? = nil
     private weak var _rememberItemCoordinatorState: RememberItemCoordinatorState?
 
     let onClose: () -> Void
@@ -29,7 +29,7 @@ final class LearnCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func learnMainStore() -> DefaultMemorizeStore<LearnMainState, LearnMainEvent, LearnMainViewState> {
+    func learnMainStore() -> DefaultStateMachine<LearnMainState, LearnMainEvent, LearnMainViewState> {
         guard let _learnMainStore else {
             let store = LearnMainFactory(
                 dependencies: LearnMainFactory.Dependencies(
@@ -47,7 +47,7 @@ final class LearnCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func startFolderLearningModeStore(folderId: Int) -> DefaultMemorizeStore<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState> {
+    func startFolderLearningModeStore(folderId: Int) -> DefaultStateMachine<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState> {
         guard let _startFolderLearningModeStore else {
             let store = SelectFolderLearningModeFactory(
                 dependencies: SelectFolderLearningModeFactory.Dependencies()
@@ -64,7 +64,7 @@ final class LearnCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func learnFoldersListStore() -> DefaultMemorizeStore<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState> {
+    func learnFoldersListStore() -> DefaultStateMachine<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState> {
         guard let _learnFoldersListStore else {
             let store = LearnFoldersListFactory(
                 dependencies: LearnFoldersListFactory.Dependencies(
@@ -82,7 +82,7 @@ final class LearnCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func learnNewCards(folderId: Int) -> DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState> {
+    func learnNewCards(folderId: Int) -> DefaultStateMachine<LearnCardState, LearnCardEvent, LearnCardViewState> {
         guard let _learnNewCardsStore else {
             let store = LearnCardFactory(
                 dependencies: LearnCardFactory.Dependencies(
@@ -106,7 +106,7 @@ final class LearnCoordinatorState: ObservableObject {
     }
 
     @MainActor
-    func reviewCards(folderId: Int) -> DefaultMemorizeStore<LearnCardState, LearnCardEvent, LearnCardViewState> {
+    func reviewCards(folderId: Int) -> DefaultStateMachine<LearnCardState, LearnCardEvent, LearnCardViewState> {
         guard let _reviewCardsStore else {
             let store = LearnCardFactory(
                 dependencies: LearnCardFactory.Dependencies(

@@ -42,7 +42,7 @@ class ReviewCardsService: LearnCardsServiceProtocol {
     func fetchStatistics(for folder: Int) async throws -> LearnStatisticsModel {
         let currentDate = Date()
         let cardItemsToReview = try await fetchItems(for: folder).filter { isCardItemToReview(item: $0, to: currentDate) }
-        let learnedTodayItems = cardItemsToReview.filter { $0.lastIncreasedLevelAt?.isInSameDay(as: currentDate) == true }
+        let learnedTodayItems = cardItemsToReview.filter { $0.lastIncreasedLevelAt?.isInSameDay(as: currentDate) == true } // bug to fix logic now only item to learn show this
 
         return LearnStatisticsModel(
             learnedCount: learnedTodayItems.count,
@@ -71,7 +71,7 @@ class ReviewCardsService: LearnCardsServiceProtocol {
             return false
         }
 
-        let showOnDate = lastIncreasedLevelAt.addingTimeInterval(60 * 60 * 23 * Double(day))
+        let showOnDate = lastIncreasedLevelAt.addingTimeInterval(60 * 60 * 24 * Double(day))
 
         return showOnDate < date
     }

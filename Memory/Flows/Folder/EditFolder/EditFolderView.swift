@@ -8,7 +8,7 @@ import SwiftData
 import PhotosUI
 import Combine
 
-struct EditFolderView<T: MemorizeStore>: View where T.ViewState == EditFolderViewState, T.Event == EditFolderEvent {
+struct EditFolderView<T: StateMachine>: View where T.ViewState == EditFolderViewState, T.Event == EditFolderEvent {
     @State private var icon = ""
     @ObservedObject var store: T
 
@@ -120,7 +120,7 @@ struct EditFolderView<T: MemorizeStore>: View where T.ViewState == EditFolderVie
 }
 
 struct EditFolderView_Previews: PreviewProvider {
-    class EditFolderMemorizeMockStore: MemorizeStore {
+    class EditFolderMemorizeMockStore: StateMachine {
         @Published var viewState: EditFolderViewState
 
         init() {

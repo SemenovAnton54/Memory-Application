@@ -1,12 +1,12 @@
 //
-//  DefaultMemorizeStore.swift
+//  DefaultStateMachine.swift
 //  Memory
 //
 
 import SwiftUI
 import Combine
 
-final class DefaultMemorizeStore<State, Event, ViewState>: MemorizeStore {
+final class DefaultStateMachine<State, Event, ViewState>: StateMachine {
     private let eventSubject = PassthroughSubject<Event, Never>()
     private let stateSubject: CurrentValueSubject<State, Never>
 

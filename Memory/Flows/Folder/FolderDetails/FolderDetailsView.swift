@@ -6,7 +6,7 @@
 import SwiftUI
 import Combine
 
-struct FolderDetailsView<T: MemorizeStore>: View where T.ViewState == FolderDetailsViewState, T.Event == FolderDetailsEvent {
+struct FolderDetailsView<T: StateMachine>: View where T.ViewState == FolderDetailsViewState, T.Event == FolderDetailsEvent {
     @ObservedObject var store: T
 
     @State private var showingOptions = false
@@ -105,7 +105,7 @@ struct FolderDetailsView<T: MemorizeStore>: View where T.ViewState == FolderDeta
 }
 
 struct FolderDetailsView_Previews: PreviewProvider {
-    class MemorizeMockStore: MemorizeStore {
+    class MemorizeMockStore: StateMachine {
         @Published var viewState: FolderDetailsViewState
 
         init() {

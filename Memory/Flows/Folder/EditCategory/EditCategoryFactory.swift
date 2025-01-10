@@ -26,14 +26,14 @@ struct EditCategoryFactory {
     func makeStore(
         arguments: Arguments,
         router: EditCategoryRouterProtocol
-    ) -> DefaultMemorizeStore<EditCategoryState, EditCategoryEvent, EditCategoryViewState> {
+    ) -> DefaultStateMachine<EditCategoryState, EditCategoryEvent, EditCategoryViewState> {
         var fetchCategoryRequest: FeedbackRequest<Int>?
 
         if let id = arguments.id {
             fetchCategoryRequest = FeedbackRequest(id)
         }
 
-        let store = DefaultMemorizeStore(
+        let store = DefaultStateMachine(
             initialState: EditCategoryState(
                 folderId: arguments.folderId,
                 id: arguments.id,

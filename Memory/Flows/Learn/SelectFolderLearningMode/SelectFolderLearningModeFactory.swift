@@ -18,11 +18,11 @@ struct SelectFolderLearningModeFactory {
     func makeStore(
         arguments: Arguments,
         router: SelectFolderLearningModeRouterProtocol
-    ) -> DefaultMemorizeStore<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState> {
+    ) -> DefaultStateMachine<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState> {
         let newCardItemsService = MemoryApp.learnNewItemsService
         let reviewCardItemsService = MemoryApp.reviewItemsService
 
-        let store = DefaultMemorizeStore(
+        let store = DefaultStateMachine(
             initialState: SelectFolderLearningModeState(
                 folderId: arguments.folderId,
                 fetchNewItemsStatisticsRequest: FeedbackRequest(),

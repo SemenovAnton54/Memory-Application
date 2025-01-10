@@ -7,7 +7,7 @@ import SwiftUI
 import Combine
 import PhotosUI
 
-struct EditCategoryView<T: MemorizeStore>: View where T.ViewState == EditCategoryViewState, T.Event == EditCategoryEvent {
+struct EditCategoryView<T: StateMachine>: View where T.ViewState == EditCategoryViewState, T.Event == EditCategoryEvent {
     @State private var icon = ""
     @ObservedObject var store: T
 
@@ -93,7 +93,7 @@ struct EditCategoryView<T: MemorizeStore>: View where T.ViewState == EditCategor
 }
 
 struct EditCategoryView_Previews: PreviewProvider {
-    class EditCategoryMemorizeMockStore: MemorizeStore {
+    class EditCategoryMemorizeMockStore: StateMachine {
         @Published var viewState: EditCategoryViewState
 
         init() {

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import PhotosUI
 
-struct ImagePickerView<T: MemorizeStore>: View where T.ViewState == ImagePickerViewState, T.Event == ImagePickerEvent {
+struct ImagePickerView<T: StateMachine>: View where T.ViewState == ImagePickerViewState, T.Event == ImagePickerEvent {
     @ObservedObject var store: T
 
     @StateObject private var searchViewModel = SearchViewModel()
@@ -42,7 +42,7 @@ struct ImagePickerView<T: MemorizeStore>: View where T.ViewState == ImagePickerV
                     isLoading: store.viewState.isLoading,
                     imagesStates: store.viewState.imagesStates,
                     onImageTap: {
-                        store.event(.removeImageFromGallery(id: $0.id))
+                        store.event(.toggleImageSelection(id: $0.id))
                     }
                 )
             }
@@ -90,7 +90,7 @@ struct ImagePickerView<T: MemorizeStore>: View where T.ViewState == ImagePickerV
 
 
 struct ImagePickerView_Previews: PreviewProvider {
-    class MemorizeMockStore: MemorizeStore {
+    class MemorizeMockStore: StateMachine {
         @Published var viewState: ImagePickerViewState
 
         init() {

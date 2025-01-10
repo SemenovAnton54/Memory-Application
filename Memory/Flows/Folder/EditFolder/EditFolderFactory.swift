@@ -18,14 +18,14 @@ struct EditFolderFactory {
 
     let dependencies: Dependencies
 
-    func makeStore(id: Int?, router: EditFolderRouterProtocol) -> DefaultMemorizeStore<EditFolderState, EditFolderEvent, EditFolderViewState> {
+    func makeStore(id: Int?, router: EditFolderRouterProtocol) -> DefaultStateMachine<EditFolderState, EditFolderEvent, EditFolderViewState> {
         var fetchFolderRequest: FeedbackRequest<Int>?
 
         if let id {
             fetchFolderRequest = .init(id)
         }
 
-        let store = DefaultMemorizeStore(
+        let store = DefaultStateMachine(
             initialState: EditFolderState(id: id, fetchFolderRequest: fetchFolderRequest),
             reduce: EditFolderReducer().reduce,
             present: EditFolderPresenter().present,

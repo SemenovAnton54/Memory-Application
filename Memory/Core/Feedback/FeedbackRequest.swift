@@ -6,26 +6,26 @@
 import Foundation
 import Combine
 
-public struct FeedbackRequest<Payload>: Hashable {
+struct FeedbackRequest<Payload>: Hashable {
     private let id: UUID
-    public let payload: Payload
+    let payload: Payload
 
-    public init(_ payload: Payload) {
+    init(_ payload: Payload) {
         self.id = UUID()
         self.payload = payload
     }
 
-    public static func == (lhs: Self, rhs: Self) -> Bool {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }
 
-    public func hash(into hasher: inout Hasher) {
+    func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }
 
 extension FeedbackRequest where Payload == Void {
-    public init() {
+    init() {
         self.init(())
     }
 }
@@ -36,9 +36,13 @@ private struct ConstHashable<Value: Equatable>: Hashable {
     func hash(into hasher: inout Hasher) { }
 }
 
-public typealias FeedbackLoop<State, Event> = (AnyPublisher<State, Never>) -> AnyPublisher<Event, Never>
+typealias FeedbackLoop<State, Event> = (AnyPublisher<State, Never>) -> AnyPublisher<Event, Never>
 
-public func react<State, Event, Request>(
+func feedbackLoop<State, Event>(_ closure: @escaping FeedbackLoop<State, Event>) -> FeedbackLoop<State, Event> {
+    closure
+}
+
+func react<State, Event, Request>(
     request keyPath: KeyPath<State, FeedbackRequest<Request>?>,
     effects: @escaping (Request) -> AnyPublisher<Event, Never>
 ) -> FeedbackLoop<State, Event> {
@@ -47,7 +51,7 @@ public func react<State, Event, Request>(
     }
 }
 
-public func react<State, Event, Request>(
+func react<State, Event, Request>(
     request keyPath: KeyPath<State, FeedbackRequest<Request>?>,
     effects: @escaping (Request) async -> Event
 ) -> FeedbackLoop<State, Event> {
@@ -56,7 +60,7 @@ public func react<State, Event, Request>(
     }
 }
 
-public func react<State, Request: Equatable, Event>(
+func react<State, Request: Equatable, Event>(
     request: @escaping (State) -> Request?,
     effects: @escaping (Request) async -> Event
 ) -> (AnyPublisher<State, Never>) -> AnyPublisher<Event, Never> {
@@ -92,7 +96,7 @@ public func react<State, Request: Equatable, Event>(
     }
 }
 
-public func react<State, Request: Equatable, Event>(
+func react<State, Request: Equatable, Event>(
     request: @escaping (State) -> Request?,
     effects: @escaping (Request) -> AnyPublisher<Event, Never>
 ) -> (AnyPublisher<State, Never>) -> AnyPublisher<Event, Never> {
