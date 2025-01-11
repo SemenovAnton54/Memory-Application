@@ -38,7 +38,14 @@ struct LearnCardFactory {
         }
 
         let store = DefaultStateMachine(
-            initialState: LearnCardState(nextCardRequest: FeedbackRequest(), statisticsRequest: FeedbackRequest()),
+            initialState: LearnCardState(
+                nextCardRequest: FeedbackRequest(
+                    LearnCardState.NextCardRequest(
+                        previousId: nil
+                    )
+                ),
+                statisticsRequest: FeedbackRequest()
+            ),
             reduce: LearnCardReducer().reduce,
             present: LearnCardPresenter().present,
             feedback: [
@@ -93,7 +100,12 @@ extension LearnCardFactory {
     func makeFetchNextCardRequestLoop(folder: Int, learnService: LearnCardsServiceProtocol) -> LearnCardFeedbackLoop {
         react(request: \.nextCardRequest) { request in
             do {
-                let item = try await learnService.fetchCardItem(for: folder, filters: nil)
+                let item = try await learnService.fetchCardItem(
+                    for: folder,
+                    filters: FetchCardFilters(
+                        lastShownItemsIds: request.previousId.flatMap { [$0] } ?? []
+                    )
+                )
 
                 return .nextCardItemFetched(.success(item))
             } catch {

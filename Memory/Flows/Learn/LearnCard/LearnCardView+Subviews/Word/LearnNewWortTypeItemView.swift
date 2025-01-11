@@ -55,7 +55,7 @@ struct LearnNewWortTypeItemView: View {
                 .padding(.top, 10)
 
             HStack {
-                HeaderText(wordViewModel.word)
+                HeaderText(actionStyle != .answer ? " " : wordViewModel.word)
                 Spacer()
             }
             .overlay {

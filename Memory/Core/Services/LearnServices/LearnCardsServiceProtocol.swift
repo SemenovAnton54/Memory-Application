@@ -4,7 +4,7 @@
 //
 
 struct FetchCardFilters {
-    let lastShownItemsIds: [Int] = []
+    let lastShownItemsIds: [Int]
 }
 
 struct LearnStatisticsModel {

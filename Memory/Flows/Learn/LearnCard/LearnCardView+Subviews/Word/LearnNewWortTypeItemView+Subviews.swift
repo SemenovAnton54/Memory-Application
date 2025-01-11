@@ -67,7 +67,9 @@ extension LearnNewWortTypeItemView {
                             if !example.translation.isEmpty {
                                 Button(
                                     action: {
-                                        expandedExamples.toggleExistence(of: example)
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            expandedExamples.toggleExistence(of: example)
+                                        }
                                     },
                                     label: {
                                         Image(systemName: expandedExamples.contains(example) ? "chevron.up" : "chevron.down")
@@ -107,7 +109,9 @@ extension LearnNewWortTypeItemView {
                         playExample(example)
                     }
                     .onLongPressGesture {
-                        expandedExamples.toggleExistence(of: example)
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            expandedExamples.toggleExistence(of: example)
+                        }
                     }
 
                     if example != examples.last {

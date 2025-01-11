@@ -21,7 +21,7 @@ class LearnNewItemsService: LearnCardsServiceProtocol {
         let newItems = try await fetchItems(for: folder).filter { $0.repeatLevel == .newItem || $0.repeatLevel == .learning }
         let itemsNotShown = newItems.filter { filters?.lastShownItemsIds.contains($0.id) == false }
 
-        guard let firstItem = itemsNotShown.first else {
+        guard let firstItem = itemsNotShown.randomElement() else {
             return newItems.randomElement()
         }
 

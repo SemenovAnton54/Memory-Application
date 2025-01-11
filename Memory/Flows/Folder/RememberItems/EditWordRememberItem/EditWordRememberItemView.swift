@@ -146,21 +146,11 @@ extension EditWordRememberItemView {
         var body: some View {
             ZStack(alignment: .trailing) {
                 VStack {
-                    TextField(
-                        "",
-                        text: $example,
-                        prompt: Text("Example").foregroundStyle(Colors.textSecondary),
-                        axis: .vertical
-                    ).defaultStyle()
+                    exampleTextField(prompt: "Example", text: $example)
 
                     Divider()
 
-                    TextField(
-                        "",
-                        text: $exampleTranslation,
-                        prompt: Text("Translation").foregroundStyle(Colors.textSecondary),
-                        axis: .vertical
-                    ).defaultStyle()
+                    exampleTextField(prompt: "Translation", text: $exampleTranslation)
                 }
                 .background(Colors.backgroundSecondary)
                 .cornerRadius(8)
@@ -176,6 +166,48 @@ extension EditWordRememberItemView {
                     .padding(.top, -25)
                     .padding(.trailing, -25)
                     Spacer()
+                }
+            }
+        }
+
+        @ViewBuilder
+        func pasteClearView(text: String, action: @escaping (String) -> Void) -> some View {
+            if text.isEmpty {
+                ZStack {
+                    HStack {
+                        Spacer()
+                        Button("Paste") {
+                            action(UIPasteboard.general.string ?? "")
+                        }
+                        .padding(.trailing, 20)
+                    }
+                }
+            } else {
+                ZStack {
+                    HStack {
+                        Spacer()
+                        Button(action: { action("") }) {
+                            Image(systemName: "delete.left")
+                        }
+                        .frame(width: 50, height: 50, alignment: .center)
+                    }
+                }
+            }
+        }
+
+        func exampleTextField(prompt: String, text: Binding<String>) -> some View {
+            ZStack {
+                TextField(
+                    "",
+                    text: text,
+                    prompt: Text("\(prompt)").foregroundStyle(Colors.textSecondary),
+                    axis: .vertical
+                )
+                .defaultStyle()
+                .padding(.trailing, 40)
+
+                pasteClearView(text: text.wrappedValue) {
+                    text.wrappedValue = $0
                 }
             }
         }
@@ -195,7 +227,7 @@ struct EditWordRememberItemView_Previews: PreviewProvider {
                 transcription: "frkrgo",
                 images: [],
                 isLearning: true,
-                examples: []
+                examples: [.init(example: "", translation: "2222")]
             )
         }
 

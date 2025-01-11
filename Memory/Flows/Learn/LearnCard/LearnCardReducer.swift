@@ -78,7 +78,7 @@ extension LearnCardReducer {
         state.cardItemRememberedRequest = nil
         state.cardItemForgottenRequest = nil
 
-        state.nextCardRequest = FeedbackRequest()
+        state.nextCardRequest = FeedbackRequest(LearnCardState.NextCardRequest(previousId: state.rememberCardItemModel?.id))
     }
 
     func onUpdatedCardItemFetched(result: Result<RememberCardItemModel, Error>, state: inout LearnCardState) {

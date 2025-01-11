@@ -8,6 +8,10 @@ struct LearnCardState {
         let id: Int
     }
 
+    struct NextCardRequest {
+        let previousId: Int?
+    }
+
     struct WordCardState {
         indirect enum ActionStyle: Equatable {
             case buttons
@@ -26,7 +30,7 @@ struct LearnCardState {
     var wordCardState: WordCardState?
 
     var playTextRequest: FeedbackRequest<String>?
-    var nextCardRequest: FeedbackRequest<()>?
+    var nextCardRequest: FeedbackRequest<NextCardRequest>?
     var fetchUpdatedCardRequest: FeedbackRequest<CardRequest>?
     var statisticsRequest: FeedbackRequest<()>?
     var cardItemRememberedRequest: FeedbackRequest<Int>?
