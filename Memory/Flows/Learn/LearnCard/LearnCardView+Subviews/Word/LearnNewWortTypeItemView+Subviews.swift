@@ -156,7 +156,12 @@ extension LearnNewWortTypeItemView {
                 .cornerRadius(12)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(isShowCorrectAnswerAnimation ? Colors.correctAnswerAnimation : Colors.actionColor, lineWidth: 2)
+                        .stroke(
+                            isShowCorrectAnswerAnimation
+                            ? Colors.correctAnswerAnimation
+                            : Colors.itemBackgroundSecondary,
+                            lineWidth: 2
+                        )
                 )
                 .padding(.horizontal, 1)
                 .keyboardType(.alphabet)

@@ -41,12 +41,3 @@ class PixabayImagePickerService: ImagePickerServiceProtocol {
         }
     }
 }
-
-fileprivate struct PixaBayResponse: Decodable {
-    let hits: [PixabayImage]
-}
-
-fileprivate struct PixabayImage: Decodable {
-    let id: Int
-    let webformatURL: URL
-}

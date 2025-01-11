@@ -19,7 +19,8 @@ struct MemoryApp: App {
     }
 
     static var imagePickerService: ImagePickerServiceProtocol {
-        PixabayImagePickerService()
+//        PixabayImagePickerService() sanctions, I hope you understand
+        PixabayImagePickerProxyService()
     }
 
     static var foldersService: FoldersServiceProtocol {
