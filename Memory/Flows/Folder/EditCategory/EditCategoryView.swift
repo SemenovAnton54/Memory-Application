@@ -34,18 +34,29 @@ struct EditCategoryView<T: StateMachine>: View where T.ViewState == EditCategory
                 ZStack {
                     HStack {
                         Spacer()
-                        PhotosPicker(
-                            selection: binding(nil) { store.event(.addImage($0)) },
-                            matching: .images
-                        ) { [image = store.viewState.image] in
-                            ImagePickerView(
-                                imageViewModel: nil,
+                        if let imageViewModel = store.viewState.image {
+                            SelectedImageView(
+                                imageViewModel: imageViewModel,
                                 deleteImageAction: {
-//                                    store.event(.removeImage)
+                                    store.event(.removeImage)
                                 }
                             )
+                        } else {
+                            PhotosPicker(
+                                selection: binding(nil) { store.event(.addImage($0)) },
+                                matching: .images
+                            ) {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100, height: 100)
+                                    .padding()
+                                    .background(Colors.backgroundSecondary)
+                                    .tint(Color.white)
+                                    .cornerRadius(8)
+                            }
+                            Spacer()
                         }
-                        Spacer()
                     }
                 }
 

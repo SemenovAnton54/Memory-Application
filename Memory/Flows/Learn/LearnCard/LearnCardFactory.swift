@@ -24,6 +24,7 @@ struct LearnCardFactory {
 
     let dependencies: Dependencies
 
+    @MainActor
     func makeStore(
         arguments: Arguments,
         router: LearnCardRouterProtocol

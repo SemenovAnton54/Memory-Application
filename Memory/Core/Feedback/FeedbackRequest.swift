@@ -51,7 +51,7 @@ func react<State, Event, Request>(
     }
 }
 
-func react<State, Event, Request>(
+func react<State, Event: Sendable, Request>(
     request keyPath: KeyPath<State, FeedbackRequest<Request>?>,
     effects: @escaping (Request) async -> Event
 ) -> FeedbackLoop<State, Event> {
@@ -60,7 +60,7 @@ func react<State, Event, Request>(
     }
 }
 
-func react<State, Request: Equatable, Event>(
+func react<State, Request: Equatable, Event: Sendable>(
     request: @escaping (State) -> Request?,
     effects: @escaping (Request) async -> Event
 ) -> (AnyPublisher<State, Never>) -> AnyPublisher<Event, Never> {

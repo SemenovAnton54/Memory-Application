@@ -35,35 +35,34 @@ struct EditFolderView<T: StateMachine>: View where T.ViewState == EditFolderView
                 ZStack {
                     HStack {
                         Spacer()
-                        PhotosPicker(
-                            selection: binding(nil) { store.event(.addImage($0)) },
-                            matching: .images
-                        ) {
-                            ZStack(alignment: .topTrailing) {
-                                if let image = store.viewState.image {
-                                    ImageView(imageViewModel: image)
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(maxHeight: 150)
+                        if let imageViewModel = store.viewState.image {
+                            ImageView(imageViewModel: imageViewModel)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxHeight: 150)
 
-                                    Button(action: { store.event(.removeImage) }) {
-                                        ZStack {
-                                            Image(systemName: "xmark.circle.fill")
-                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    }
-                                    .frame(width: 25, height: 25)
-                                    .padding(.top, -15)
-                                    .padding(.trailing, -15)
-                                } else {
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 100, height: 100)
-                                        .padding()
-                                        .background(Colors.backgroundSecondary)
-                                        .tint(Color.white)
-                                        .cornerRadius(8)
-                                }
+                            Button(action: { store.event(.removeImage) }) {
+                                ZStack {
+                                    Image(systemName: "xmark.circle.fill")
+                                }.frame(maxWidth: .infinity, maxHeight: .infinity)
                             }
+                            .frame(width: 25, height: 25)
+                            .padding(.top, -15)
+                            .padding(.trailing, -15)
+                        } else {
+                            PhotosPicker(
+                                selection: binding(nil) { store.event(.addImage($0)) },
+                                matching: .images
+                            ) {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100, height: 100)
+                                    .padding()
+                                    .background(Colors.backgroundSecondary)
+                                    .tint(Color.white)
+                                    .cornerRadius(8)
+                            }
+                            Spacer()
                         }
                         Spacer()
                     }

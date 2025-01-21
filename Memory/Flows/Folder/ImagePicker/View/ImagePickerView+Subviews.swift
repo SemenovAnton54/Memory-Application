@@ -1,5 +1,5 @@
 //
-//  ImagePickerView+Subviews.swift
+//  SelectedImageView+Subviews.swift
 //  Memory
 //
 //  Created by Anton Semenov on 05.01.2025.

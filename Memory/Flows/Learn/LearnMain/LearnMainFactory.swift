@@ -13,6 +13,7 @@ struct LearnMainFactory {
 
     let dependencies: Dependencies
 
+    @MainActor
     func makeStore(
         router: LearnMainRouterProtocol
     ) -> DefaultStateMachine<LearnMainState, LearnMainEvent, LearnMainViewState> {
