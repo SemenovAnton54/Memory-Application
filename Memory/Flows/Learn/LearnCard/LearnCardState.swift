@@ -18,12 +18,12 @@ struct LearnCardState {
             case textField
             case variants
             case answer
-            case correctAnswerAnimation(from: ActionStyle)
         }
 
         var actionStyle: ActionStyle = .buttons
         var enteringWord: String = ""
         var wrongAnswersCount: Int = 0
+        var isAnswered: Bool = false
     }
 
     var rememberCardItemModel: RememberCardItemModel?

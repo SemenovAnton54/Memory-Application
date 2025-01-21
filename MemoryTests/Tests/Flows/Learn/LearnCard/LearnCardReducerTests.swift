@@ -83,7 +83,7 @@ final class LearnCardReducerTests {
         state.cardItemForgottenRequest = nil
         state.fetchUpdatedCardRequest = nil
         state.cardItemRememberedRequest = nil
-        state.nextCardRequest = FeedbackRequest()
+        state.nextCardRequest = FeedbackRequest(LearnCardState.NextCardRequest(previousId: nil))
         reducer.reduce(state: &state, event: .rememberItemUpdated(id: rememberCardItemModel.id))
         #expect(state.fetchUpdatedCardRequest == nil)
     }
@@ -165,7 +165,7 @@ final class LearnCardReducerTests {
     @Test("Test nextCardItemFetched event success and failure result")
     func testSendEventNextCardItemFetchedOutputStateNextCardRequestChanged() {
         state.rememberCardItemModel = rememberCardItemModel
-        state.nextCardRequest = FeedbackRequest()
+        state.nextCardRequest = FeedbackRequest(LearnCardState.NextCardRequest(previousId: nil))
         state.wordCardState = .init(
             actionStyle: .answer,
             enteringWord: "enteringWord",
@@ -182,9 +182,8 @@ final class LearnCardReducerTests {
         #expect(state.wordCardState?.enteringWord == "")
         #expect(state.wordCardState?.wrongAnswersCount == 0)
 
-        state.nextCardRequest = FeedbackRequest()
+        state.nextCardRequest = FeedbackRequest(LearnCardState.NextCardRequest(previousId: nil))
         state.rememberCardItemModel = rememberCardItemModel
-        state.nextCardRequest = FeedbackRequest()
         state.wordCardState = .init(
             actionStyle: .answer,
             enteringWord: "enteringWord",
@@ -200,9 +199,7 @@ final class LearnCardReducerTests {
         #expect(state.wordCardState?.wrongAnswersCount == 0)
 
         state.rememberCardItemModel = rememberCardItemModel
-        state.nextCardRequest = FeedbackRequest()
-        state.rememberCardItemModel = rememberCardItemModel
-        state.nextCardRequest = FeedbackRequest()
+        state.nextCardRequest = FeedbackRequest(LearnCardState.NextCardRequest(previousId: nil))
         state.wordCardState = .init(
             actionStyle: .answer,
             enteringWord: "enteringWord",

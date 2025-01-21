@@ -10,6 +10,7 @@ struct LearnCardViewState {
         let actionStyle: LearnCardState.WordCardState.ActionStyle
         let enteringWord: String
         let wrongAnswersCount: Int
+        let showCorrectAnswerAnimation: Bool
     }
 
     let isLoading: Bool

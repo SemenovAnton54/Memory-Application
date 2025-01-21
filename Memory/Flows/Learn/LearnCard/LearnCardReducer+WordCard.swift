@@ -85,7 +85,7 @@ extension LearnCardReducer {
             return
         }
 
-        state.wordCardState?.actionStyle = .correctAnswerAnimation(from: wordCardState.actionStyle)
+        state.wordCardState?.isAnswered = true
     }
 
     func onEnteringWord(word: String, state: inout LearnCardState) {

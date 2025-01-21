@@ -54,7 +54,7 @@ extension LearnCardReducerTests {
         #expect(state.wordCardState?.actionStyle == actionStyle)
 
         switch actionStyle {
-        case .buttons, .textField, .variants, .correctAnswerAnimation:
+        case .buttons, .textField, .variants:
             break
         case .answer:
             #expect(state.playTextRequest?.payload == rememberCardItemModel.word?.word)
@@ -94,7 +94,8 @@ extension LearnCardReducerTests {
         let previousState = state.wordCardState!.actionStyle
         
         reducer.reduce(state: &state, event: .wordCardEvent(.checkAnswer))
-        #expect(state.wordCardState?.actionStyle == .correctAnswerAnimation(from: previousState))
+        #expect(state.wordCardState?.actionStyle == previousState)
+        #expect(state.wordCardState?.isAnswered == true)
     }
 
     @Test("Test wordCardEvent + WordCardEvent event", arguments: ["testWord", "to test"])

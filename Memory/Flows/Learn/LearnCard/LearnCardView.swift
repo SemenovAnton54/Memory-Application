@@ -42,6 +42,7 @@ struct LearnCardView<T: StateMachine>: View where T.ViewState == LearnCardViewSt
                                     enteringWord: state.enteringWord,
                                     wrongAnswersCount: state.wrongAnswersCount,
                                     wordViewModel: state.word,
+                                    showCorrectAnswerAnimation: state.showCorrectAnswerAnimation,
                                     onEvent: { [weak store] in
                                         store?.event(.wordCardEvent($0))
                                     }
@@ -87,12 +88,6 @@ struct LearnCardView<T: StateMachine>: View where T.ViewState == LearnCardViewSt
                     .fill(Colors.backgroundSecondary)
             )
             .cornerRadius(20)
-            .overlay(
-                CorrectAnswerRoundedRectangle(
-                    actionStyle: store.viewState.wordCardViewState?.actionStyle ?? .buttons,
-                    animationCompleted: { store.event(.wordCardEvent(.correctAnswerAnimationFinished)) }
-                )
-            )
             .padding(EdgeInsets(horizontal: 20))
             .scaleEffect(cardScaleEffect)
             .offset(x: cardXOffset)
@@ -151,7 +146,8 @@ struct LearnNewItemView_Previews: PreviewProvider {
                     isImagesHidden: false,
                     actionStyle: .textField,
                     enteringWord: "111",
-                    wrongAnswersCount: 1
+                    wrongAnswersCount: 1,
+                    showCorrectAnswerAnimation: false
                 ),
                 rememberItemViewModel: .init(
                     id: 1,

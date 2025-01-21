@@ -16,6 +16,7 @@ struct CategoryModel {
 
     init(from entity: CategoryEntity) {
         id = entity.id
+        folderId = entity.folderId
         name = entity.name
         desc = entity.desc
         icon = entity.icon

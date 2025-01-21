@@ -127,10 +127,11 @@ extension LearnNewWortTypeItemView {
             case myField
         }
 
-        @State var isShowCorrectAnswerAnimation: Bool = false
-        @State var shakeTextField: Bool = false
-
         @FocusState private var focusedField: Field?
+
+        @State private var isShowCorrectAnswerAnimation: Bool = false
+        @State private var shakeTextField: Bool = false
+
 
         let actionStyle: LearnCardState.WordCardState.ActionStyle
         let onEvent: (LearnCardEvent.WordCardEvent) -> ()
@@ -139,7 +140,7 @@ extension LearnNewWortTypeItemView {
         let wordViewModel: WordViewModel
         let isCorrectAnswerAnimation: Bool
 
-        let passwordFieldDelegate = TextFieldDelegate()
+        let textFieldDelegate = TextFieldDelegate()
 
         var body: some View {
             switch actionStyle {
@@ -161,9 +162,7 @@ extension LearnNewWortTypeItemView {
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
                         .stroke(
-                            isShowCorrectAnswerAnimation
-                            ? Colors.correctAnswerAnimation
-                            : Colors.itemBackgroundSecondary,
+                            isShowCorrectAnswerAnimation ? Colors.correctAnswerAnimation : Colors.itemBackgroundSecondary,
                             lineWidth: 2
                         )
                 )
@@ -171,31 +170,35 @@ extension LearnNewWortTypeItemView {
                 .keyboardType(.alphabet)
                 .disableAutocorrection(true)
                 .introspect(.textField, on: .iOS(.v17, .v18)) {
-                    passwordFieldDelegate.shouldReturn = {
+                    textFieldDelegate.shouldReturn = {
                         onEvent(.checkAnswer)
 
                         return false
                     }
 
-                    $0.delegate = passwordFieldDelegate
+                    $0.delegate = textFieldDelegate
                 }
                 .focused($focusedField, equals: .myField)
                 .modifier(CheckAnswerButton(isHidden: isCorrectAnswerAnimation, enter: { onEvent(.checkAnswer) }))
                 .padding(.top, 30)
                 .padding(.horizontal, 20)
                 .onAppear {
-                    guard !isCorrectAnswerAnimation else {
-                        withAnimation(.easeInOut(duration: 0.7)) {
-                            isShowCorrectAnswerAnimation = true
-                        }
-                        return
-                    }
-
                     guard actionStyle == .textField else {
                         return
                     }
 
                     focusedField = .myField
+                }
+                .onChange(of: isCorrectAnswerAnimation) {
+                    guard !isShowCorrectAnswerAnimation else {
+                        return
+                    }
+
+                    withAnimation(.easeInOut(duration: 0.7)) {
+                        isShowCorrectAnswerAnimation = true
+                    } completion: {
+                        onEvent(.correctAnswerAnimationFinished)
+                    }
                 }
                 .onChange(of: wrongAnswersCount, initial: false) { newValue, _ in
                     withAnimation(.easeInOut(duration: 0.5).repeatCount(4, autoreverses: true).speed(8)) {
@@ -237,22 +240,16 @@ extension LearnNewWortTypeItemView {
                 )
                 .padding(.top, 20)
                 .padding(.horizontal, 20)
-            case let .correctAnswerAnimation(from: actionStyle):
-                ActionStyleView(
-                    actionStyle: actionStyle,
-                    onEvent: onEvent,
-                    enteringWord: enteringWord,
-                    wrongAnswersCount: wrongAnswersCount,
-                    wordViewModel: wordViewModel,
-                    isCorrectAnswerAnimation: true
-                )
             }
         }
     }
 }
 
 #Preview {
-    let examples: [WordExampleModel] = [WordExampleModel(example: "Text example 1 ", translation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")]
+    let examples: [WordExampleModel] = [WordExampleModel(
+        example: "Text example 1 ",
+        translation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    )]
     return LearnNewWortTypeItemView.ActionStyleWordExamplesView(
         examples: examples,
         playExample: { _ in }

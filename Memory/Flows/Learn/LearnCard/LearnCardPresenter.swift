@@ -28,7 +28,8 @@ extension LearnCardPresenter {
             isImagesHidden: state.rememberCardItemModel?.repeatLevel == .newItem,
             actionStyle: wordCardState.actionStyle,
             enteringWord: wordCardState.enteringWord,
-            wrongAnswersCount: wordCardState.wrongAnswersCount
+            wrongAnswersCount: wordCardState.wrongAnswersCount,
+            showCorrectAnswerAnimation: wordCardState.isAnswered
         )
     }
 

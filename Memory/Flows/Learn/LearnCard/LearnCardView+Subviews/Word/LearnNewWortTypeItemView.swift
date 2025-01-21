@@ -12,6 +12,7 @@ struct LearnNewWortTypeItemView: View {
     let enteringWord: String
     let wrongAnswersCount: Int
     let wordViewModel: WordViewModel
+    let showCorrectAnswerAnimation: Bool
     let onEvent: (LearnCardEvent.WordCardEvent) -> ()
 
     init(
@@ -20,6 +21,7 @@ struct LearnNewWortTypeItemView: View {
         enteringWord: String,
         wrongAnswersCount: Int,
         wordViewModel: WordViewModel,
+        showCorrectAnswerAnimation: Bool,
         onEvent: @escaping (LearnCardEvent.WordCardEvent) -> Void
     ) {
         self.isImagesHidden = isImagesHidden
@@ -27,6 +29,7 @@ struct LearnNewWortTypeItemView: View {
         self.enteringWord = enteringWord
         self.wrongAnswersCount = wrongAnswersCount
         self.wordViewModel = wordViewModel
+        self.showCorrectAnswerAnimation = showCorrectAnswerAnimation
         self.onEvent = onEvent
     }
 
@@ -98,7 +101,7 @@ struct LearnNewWortTypeItemView: View {
                 enteringWord: enteringWord,
                 wrongAnswersCount: wrongAnswersCount,
                 wordViewModel: wordViewModel,
-                isCorrectAnswerAnimation: false
+                isCorrectAnswerAnimation: showCorrectAnswerAnimation
             )
         }
     }
@@ -140,6 +143,7 @@ struct CheckAnswerButton: ViewModifier {
             examples: [.init(example: "What is your name?", translation: "Как тебя зовут?")],
             images: []
         ),
+        showCorrectAnswerAnimation: false,
         onEvent: { _ in }
     )
     .background(
