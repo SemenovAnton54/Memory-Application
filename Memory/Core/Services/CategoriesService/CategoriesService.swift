@@ -39,14 +39,7 @@ actor CategoriesService: CategoriesServiceProtocol {
     }
 
     func fetchCategory(id: Int) async throws -> CategoryModel {
-        let predicate = #Predicate<CategoryEntity> { object in
-            object.id == id
-        }
-
-        var descriptor = FetchDescriptor<CategoryEntity>(predicate: predicate)
-        descriptor.fetchLimit = 1
-
-        guard let entity = try context.fetch(descriptor).first else {
+        guard let entity = try? fetchCategoryEntity(id: id) else {
             throw CategoriesServiceError.categoryNotExist
         }
 
@@ -54,16 +47,7 @@ actor CategoriesService: CategoriesServiceProtocol {
     }
 
     func updateCategory(category: UpdateCategoryModel) async throws -> CategoryModel {
-        let id = category.id
-        
-        let predicate = #Predicate<CategoryEntity> { object in
-            object.id == id
-        }
-
-        var descriptor = FetchDescriptor<CategoryEntity>(predicate: predicate)
-        descriptor.fetchLimit = 1
-
-        guard let entity = try context.fetch(descriptor).first else {
+        guard let entity = try? fetchCategoryEntity(id: category.id) else {
             throw CategoriesServiceError.categoryNotExist
         }
 

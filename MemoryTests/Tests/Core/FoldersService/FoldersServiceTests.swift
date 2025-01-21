@@ -92,16 +92,31 @@ class FoldersServiceTests {
         #expect(modelOne.icon == deletedModel.icon)
         #expect(modelOne.image == deletedModel.image)
         #expect(modelOne.id == deletedModel.id)
+    }
 
-        var fetchError: Error?
+    @Test("Create new items, Fetch favorite and not favorite  items")
+    func testCreateFetchNewFolders() async throws {
+        let newModel = MockFolderModel.mockNewFolderModel(isFavorite: false)
+        let newModelTwo = MockFolderModel.mockNewFolderModel(name: "Special name for model two", desc: "Special desc for model two", isFavorite: true)
 
-        do {
-            _ = try await service.fetchFolder(id: modelOne.id)
-        } catch {
-            fetchError = error
-        }
+        let modelOne = try await service.createFolder(
+            newFolder: newModel
+        )
 
-        #expect((fetchError as! FoldersService.FoldersServiceError) == FoldersService.FoldersServiceError.folderNotExist)
+        let modelTwo = try await service.createFolder(
+            newFolder: newModelTwo
+        )
+
+        let favoriteItems = try await service.fetchFolders(filters: FolderFilters(isFavorite: true))
+        #expect(favoriteItems.count == 1)
+        #expect(favoriteItems[0].id == modelTwo.id)
+        
+        let nonFavoriteItems = try await service.fetchFolders(filters: FolderFilters(isFavorite: false))
+        #expect(nonFavoriteItems.count == 1)
+        #expect(nonFavoriteItems[0].id == modelOne.id)
+
+        let allItems = try await service.fetchFolders(filters: nil)
+        #expect(allItems.count == 2)
     }
 
     @Test(
@@ -161,6 +176,36 @@ class FoldersServiceTests {
 
         do {
             _ = try await service.fetchFolder(id: 1)
+        } catch {
+            fetchError = error
+        }
+
+        #expect((fetchError as! FoldersService.FoldersServiceError) == FoldersService.FoldersServiceError.folderNotExist)
+    }
+
+    @Test("remove not existing Folder")
+    func testDeleteNotExistingFolder() async {
+        var fetchError: Error?
+
+        do {
+            _ = try await service.remove(id: 1)
+        } catch {
+            fetchError = error
+        }
+
+        #expect((fetchError as! FoldersService.FoldersServiceError) == FoldersService.FoldersServiceError.folderNotExist)
+    }
+
+    @Test("update not existing Folder")
+    func testUpdateNotExistingFolder() async {
+        let updateModel = MockFolderModel.mockUpdateFolderModel(id: 99)
+
+        var fetchError: Error?
+
+        do {
+            _ = try await service.updateFolder(
+                folder: updateModel
+            )
         } catch {
             fetchError = error
         }

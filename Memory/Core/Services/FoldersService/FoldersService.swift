@@ -51,14 +51,7 @@ actor FoldersService: FoldersServiceProtocol {
     }
 
     func fetchFolder(id: Int) async throws -> FolderModel {
-        let predicate = #Predicate<FolderEntity> { object in
-            object.id == id
-        }
-
-        var descriptor = FetchDescriptor<FolderEntity>(predicate: predicate)
-        descriptor.fetchLimit = 1
-
-        guard let entity = try context.fetch(descriptor).first else {
+        guard let entity = try? fetchFolderEntity(id: id) else {
             throw FoldersServiceError.folderNotExist
         }
 
@@ -66,16 +59,7 @@ actor FoldersService: FoldersServiceProtocol {
     }
 
     func updateFolder(folder: UpdateFolderModel) async throws -> FolderModel {
-        let id = folder.id
-        
-        let predicate = #Predicate<FolderEntity> { object in
-            object.id == id
-        }
-
-        var descriptor = FetchDescriptor<FolderEntity>(predicate: predicate)
-        descriptor.fetchLimit = 1
-
-        guard let entity = try context.fetch(descriptor).first else {
+        guard let entity = try? fetchFolderEntity(id: folder.id) else {
             throw FoldersServiceError.folderNotExist
         }
 

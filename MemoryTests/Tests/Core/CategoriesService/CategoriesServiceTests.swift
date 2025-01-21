@@ -167,4 +167,35 @@ class CategoriesServiceTests {
 
         #expect((fetchError as! CategoriesService.CategoriesServiceError) == CategoriesService.CategoriesServiceError.categoryNotExist)
     }
+
+
+    @Test("remove not existing Category")
+    func testDeleteNotExistingCategory() async {
+        var fetchError: Error?
+
+        do {
+            _ = try await service.remove(id: 1)
+        } catch {
+            fetchError = error
+        }
+
+        #expect((fetchError as! CategoriesService.CategoriesServiceError) == CategoriesService.CategoriesServiceError.categoryNotExist)
+    }
+
+    @Test("update not existing Category")
+    func testUpdateNotExistingCategory() async {
+        let updateModel = MockCategoryModel.mockUpdateCategoryModel(id: 99)
+
+        var fetchError: Error?
+
+        do {
+            _ = try await service.updateCategory(
+                category: updateModel
+            )
+        } catch {
+            fetchError = error
+        }
+
+        #expect((fetchError as! CategoriesService.CategoriesServiceError) == CategoriesService.CategoriesServiceError.categoryNotExist)
+    }
 }
