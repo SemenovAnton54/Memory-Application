@@ -16,7 +16,6 @@ enum FoldersRoute: Hashable, Identifiable {
     case editCategory(id: Int?, folderId: Int?)
 
     case editWordRememberItem(id: Int?, categoriesIds: [Int]?)
-//    case imagePicker(String?, completion: HashableWrapper<([ImageModel]) -> ()>)
 
     var id: String {
         switch self {
@@ -44,8 +43,6 @@ enum FoldersRoute: Hashable, Identifiable {
             }
 
             return "editCategory_\(id)"
-//        case let .imagePicker(text, _):
-//            return "imagePicker_\(text ?? "")"
         }
     }
 }

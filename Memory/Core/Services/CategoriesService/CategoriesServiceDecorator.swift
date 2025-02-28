@@ -5,11 +5,11 @@
 
 class CategoriesServiceDecorator: CategoriesServiceProtocol {
     struct Dependencies {
-        let categoriesService: CategoriesService
+        let categoriesService: CategoriesServiceProtocol
         let appEventsClientProtocol: AppEventsClientProtocol
     }
 
-    private let categoriesService: CategoriesService
+    private let categoriesService: CategoriesServiceProtocol
     private let appEventsClientProtocol: AppEventsClientProtocol
 
     init(dependencies: Dependencies) {

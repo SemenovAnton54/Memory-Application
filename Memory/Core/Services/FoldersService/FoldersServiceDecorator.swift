@@ -5,11 +5,11 @@
 
 class FoldersServiceDecorator: FoldersServiceProtocol {
     struct Dependencies {
-        let foldersService: FoldersService
+        let foldersService: FoldersServiceProtocol
         let appEventsClient: AppEventsClientProtocol
     }
 
-    private let foldersService: FoldersService
+    private let foldersService: FoldersServiceProtocol
     private let appEventsClient: AppEventsClientProtocol
 
     init(dependencies: Dependencies) {

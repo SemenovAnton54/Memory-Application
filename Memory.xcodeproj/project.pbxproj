@@ -94,6 +94,8 @@
 		683A17EF2D174BA3003CD1BF /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683A17EE2D174BA0003CD1BF /* Date+Extensions.swift */; };
 		683A17F12D184A8F003CD1BF /* LearnCardReducer+WordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683A17F02D184A76003CD1BF /* LearnCardReducer+WordCard.swift */; };
 		683A17F32D192E27003CD1BF /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683A17F22D192E23003CD1BF /* Notification+Extensions.swift */; };
+		6859C0312D72183B00F8F2B8 /* RootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0302D72183B00F8F2B8 /* RootComponent.swift */; };
+		6859C0332D721A8A00F8F2B8 /* FoldersDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0322D721A8A00F8F2B8 /* FoldersDependencies.swift */; };
 		6877B4E22CB2DF6600A1A660 /* WordsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E12CB2DF6600A1A660 /* WordsServiceProtocol.swift */; };
 		6877B4E42CB2DFA800A1A660 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E32CB2DFA800A1A660 /* WordModel.swift */; };
 		6877B4E62CB2E12700A1A660 /* WordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E52CB2E12700A1A660 /* WordsService.swift */; };
@@ -203,6 +205,8 @@
 		68BD86122CB9CBA200DD0A2B /* TextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BD86112CB9CBA200DD0A2B /* TextField+Extensions.swift */; };
 		68BD86202CBD25DA00DD0A2B /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BD861F2CBD25DA00DD0A2B /* RootRouter.swift */; };
 		68BD86222CBD269000DD0A2B /* CoordinatorRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BD86212CBD269000DD0A2B /* CoordinatorRootView.swift */; };
+		68CBB5652D529371009F5FD1 /* NeedleFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 68CBB5642D529371009F5FD1 /* NeedleFoundation */; };
+		68CBB5692D52994B009F5FD1 /* NeedleGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CBB5682D529948009F5FD1 /* NeedleGenerated.swift */; };
 		68CDC00E2D0380FC0042CE81 /* LearnMainFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CDC00A2D0380FC0042CE81 /* LearnMainFactory.swift */; };
 		68CDC00F2D0380FC0042CE81 /* LearnMainState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CDC00B2D0380FC0042CE81 /* LearnMainState.swift */; };
 		68CDC0102D0380FC0042CE81 /* LearnMainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CDC0062D0380FC0042CE81 /* LearnMainPresenter.swift */; };
@@ -362,6 +366,8 @@
 		683A17EE2D174BA0003CD1BF /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		683A17F02D184A76003CD1BF /* LearnCardReducer+WordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LearnCardReducer+WordCard.swift"; sourceTree = "<group>"; };
 		683A17F22D192E23003CD1BF /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
+		6859C0302D72183B00F8F2B8 /* RootComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootComponent.swift; sourceTree = "<group>"; };
+		6859C0322D721A8A00F8F2B8 /* FoldersDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersDependencies.swift; sourceTree = "<group>"; };
 		6877B4E12CB2DF6600A1A660 /* WordsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsServiceProtocol.swift; sourceTree = "<group>"; };
 		6877B4E32CB2DFA800A1A660 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		6877B4E52CB2E12700A1A660 /* WordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsService.swift; sourceTree = "<group>"; };
@@ -471,6 +477,7 @@
 		68BD86112CB9CBA200DD0A2B /* TextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extensions.swift"; sourceTree = "<group>"; };
 		68BD861F2CBD25DA00DD0A2B /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		68BD86212CBD269000DD0A2B /* CoordinatorRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorRootView.swift; sourceTree = "<group>"; };
+		68CBB5682D529948009F5FD1 /* NeedleGenerated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleGenerated.swift; sourceTree = "<group>"; };
 		68CDC0052D0380FC0042CE81 /* LearnMainEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMainEvent.swift; sourceTree = "<group>"; };
 		68CDC0062D0380FC0042CE81 /* LearnMainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMainPresenter.swift; sourceTree = "<group>"; };
 		68CDC0072D0380FC0042CE81 /* LearnMainReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMainReducer.swift; sourceTree = "<group>"; };
@@ -531,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6827E0D72D1EF7D400C69638 /* Kingfisher in Frameworks */,
+				68CBB5652D529371009F5FD1 /* NeedleFoundation in Frameworks */,
 				6827E0FB2D22F8D100C69638 /* SwiftUIIntrospect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,6 +595,7 @@
 		68167A952C4E99E800D30E97 /* Memory */ = {
 			isa = PBXGroup;
 			children = (
+				68CBB5682D529948009F5FD1 /* NeedleGenerated.swift */,
 				6827E0CD2D1EA55E00C69638 /* CommonViews */,
 				68167AC42C4EA59C00D30E97 /* Core */,
 				68BD860B2CB9C6B200DD0A2B /* Design */,
@@ -595,6 +604,7 @@
 				68D8E19F2CE5276700660E24 /* Helpers */,
 				68CDC0392D039BB40042CE81 /* Info.plist */,
 				68167A9C2C4E99E900D30E97 /* Assets.xcassets */,
+				6859C0302D72183B00F8F2B8 /* RootComponent.swift */,
 				68167A962C4E99E800D30E97 /* MemoryApp.swift */,
 				68167A9E2C4E99E900D30E97 /* Preview Content */,
 				68CDC01E2D039AB60042CE81 /* Resources */,
@@ -1563,6 +1573,7 @@
 		68D8E1862CE51A3600660E24 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
+				6859C0322D721A8A00F8F2B8 /* FoldersDependencies.swift */,
 				6890F9412D29937900BBB87A /* ImagePicker */,
 				68BA40142D0D8097006A86FE /* RememberItems */,
 				68BA3FEF2D0CB41A006A86FE /* CategoryDetails */,
@@ -1630,6 +1641,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68167AB92C4E99E900D30E97 /* Build configuration list for PBXNativeTarget "Memory" */;
 			buildPhases = (
+				68CBB5672D5296C6009F5FD1 /* ShellScript */,
 				68167A8F2C4E99E800D30E97 /* Sources */,
 				68167A902C4E99E800D30E97 /* Frameworks */,
 				68167A912C4E99E800D30E97 /* Resources */,
@@ -1642,6 +1654,7 @@
 			packageProductDependencies = (
 				6827E0D62D1EF7D400C69638 /* Kingfisher */,
 				6827E0FA2D22F8D100C69638 /* SwiftUIIntrospect */,
+				68CBB5642D529371009F5FD1 /* NeedleFoundation */,
 			);
 			productName = Memory;
 			productReference = 68167A932C4E99E800D30E97 /* Memory.app */;
@@ -1718,6 +1731,7 @@
 			packageReferences = (
 				6827E0D52D1EF7D400C69638 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				6827E0F92D22F8D100C69638 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				68CBB5632D529371009F5FD1 /* XCRemoteSwiftPackageReference "needle" */,
 			);
 			productRefGroup = 68167A942C4E99E800D30E97 /* Products */;
 			projectDirPath = "";
@@ -1757,6 +1771,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		68CBB5672D5296C6009F5FD1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/homebrew/bin/needle generate ./Memory/NeedleGenerated.swift ./Memory/\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		68167A8F2C4E99E800D30E97 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1777,6 +1811,7 @@
 				68BD86222CBD269000DD0A2B /* CoordinatorRootView.swift in Sources */,
 				68CDC03E2D046CFD0042CE81 /* PressButtonStyle.swift in Sources */,
 				6827E0B62D1CAE9E00C69638 /* AppTabBarTabs.swift in Sources */,
+				6859C0332D721A8A00F8F2B8 /* FoldersDependencies.swift in Sources */,
 				683A17612D10B227003CD1BF /* LearnRow.swift in Sources */,
 				6890F9EA2D32D27000BBB87A /* PixabayImage.swift in Sources */,
 				683A17BC2D142B98003CD1BF /* ActionButton.swift in Sources */,
@@ -1839,6 +1874,7 @@
 				68BA3FE72D0C9344006A86FE /* CategoriesServiceProtocol.swift in Sources */,
 				68D8E1702CE504CD00660E24 /* FolderEntity.swift in Sources */,
 				6877B4E22CB2DF6600A1A660 /* WordsServiceProtocol.swift in Sources */,
+				6859C0312D72183B00F8F2B8 /* RootComponent.swift in Sources */,
 				68CDC05C2D04EBFE0042CE81 /* FoldersCoordinatorView.swift in Sources */,
 				68CDC01A2D038BB20042CE81 /* MainText.swift in Sources */,
 				68BD86062CB8633200DD0A2B /* WordExampleModel.swift in Sources */,
@@ -1865,6 +1901,7 @@
 				68BA402B2D0DE197006A86FE /* CreateWordModel.swift in Sources */,
 				68CDC00F2D0380FC0042CE81 /* LearnMainState.swift in Sources */,
 				68CDC0102D0380FC0042CE81 /* LearnMainPresenter.swift in Sources */,
+				68CBB5692D52994B009F5FD1 /* NeedleGenerated.swift in Sources */,
 				68CDC0112D0380FC0042CE81 /* LearnMainRouterProtocol.swift in Sources */,
 				68BA400B2D0CB4E7006A86FE /* RememberCardItemModel.swift in Sources */,
 				68CDC0122D0380FC0042CE81 /* LearnMainView.swift in Sources */,
@@ -2074,7 +2111,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2137,7 +2174,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2374,6 +2411,14 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		68CBB5632D529371009F5FD1 /* XCRemoteSwiftPackageReference "needle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uber/needle.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2386,6 +2431,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6827E0F92D22F8D100C69638 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
 			productName = SwiftUIIntrospect;
+		};
+		68CBB5642D529371009F5FD1 /* NeedleFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68CBB5632D529371009F5FD1 /* XCRemoteSwiftPackageReference "needle" */;
+			productName = NeedleFoundation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

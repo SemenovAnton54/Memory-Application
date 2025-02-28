@@ -8,7 +8,7 @@ extension FoldersCoordinatorState {
         let state: FoldersCoordinatorState
 
         func close() {
-            state.onClose()
+            state.onClose?()
         }
         
         func editFolder(id: Int) {
@@ -28,7 +28,7 @@ extension FoldersCoordinatorState {
         let state: FoldersCoordinatorState
 
         func close() {
-            state.onClose()
+            state.onClose?()
         }
         
         func editCategory(id: Int) {

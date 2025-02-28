@@ -5,14 +5,15 @@
 
 import SwiftUI
 import SwiftData
+import NeedleFoundation
 
 @main
 struct MemoryApp: App {
     static var appEventFactory: AppEventFactory = AppEventFactory()
 
-//    static var wordsService: WordsServiceProtocol {
-//        WordsService(modelContainer: sharedModelContainer)
-//    }
+    static var wordsService: WordsServiceProtocol {
+        WordsService(modelContainer: sharedModelContainer)
+    }
 
     static var speechUtteranceService: SpeechUtteranceServiceProtocol {
         SpeechUtteranceService()
@@ -88,18 +89,28 @@ struct MemoryApp: App {
         }
     }()
 
-    private let state = CoordinatorRootState()
+    private let state: CoordinatorRootState
+    private let rootComponent: RootComponent
 
     init() {
         let standardAppearance = UITabBarAppearance()
         standardAppearance.configureWithTransparentBackground()
         UITabBar.appearance().standardAppearance = standardAppearance
         UITabBar.appearance().backgroundColor = UIColor(Colors.background)
+
+        registerProviderFactories()
+
+        let rootComponent = RootComponent()
+        self.rootComponent = rootComponent
+        self.state = rootComponent.rootState
     }
 
     var body: some Scene {
         WindowGroup {
-            CoordinatorRootView(state: state)
+            CoordinatorRootView(
+                foldersCoordinatorFactory: rootComponent.foldersComponent,
+                state: state
+            )
         }
     }
 }
