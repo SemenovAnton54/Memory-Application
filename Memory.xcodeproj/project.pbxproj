@@ -96,6 +96,10 @@
 		683A17F32D192E27003CD1BF /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683A17F22D192E23003CD1BF /* Notification+Extensions.swift */; };
 		6859C0312D72183B00F8F2B8 /* RootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0302D72183B00F8F2B8 /* RootComponent.swift */; };
 		6859C0332D721A8A00F8F2B8 /* FoldersDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0322D721A8A00F8F2B8 /* FoldersDependencies.swift */; };
+		6859C0362D72311200F8F2B8 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 6859C0352D72311200F8F2B8 /* Quick */; };
+		6859C03E2D7231F600F8F2B8 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 6859C03D2D7231F600F8F2B8 /* Nimble */; };
+		6859C0412D72356100F8F2B8 /* ImagePickerReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0402D72355B00F8F2B8 /* ImagePickerReducerTests.swift */; };
+		6859C0442D72396600F8F2B8 /* ImagePickerRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0432D7237CE00F8F2B8 /* ImagePickerRouterMock.swift */; };
 		6877B4E22CB2DF6600A1A660 /* WordsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E12CB2DF6600A1A660 /* WordsServiceProtocol.swift */; };
 		6877B4E42CB2DFA800A1A660 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E32CB2DFA800A1A660 /* WordModel.swift */; };
 		6877B4E62CB2E12700A1A660 /* WordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E52CB2E12700A1A660 /* WordsService.swift */; };
@@ -368,6 +372,8 @@
 		683A17F22D192E23003CD1BF /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
 		6859C0302D72183B00F8F2B8 /* RootComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootComponent.swift; sourceTree = "<group>"; };
 		6859C0322D721A8A00F8F2B8 /* FoldersDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersDependencies.swift; sourceTree = "<group>"; };
+		6859C0402D72355B00F8F2B8 /* ImagePickerReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerReducerTests.swift; sourceTree = "<group>"; };
+		6859C0432D7237CE00F8F2B8 /* ImagePickerRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerRouterMock.swift; sourceTree = "<group>"; };
 		6877B4E12CB2DF6600A1A660 /* WordsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsServiceProtocol.swift; sourceTree = "<group>"; };
 		6877B4E32CB2DFA800A1A660 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		6877B4E52CB2E12700A1A660 /* WordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsService.swift; sourceTree = "<group>"; };
@@ -547,6 +553,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6859C0362D72311200F8F2B8 /* Quick in Frameworks */,
+				6859C03E2D7231F600F8F2B8 /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +586,7 @@
 				68167A952C4E99E800D30E97 /* Memory */,
 				68167AA82C4E99E900D30E97 /* MemoryTests */,
 				68167AB22C4E99E900D30E97 /* MemoryUITests */,
+				6859C03C2D7231F600F8F2B8 /* Frameworks */,
 				68167A942C4E99E800D30E97 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -790,6 +799,7 @@
 		6827E11D2D26A4BB00C69638 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
+				6859C03F2D72352100F8F2B8 /* ImagePicker */,
 				6890F99A2D2C3AE700BBB87A /* RememberItems */,
 				6890F9922D2C23C100BBB87A /* FoldersList */,
 				6890F9882D2C142200BBB87A /* CategoryDetails */,
@@ -952,6 +962,30 @@
 				683A17EC2D174404003CD1BF /* LearnNewItemsService.swift */,
 			);
 			path = LearnNewCardsService;
+			sourceTree = "<group>";
+		};
+		6859C03C2D7231F600F8F2B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6859C03F2D72352100F8F2B8 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				6859C0422D7237BD00F8F2B8 /* Helpers */,
+				6859C0402D72355B00F8F2B8 /* ImagePickerReducerTests.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		6859C0422D7237BD00F8F2B8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6859C0432D7237CE00F8F2B8 /* ImagePickerRouterMock.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		6877B4E02CB2DF5200A1A660 /* Services */ = {
@@ -1732,6 +1766,8 @@
 				6827E0D52D1EF7D400C69638 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				6827E0F92D22F8D100C69638 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 				68CBB5632D529371009F5FD1 /* XCRemoteSwiftPackageReference "needle" */,
+				6859C0342D72311200F8F2B8 /* XCRemoteSwiftPackageReference "Quick" */,
+				6859C03B2D72314D00F8F2B8 /* XCRemoteSwiftPackageReference "Nimble" */,
 			);
 			productRefGroup = 68167A942C4E99E800D30E97 /* Products */;
 			projectDirPath = "";
@@ -2030,6 +2066,7 @@
 				682F023C2D402989002B5BD6 /* CategoriesServiceTests.swift in Sources */,
 				6827E1202D26A4E600C69638 /* EditFolderReducerTests.swift in Sources */,
 				6890F9812D2C045600BBB87A /* MockCategoryModel.swift in Sources */,
+				6859C0442D72396600F8F2B8 /* ImagePickerRouterMock.swift in Sources */,
 				6890F9852D2C09D900BBB87A /* FolderDetailsRouterMock.swift in Sources */,
 				6890F9AC2D2D8DAE00BBB87A /* LearnFoldersListRouterMock.swift in Sources */,
 				6890F9B22D2D8F7800BBB87A /* LearnMainRouterMock.swift in Sources */,
@@ -2038,6 +2075,7 @@
 				6890F9912D2C15BC00BBB87A /* MockRememberItemModel.swift in Sources */,
 				6827E12D2D26C8BD00C69638 /* EditFolderRouterMock.swift in Sources */,
 				682F02362D4003C9002B5BD6 /* AppEventsClientTests.swift in Sources */,
+				6859C0412D72356100F8F2B8 /* ImagePickerReducerTests.swift in Sources */,
 				6890F97D2D2C038600BBB87A /* EditCategoryRouterMock.swift in Sources */,
 				6890F9B42D2D8FE300BBB87A /* LearnMainReducerTests.swift in Sources */,
 				6890F9972D2C23F600BBB87A /* FoldersListRouterMock.swift in Sources */,
@@ -2411,6 +2449,22 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		6859C0342D72311200F8F2B8 /* XCRemoteSwiftPackageReference "Quick" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Quick.git";
+			requirement = {
+				kind = exactVersion;
+				version = 7.0.0;
+			};
+		};
+		6859C03B2D72314D00F8F2B8 /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble.git";
+			requirement = {
+				kind = exactVersion;
+				version = 12.0.0;
+			};
+		};
 		68CBB5632D529371009F5FD1 /* XCRemoteSwiftPackageReference "needle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uber/needle.git";
@@ -2431,6 +2485,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6827E0F92D22F8D100C69638 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
 			productName = SwiftUIIntrospect;
+		};
+		6859C0352D72311200F8F2B8 /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6859C0342D72311200F8F2B8 /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+		6859C03D2D7231F600F8F2B8 /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6859C03B2D72314D00F8F2B8 /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
 		};
 		68CBB5642D529371009F5FD1 /* NeedleFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
