@@ -16,4 +16,5 @@ enum FolderDetailsEvent {
     case categoryDetails(id: Int)
 
     case categoriesChanged
+    case folderChanged
 }

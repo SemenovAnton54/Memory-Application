@@ -15,6 +15,7 @@ struct LearnMainFavoriteFolderView: View {
         ZStack {
             VStack(spacing: 0) {
                 FolderRow(
+                    id: favoriteFolderViewModel.folder.id,
                     icon: favoriteFolderViewModel.folder.icon,
                     name: favoriteFolderViewModel.folder.name,
                     description: favoriteFolderViewModel.folder.description

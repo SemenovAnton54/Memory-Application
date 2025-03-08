@@ -35,7 +35,7 @@ class FoldersServiceDecorator: FoldersServiceProtocol {
 
     func updateFolder(folder: UpdateFolderModel) async throws -> FolderModel {
         defer {
-            appEventsClient.emit(FolderEvent.folderUpdated)
+            appEventsClient.emit(FolderEvent.folderUpdated(id: folder.id))
         }
 
         return try await foldersService.updateFolder(folder: folder)

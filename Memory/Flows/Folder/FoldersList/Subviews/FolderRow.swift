@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct FolderRow: View {
+    let id: Int
     let icon: String
     let name: String
     let description: String
@@ -18,15 +19,19 @@ struct FolderRow: View {
                     Image(systemName: "folder")
                         .frame(maxWidth: .infinity)
                         .frame(width: 40)
+                        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCellIcon(id: id))
                 } else {
                     Text(icon)
                         .frame(maxWidth: .infinity)
                         .frame(width: 40)
+                        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCellIcon(id: id))
                 }
 
                 VStack(alignment: .leading, spacing: 5) {
                     MainText(name)
+                        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCellTitle(id: id))
                     SecondText(description)
+                        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCellDescription(id: id))
                 }
                 Spacer()
             }
@@ -36,5 +41,6 @@ struct FolderRow: View {
             }
         }
         .buttonStyle(PressButtonStyle())
+        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCell(id: id))
     }
 }

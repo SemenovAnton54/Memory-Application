@@ -25,6 +25,8 @@ struct FolderDetailsReducer {
             onCategoriesChanged(state: &state)
         case .deleteFolder:
             onDeleteFolder(state: &state)
+        case .folderChanged:
+            onFolderChanged(state: &state)
         }
     }
 }
@@ -62,6 +64,10 @@ private extension FolderDetailsReducer {
 
     func onCategoriesChanged(state: inout FolderDetailsState) {
         state.fetchCategoriesRequest = FeedbackRequest(CategoriesRequest(folderId: state.id))
+    }
+
+    func onFolderChanged(state: inout FolderDetailsState) {
+        state.fetchFolderRequest = FeedbackRequest(FolderRequest(id: state.id))
     }
 
     func onFolderFetched(result: Result<FolderModel, Error>, state: inout FolderDetailsState) {

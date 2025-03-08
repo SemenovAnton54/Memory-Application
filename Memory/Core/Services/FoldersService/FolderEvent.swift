@@ -3,8 +3,8 @@
 //  Memory
 //
 
-enum FolderEvent: AppEvent {
+enum FolderEvent: AppEvent, Equatable {
     case folderCreated
     case folderDeleted
-    case folderUpdated
+    case folderUpdated(id: Int)
 }

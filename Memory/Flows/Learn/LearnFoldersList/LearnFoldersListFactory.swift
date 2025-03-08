@@ -27,11 +27,6 @@ struct LearnFoldersListFactory {
 
         return store
     }
-
-    @MainActor
-    static func makeView(for store: DefaultStateMachine<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState>) -> some View {
-        LearnFoldersListView(store: store)
-    }
 }
 
 // MARK: - Feedback loops

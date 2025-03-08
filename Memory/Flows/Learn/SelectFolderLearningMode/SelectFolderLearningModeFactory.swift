@@ -9,7 +9,8 @@ struct SelectFolderLearningModeFactory {
     }
 
     struct Dependencies {
-        
+        let learnNewItemsService: LearnCardsServiceProtocol
+        let reviewItemsService: LearnCardsServiceProtocol
     }
 
     let dependencies: Dependencies
@@ -19,8 +20,8 @@ struct SelectFolderLearningModeFactory {
         arguments: Arguments,
         router: SelectFolderLearningModeRouterProtocol
     ) -> DefaultStateMachine<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState> {
-        let newCardItemsService = MemoryApp.learnNewItemsService
-        let reviewCardItemsService = MemoryApp.reviewItemsService
+        let newCardItemsService = dependencies.learnNewItemsService
+        let reviewCardItemsService = dependencies.reviewItemsService
 
         let store = DefaultStateMachine(
             initialState: SelectFolderLearningModeState(

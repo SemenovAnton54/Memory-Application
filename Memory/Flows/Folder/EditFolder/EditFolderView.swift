@@ -22,14 +22,17 @@ struct EditFolderView<T: StateMachine>: View where T.ViewState == EditFolderView
                 ZStack {
                     HStack {
                         Button("Cancel") { store.event(.cancel) }
+                            .accessibilityIdentifier(EditFolderAccessibilityIdentifier.cancelButton)
                         Spacer()
                         Button("Save") { store.event(.save) }
+                            .accessibilityIdentifier(EditFolderAccessibilityIdentifier.saveButton)
                     }
 
                     Text(store.viewState.isNewFolder ? "New Folder" : "Edit folder")
                         .frame(maxWidth: .infinity, alignment: .center)
                         .multilineTextAlignment(.leading)
                         .foregroundStyle(Colors.text)
+                        .accessibilityIdentifier(EditFolderAccessibilityIdentifier.title)
                 }
 
                 ZStack {
@@ -64,7 +67,6 @@ struct EditFolderView<T: StateMachine>: View where T.ViewState == EditFolderView
                             }
                             Spacer()
                         }
-                        Spacer()
                     }
                 }
 
@@ -72,33 +74,39 @@ struct EditFolderView<T: StateMachine>: View where T.ViewState == EditFolderView
                     "Name",
                     text: binding(store.viewState.title) { store.event(.nameDidChange($0)) },
                     prompt: Text("Enter Name").foregroundStyle(Colors.textSecondary)
-                ).defaultStyle()
+                )
+                .defaultStyle()
+                .accessibilityIdentifier(EditFolderAccessibilityIdentifier.nameField)
 
                 TextField(
                     "Icon",
                     text: $icon,
                     prompt: Text("Icon (only emoji)").foregroundStyle(Colors.textSecondary)
-                ).defaultStyle()
-                    .onReceive(Just(icon)) { newValue in
-                        let newValue = newValue.onlyEmoji().last?.toString() ?? store.viewState.icon
+                )
+                .defaultStyle()
+                .accessibilityIdentifier(EditFolderAccessibilityIdentifier.iconField)
+                .onReceive(Just(icon)) { newValue in
+                    let newValue = newValue.onlyEmoji().last?.toString() ?? store.viewState.icon
 
-                        if newValue != icon {
-                            icon = newValue
-                        }
-                        
-                        guard newValue != store.viewState.icon else {
-                            return
-                        }
-
-                        icon = newValue.onlyEmoji().last?.toString() ?? ""
-                        store.event(.iconDidChanged(icon))
+                    if newValue != icon {
+                        icon = newValue
                     }
+
+                    guard newValue != store.viewState.icon else {
+                        return
+                    }
+
+                    icon = newValue.onlyEmoji().last?.toString() ?? ""
+                    store.event(.iconDidChanged(icon))
+                }
 
                 TextField(
                     "Description",
                     text: binding(store.viewState.description) { store.event(.descDidChanged($0)) },
                     prompt: Text("Enter Description").foregroundStyle(Colors.textSecondary)
-                ).defaultStyle()
+                )
+                .defaultStyle()
+                .accessibilityIdentifier(EditFolderAccessibilityIdentifier.descriptionField)
 
                 Toggle(
                     "Favorite",
@@ -109,6 +117,7 @@ struct EditFolderView<T: StateMachine>: View where T.ViewState == EditFolderView
                 .tint(Colors.actionColor)
                 .foregroundStyle(Colors.text)
                 .cornerRadius(10)
+                .accessibilityIdentifier(EditFolderAccessibilityIdentifier.isFavoriteSwitch)
 
                 Spacer()
             }

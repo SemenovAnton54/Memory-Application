@@ -18,6 +18,7 @@ struct LearnFoldersListView<T: StateMachine>: View where T.ViewState == LearnFol
             Section() {
                 ForEach(store.viewState.folders) { folder in
                     FolderRow(
+                        id: folder.id,
                         icon: folder.icon,
                         name: folder.name,
                         description: folder.description

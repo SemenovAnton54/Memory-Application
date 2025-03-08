@@ -9,6 +9,8 @@ struct LearnMainFactory {
     struct Dependencies {
         let foldersService: FoldersServiceProtocol
         let appEventsClient: AppEventsClientProtocol
+        let learnNewItemsService: LearnCardsServiceProtocol
+        let reviewItemsService: LearnCardsServiceProtocol
     }
 
     let dependencies: Dependencies
@@ -17,8 +19,8 @@ struct LearnMainFactory {
     func makeStore(
         router: LearnMainRouterProtocol
     ) -> DefaultStateMachine<LearnMainState, LearnMainEvent, LearnMainViewState> {
-        let newCardItemsService = MemoryApp.learnNewItemsService
-        let reviewCardItemsService = MemoryApp.reviewItemsService
+        let newCardItemsService = dependencies.learnNewItemsService
+        let reviewCardItemsService = dependencies.reviewItemsService
 
         let store = DefaultStateMachine(
             initialState: LearnMainState(),

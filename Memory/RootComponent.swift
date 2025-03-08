@@ -17,7 +17,9 @@ class RootComponent: BootstrapComponent {
                 CategoryEntity.self,
                 RememberCardItemEntity.self,
             ])
-            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+            
+            let isUITests = CommandLine.arguments.contains("UITests")
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: isUITests)
 
             do {
                 return try ModelContainer(for: schema, configurations: [modelConfiguration])
@@ -28,7 +30,14 @@ class RootComponent: BootstrapComponent {
     }
 
     public var appEventsClient: AppEventsClientProtocol {
-        AppEventFactory().makeClient()
+        appEventFactory.makeClient()
+    }
+
+    public var imagePickerService: ImagePickerServiceProtocol {
+//        PixabayImagePickerService() sanctions, I hope you understand
+        shared {
+            PixabayImagePickerProxyService()
+        }
     }
 
     public var foldersService: FoldersServiceProtocol {
@@ -89,7 +98,8 @@ class RootComponent: BootstrapComponent {
     var rootState: CoordinatorRootState {
         CoordinatorRootState(
             dependencies: CoordinatorRootState.Dependencies(
-                foldersCoordinatorFactory: foldersComponent
+                foldersCoordinatorFactory: foldersComponent,
+                learnCoordinatorFactory: learnComponent
             )
         )
     }
@@ -97,4 +107,10 @@ class RootComponent: BootstrapComponent {
     var foldersComponent: FoldersComponent {
         FoldersComponent(parent: self)
     }
+
+    var learnComponent: LearnComponent {
+        LearnComponent(parent: self)
+    }
+
+    private var appEventFactory = AppEventFactory()
 }

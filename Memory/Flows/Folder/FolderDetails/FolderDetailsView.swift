@@ -39,6 +39,7 @@ struct FolderDetailsView<T: StateMachine>: View where T.ViewState == FolderDetai
                     content: {
                         ForEach(store.viewState.categories) { category in
                             FolderRow(
+                                id: category.id,
                                 icon: category.icon,
                                 name: category.name,
                                 description: category.description
@@ -58,20 +59,24 @@ struct FolderDetailsView<T: StateMachine>: View where T.ViewState == FolderDetai
                 .listRowSeparatorTint(.white.opacity(0.1))
                 .listRowBackground(Colors.backgroundSecondary)
             }
+            .accessibilityIdentifier(FolderDetailsAccessibilityIdentifier.collectionView)
             .background(Colors.background)
             .scrollContentBackground(.hidden)
             .toolbar {
                 Button(action: { showingOptions = true }) {
                     Image(systemName: "ellipsis.circle")
                 }
+                .accessibilityIdentifier(FolderDetailsAccessibilityIdentifier.options)
                 .confirmationDialog("Select option", isPresented: $showingOptions, titleVisibility: .visible) {
                     Button("Edit") {
                         store.event(.editFolder)
                     }
+                    .accessibilityIdentifier(FolderDetailsAccessibilityIdentifier.editButton)
 
                     Button("Delete", role: .destructive) {
                         showingDeleteConfirmation = true
                     }
+                    .accessibilityIdentifier(FolderDetailsAccessibilityIdentifier.deleteButton)
                 }
                 .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
                     Button("Yes", role: .destructive) {

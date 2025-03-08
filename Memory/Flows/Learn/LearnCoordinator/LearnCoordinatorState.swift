@@ -7,10 +7,16 @@ import SwiftUI
 import Combine
 
 final class LearnCoordinatorState: ObservableObject {
-    @Published var route: LearnRoute
+    struct Dependencies {
+        let learnCoordinatorFactory: LearnCoordinatorFactoryProtocol
+        let rememberItemCoordinatorFactory: RememberItemCoordinatorFactoryProtocol
+        let learnMainFactory: LearnMainFactory
+        let selectFolderLearningModeFactory: SelectFolderLearningModeFactory
+        let learnFoldersListFactory: LearnFoldersListFactory
+        let learnCardFactory: LearnCardFactory
+    }
 
-    @Published var nextItem: LearnRoute?
-    @Published var presentedItem: LearnRoute?
+    private let dependencies: Dependencies
 
     private weak var nextCoordinatorState: LearnCoordinatorState?
 
@@ -21,9 +27,15 @@ final class LearnCoordinatorState: ObservableObject {
     private weak var _learnFoldersListStore: DefaultStateMachine<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState>? = nil
     private weak var _rememberItemCoordinatorState: RememberItemCoordinatorState?
 
-    let onClose: () -> Void
-    
-    init(route: LearnRoute, onClose: @escaping () -> Void) {
+    let onClose: (() -> Void)?
+
+    @Published var route: LearnRoute
+
+    @Published var nextItem: LearnRoute?
+    @Published var presentedItem: LearnRoute?
+
+    init(dependencies: Dependencies, route: LearnRoute, onClose: (() -> Void)?) {
+        self.dependencies = dependencies
         self.route = route
         self.onClose = onClose
     }
@@ -31,13 +43,7 @@ final class LearnCoordinatorState: ObservableObject {
     @MainActor
     func learnMainStore() -> DefaultStateMachine<LearnMainState, LearnMainEvent, LearnMainViewState> {
         guard let _learnMainStore else {
-            let store = LearnMainFactory(
-                dependencies: LearnMainFactory.Dependencies(
-                    foldersService: MemoryApp.foldersService,
-                    appEventsClient: MemoryApp.appEventsClient()
-                )
-            )
-                .makeStore(router: LearnMainRouter(state: self))
+            let store = dependencies.learnMainFactory.makeStore(router: LearnMainRouter(state: self))
             _learnMainStore = store
 
             return store
@@ -49,9 +55,7 @@ final class LearnCoordinatorState: ObservableObject {
     @MainActor
     func startFolderLearningModeStore(folderId: Int) -> DefaultStateMachine<SelectFolderLearningModeState, SelectFolderLearningModeEvent, SelectFolderLearningModeViewState> {
         guard let _startFolderLearningModeStore else {
-            let store = SelectFolderLearningModeFactory(
-                dependencies: SelectFolderLearningModeFactory.Dependencies()
-            ).makeStore(
+            let store = dependencies.selectFolderLearningModeFactory.makeStore(
                 arguments: SelectFolderLearningModeFactory.Arguments(folderId: folderId),
                 router: self
             )
@@ -66,11 +70,7 @@ final class LearnCoordinatorState: ObservableObject {
     @MainActor
     func learnFoldersListStore() -> DefaultStateMachine<LearnFoldersListState, LearnFoldersListEvent, LearnFoldersListViewState> {
         guard let _learnFoldersListStore else {
-            let store = LearnFoldersListFactory(
-                dependencies: LearnFoldersListFactory.Dependencies(
-                    foldersService: MemoryApp.foldersService
-                )
-            ).makeStore(
+            let store = dependencies.learnFoldersListFactory.makeStore(
                 router: LearnFoldersListRouter(state: self)
             )
             _learnFoldersListStore = store
@@ -84,13 +84,7 @@ final class LearnCoordinatorState: ObservableObject {
     @MainActor
     func learnNewCards(folderId: Int) -> DefaultStateMachine<LearnCardState, LearnCardEvent, LearnCardViewState> {
         guard let _learnNewCardsStore else {
-            let store = LearnCardFactory(
-                dependencies: LearnCardFactory.Dependencies(
-                    speechUtteranceService: MemoryApp.speechUtteranceService,
-                    appEventsClient: MemoryApp.appEventsClient(),
-                    rememberItemsService: MemoryApp.rememberItemsService
-                )
-            ).makeStore(
+            let store = dependencies.learnCardFactory.makeStore(
                 arguments: .init(
                     folderId: folderId,
                     mode: .learnNew
@@ -108,13 +102,7 @@ final class LearnCoordinatorState: ObservableObject {
     @MainActor
     func reviewCards(folderId: Int) -> DefaultStateMachine<LearnCardState, LearnCardEvent, LearnCardViewState> {
         guard let _reviewCardsStore else {
-            let store = LearnCardFactory(
-                dependencies: LearnCardFactory.Dependencies(
-                    speechUtteranceService: MemoryApp.speechUtteranceService,
-                    appEventsClient: MemoryApp.appEventsClient(),
-                    rememberItemsService: MemoryApp.rememberItemsService
-                )
-            ).makeStore(
+            let store = dependencies.learnCardFactory.makeStore(
                 arguments: .init(
                     folderId: folderId,
                     mode: .review
@@ -132,7 +120,7 @@ final class LearnCoordinatorState: ObservableObject {
     @MainActor
     func nextItemCoordinatorState(for route: LearnRoute) -> LearnCoordinatorState? {
         guard let nextCoordinatorState else {
-            let state = LearnCoordinatorFactory().makeState(route: route) { [weak self] in
+            let state = dependencies.learnCoordinatorFactory.makeState(for: route) { [weak self] in
                 self?.nextItem = nil
             }
             
@@ -147,7 +135,9 @@ final class LearnCoordinatorState: ObservableObject {
     @MainActor
     func rememberItemCoordinatorState(router: RememberItemRouter) -> RememberItemCoordinatorState {
         guard let _rememberItemCoordinatorState else {
-            let store = RememberItemCoordinatorState(route: router) { [weak self] in
+            let store = dependencies.rememberItemCoordinatorFactory.makeState(
+                route: router
+            ) { [weak self] in
                 self?.presentedItem = nil
             }
             _rememberItemCoordinatorState = store

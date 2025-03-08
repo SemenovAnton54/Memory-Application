@@ -9,19 +9,28 @@ import SwiftUI
 import Combine
 
 final class RememberItemCoordinatorState: ObservableObject {
-    @Published var route: RememberItemRouter
+    struct Dependencies {
+        let rememberItemCoordinatorFactory: RememberItemCoordinatorFactoryProtocol
+        let editWordRememberItemFactory: EditWordRememberItemFactory
+        let imagePickerFactory: ImagePickerFactory
+    }
 
-    @Published var nextItem: RememberItemRouter?
-    @Published var presentedItem: RememberItemRouter?
-
-    let onClose: () -> Void
+    private let dependencies: Dependencies
 
     private weak var _nextCoordinatorState: RememberItemCoordinatorState?
 
     private weak var _imagePickerStore: DefaultStateMachine<ImagePickerState, ImagePickerEvent, ImagePickerViewState>?
     private weak var _editWordRememberItemStore: DefaultStateMachine<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState>?
 
-    init(route: RememberItemRouter, onClose: @escaping () -> Void) {
+    let onClose: () -> Void
+
+    @Published var route: RememberItemRouter
+
+    @Published var nextItem: RememberItemRouter?
+    @Published var presentedItem: RememberItemRouter?
+
+    init(dependencies: Dependencies, route: RememberItemRouter, onClose: @escaping () -> Void) {
+        self.dependencies = dependencies
         self.onClose = onClose
         self.route = route
     }
@@ -29,9 +38,7 @@ final class RememberItemCoordinatorState: ObservableObject {
     @MainActor
     func editWordRememberItemStore(id: Int?, categoriesIds: [Int]?) -> DefaultStateMachine<EditWordRememberItemState, EditWordRememberItemEvent, EditWordRememberItemViewState> {
         guard let _editWordRememberItemStore else {
-            let store = EditWordRememberItemFactory(
-                dependencies: EditWordRememberItemFactory.Dependencies(rememberItemsService: MemoryApp.rememberItemsService)
-            ).makeStore(
+            let store = dependencies.editWordRememberItemFactory.makeStore(
                 arguments: EditWordRememberItemFactory.Arguments(
                     id: id,
                     categoriesIds: categoriesIds
@@ -49,9 +56,7 @@ final class RememberItemCoordinatorState: ObservableObject {
     @MainActor
     func imagePickerStore(text: String?, completion: HashableWrapper<([ImageType]) -> ()>) -> DefaultStateMachine<ImagePickerState, ImagePickerEvent, ImagePickerViewState> {
         guard let _imagePickerStore else {
-            let store = ImagePickerFactory(
-                dependencies: ImagePickerFactory.Dependencies(imagePickerService: MemoryApp.imagePickerService)
-            ).makeStore(
+            let store = dependencies.imagePickerFactory.makeStore(
                 arguments: ImagePickerFactory.Arguments(text: text, onComplete: completion.value),
                 router: ImagePickerRouter(state: self)
             )
@@ -70,7 +75,7 @@ final class RememberItemCoordinatorState: ObservableObject {
         }
 
         guard let _nextCoordinatorState else {
-            let state = RememberItemCoordinatorFactory().makeState(route: nextItem) { [weak self] in
+            let state = dependencies.rememberItemCoordinatorFactory.makeState(route: nextItem) { [weak self] in
                 self?.nextItem = nil
             }
 

@@ -31,9 +31,11 @@ struct FoldersListView<T: StateMachine>: View where T.ViewState == FoldersListVi
                 .alignmentGuide(.listRowSeparatorLeading) { _ in
                     0
                 }
+                .accessibilityIdentifier(FoldersListAccessibilityIdentifier.newFolderButton)
 
                 ForEach(store.viewState.favoriteFolders) { folder in
                     FolderRow(
+                        id: folder.id,
                         icon: folder.icon,
                         name: folder.name,
                         description: folder.description
@@ -47,6 +49,7 @@ struct FoldersListView<T: StateMachine>: View where T.ViewState == FoldersListVi
             .listRowSeparatorTint(.white.opacity(0.1))
             .listRowBackground(Colors.backgroundSecondary)
         }
+        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderList)
         .background(Colors.background)
         .scrollContentBackground(.hidden)
         .onAppear {

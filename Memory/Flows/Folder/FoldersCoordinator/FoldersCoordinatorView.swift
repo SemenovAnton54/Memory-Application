@@ -14,11 +14,10 @@ struct FoldersCoordinatorView: View {
                 switch $0 {
                 default:
                     if let state = state.nextItemCoordinatorState(for: $0) {
-                        FoldersCoordinatorFactory().makeView(for: state)
+                        FoldersCoordinatorView(state: state)
                     } else {
                         EmptyView()
                     }
-
                 }
             }
             .sheet(item: $state.presentedItem, content: sheetContent)
@@ -29,14 +28,12 @@ struct FoldersCoordinatorView: View {
         case let .editFolder(id):
             EditFolderView(store: state.folderStore(id: id))
         case let .editWordRememberItem(id, categoriesIds):
-            RememberItemCoordinatorFactory().makeView(
-                for: state.rememberItemCoordinatorState(
-                    router: .editWordRememberItem(
-                        id: id,
-                        categoriesIds: categoriesIds
-                    )
+            RememberItemCoordinatorView(state: state.rememberItemCoordinatorState(
+                router: .editWordRememberItem(
+                    id: id,
+                    categoriesIds: categoriesIds
                 )
-            )
+            ))
         case let .editCategory(id, folderId):
             EditCategoryView(store: state.categoryStore(id: id, folderId: folderId))
         default:

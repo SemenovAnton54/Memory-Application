@@ -14,7 +14,7 @@ struct LearnCoordinatorView: View {
                 switch $0 {
                 default:
                     if let state = state.nextItemCoordinatorState(for: $0) {
-                        LearnCoordinatorFactory().makeView(for: state)
+                        LearnCoordinatorView(state: state)
                     } else {
                         EmptyView()
                     }
@@ -29,8 +29,7 @@ struct LearnCoordinatorView: View {
         case .main:
             LearnMainView(store: state.learnMainStore())
         case let .editRememberItem(id):
-            RememberItemCoordinatorFactory().makeView(
-                for: state.rememberItemCoordinatorState(
+            RememberItemCoordinatorView(state: state.rememberItemCoordinatorState(
                     router: .editWordRememberItem(
                         id: id,
                         categoriesIds: nil
@@ -53,7 +52,7 @@ struct LearnCoordinatorView: View {
         case let .reviewCards(folderId):
             LearnCardView(store: state.reviewCards(folderId: folderId))
         case .allFolders:
-            LearnFoldersListFactory.makeView(for: state.learnFoldersListStore())
+            LearnFoldersListView(store: state.learnFoldersListStore())
         case .editRememberItem:
             EmptyView()
         }

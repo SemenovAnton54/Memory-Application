@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,13 @@
 		68167AB42C4E99E900D30E97 /* MemoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68167AB32C4E99E900D30E97 /* MemoryUITests.swift */; };
 		68167AB62C4E99E900D30E97 /* MemoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68167AB52C4E99E900D30E97 /* MemoryUITestsLaunchTests.swift */; };
 		68167AC32C4EA59700D30E97 /* AppTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68167AC22C4EA59700D30E97 /* AppTabBarView.swift */; };
+		6820378A2D7B1DB7006CA5E6 /* EditFolderAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682037892D7B1DAB006CA5E6 /* EditFolderAccessibilityIdentifier.swift */; };
+		6820378B2D7B251D006CA5E6 /* EditFolderAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682037892D7B1DAB006CA5E6 /* EditFolderAccessibilityIdentifier.swift */; };
+		6820378D2D7C5338006CA5E6 /* EditFolderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6820378C2D7C5321006CA5E6 /* EditFolderUITests.swift */; };
+		6820378F2D7C77C7006CA5E6 /* LearnComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6820378E2D7C77C7006CA5E6 /* LearnComponent.swift */; };
+		682037912D7C7F56006CA5E6 /* RememberItemsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682037902D7C7F56006CA5E6 /* RememberItemsComponent.swift */; };
+		682037932D7C94CF006CA5E6 /* FoldersListAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682037922D7C94CF006CA5E6 /* FoldersListAccessibilityIdentifier.swift */; };
+		682037942D7C95EE006CA5E6 /* FoldersListAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682037922D7C94CF006CA5E6 /* FoldersListAccessibilityIdentifier.swift */; };
 		6826896A2CC05739000284E7 /* CoordinatorRootState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682689692CC05728000284E7 /* CoordinatorRootState.swift */; };
 		682689742CC44565000284E7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682689732CC44560000284E7 /* Collection.swift */; };
 		6827E09A2D1C2D8F00C69638 /* ReviewCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6827E0992D1C2D8F00C69638 /* ReviewCardsService.swift */; };
@@ -95,11 +102,13 @@
 		683A17F12D184A8F003CD1BF /* LearnCardReducer+WordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683A17F02D184A76003CD1BF /* LearnCardReducer+WordCard.swift */; };
 		683A17F32D192E27003CD1BF /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683A17F22D192E23003CD1BF /* Notification+Extensions.swift */; };
 		6859C0312D72183B00F8F2B8 /* RootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0302D72183B00F8F2B8 /* RootComponent.swift */; };
-		6859C0332D721A8A00F8F2B8 /* FoldersDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0322D721A8A00F8F2B8 /* FoldersDependencies.swift */; };
+		6859C0332D721A8A00F8F2B8 /* FoldersComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0322D721A8A00F8F2B8 /* FoldersComponent.swift */; };
 		6859C0362D72311200F8F2B8 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 6859C0352D72311200F8F2B8 /* Quick */; };
 		6859C03E2D7231F600F8F2B8 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 6859C03D2D7231F600F8F2B8 /* Nimble */; };
 		6859C0412D72356100F8F2B8 /* ImagePickerReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0402D72355B00F8F2B8 /* ImagePickerReducerTests.swift */; };
 		6859C0442D72396600F8F2B8 /* ImagePickerRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859C0432D7237CE00F8F2B8 /* ImagePickerRouterMock.swift */; };
+		68729F6A2D7CC4D700DEC303 /* FolderDetailsAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68729F692D7CC4D700DEC303 /* FolderDetailsAccessibilityIdentifier.swift */; };
+		68729F6B2D7CC5D600DEC303 /* FolderDetailsAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68729F692D7CC4D700DEC303 /* FolderDetailsAccessibilityIdentifier.swift */; };
 		6877B4E22CB2DF6600A1A660 /* WordsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E12CB2DF6600A1A660 /* WordsServiceProtocol.swift */; };
 		6877B4E42CB2DFA800A1A660 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E32CB2DFA800A1A660 /* WordModel.swift */; };
 		6877B4E62CB2E12700A1A660 /* WordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877B4E52CB2E12700A1A660 /* WordsService.swift */; };
@@ -293,6 +302,11 @@
 		68167AB32C4E99E900D30E97 /* MemoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUITests.swift; sourceTree = "<group>"; };
 		68167AB52C4E99E900D30E97 /* MemoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		68167AC22C4EA59700D30E97 /* AppTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarView.swift; sourceTree = "<group>"; };
+		682037892D7B1DAB006CA5E6 /* EditFolderAccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFolderAccessibilityIdentifier.swift; sourceTree = "<group>"; };
+		6820378C2D7C5321006CA5E6 /* EditFolderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFolderUITests.swift; sourceTree = "<group>"; };
+		6820378E2D7C77C7006CA5E6 /* LearnComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnComponent.swift; sourceTree = "<group>"; };
+		682037902D7C7F56006CA5E6 /* RememberItemsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberItemsComponent.swift; sourceTree = "<group>"; };
+		682037922D7C94CF006CA5E6 /* FoldersListAccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersListAccessibilityIdentifier.swift; sourceTree = "<group>"; };
 		682689692CC05728000284E7 /* CoordinatorRootState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorRootState.swift; sourceTree = "<group>"; };
 		682689732CC44560000284E7 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		6827E0992D1C2D8F00C69638 /* ReviewCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCardsService.swift; sourceTree = "<group>"; };
@@ -371,9 +385,10 @@
 		683A17F02D184A76003CD1BF /* LearnCardReducer+WordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LearnCardReducer+WordCard.swift"; sourceTree = "<group>"; };
 		683A17F22D192E23003CD1BF /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
 		6859C0302D72183B00F8F2B8 /* RootComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootComponent.swift; sourceTree = "<group>"; };
-		6859C0322D721A8A00F8F2B8 /* FoldersDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersDependencies.swift; sourceTree = "<group>"; };
+		6859C0322D721A8A00F8F2B8 /* FoldersComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersComponent.swift; sourceTree = "<group>"; };
 		6859C0402D72355B00F8F2B8 /* ImagePickerReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerReducerTests.swift; sourceTree = "<group>"; };
 		6859C0432D7237CE00F8F2B8 /* ImagePickerRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerRouterMock.swift; sourceTree = "<group>"; };
+		68729F692D7CC4D700DEC303 /* FolderDetailsAccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailsAccessibilityIdentifier.swift; sourceTree = "<group>"; };
 		6877B4E12CB2DF6600A1A660 /* WordsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsServiceProtocol.swift; sourceTree = "<group>"; };
 		6877B4E32CB2DFA800A1A660 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		6877B4E52CB2E12700A1A660 /* WordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsService.swift; sourceTree = "<group>"; };
@@ -538,6 +553,10 @@
 		68D8E1B32CE9250900660E24 /* EditFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFolderFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		68729F652D7CC3DF00DEC303 /* Mocks */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Mocks; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		68167A902C4E99E800D30E97 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -641,6 +660,8 @@
 		68167AB22C4E99E900D30E97 /* MemoryUITests */ = {
 			isa = PBXGroup;
 			children = (
+				68729F652D7CC3DF00DEC303 /* Mocks */,
+				682037872D7B090B006CA5E6 /* Flows */,
 				68167AB32C4E99E900D30E97 /* MemoryUITests.swift */,
 				68167AB52C4E99E900D30E97 /* MemoryUITestsLaunchTests.swift */,
 			);
@@ -691,6 +712,7 @@
 		68167AC82C4EB58400D30E97 /* Learn */ = {
 			isa = PBXGroup;
 			children = (
+				6820378E2D7C77C7006CA5E6 /* LearnComponent.swift */,
 				6827E1092D2691F600C69638 /* LearnFoldersList */,
 				683A179B2D141983003CD1BF /* LearnCard */,
 				683A174C2D10ADFF003CD1BF /* SelectFolderLearningMode */,
@@ -698,6 +720,22 @@
 				68CDC0042D0380EA0042CE81 /* LearnMain */,
 			);
 			path = Learn;
+			sourceTree = "<group>";
+		};
+		682037872D7B090B006CA5E6 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				682037882D7B0916006CA5E6 /* Folder */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		682037882D7B0916006CA5E6 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				6820378C2D7C5321006CA5E6 /* EditFolderUITests.swift */,
+			);
+			path = Folder;
 			sourceTree = "<group>";
 		};
 		6826896B2CC2F286000284E7 /* Feedback */ = {
@@ -1007,6 +1045,7 @@
 		688C30D52D04F3E700ECDEB6 /* FolderDetails */ = {
 			isa = PBXGroup;
 			children = (
+				68729F692D7CC4D700DEC303 /* FolderDetailsAccessibilityIdentifier.swift */,
 				688C30D62D04F3FC00ECDEB6 /* FolderDetailsEvent.swift */,
 				688C30D72D04F3FC00ECDEB6 /* FolderDetailsPresenter.swift */,
 				688C30D82D04F3FC00ECDEB6 /* FolderDetailsReducer.swift */,
@@ -1418,6 +1457,7 @@
 		68BA40142D0D8097006A86FE /* RememberItems */ = {
 			isa = PBXGroup;
 			children = (
+				682037902D7C7F56006CA5E6 /* RememberItemsComponent.swift */,
 				6890F95F2D29B36000BBB87A /* RememberItemCoordinator */,
 				68BA40132D0D805B006A86FE /* EditWordRememberItem */,
 			);
@@ -1520,6 +1560,7 @@
 		68CDC03F2D047A250042CE81 /* FoldersList */ = {
 			isa = PBXGroup;
 			children = (
+				682037922D7C94CF006CA5E6 /* FoldersListAccessibilityIdentifier.swift */,
 				68CDC0552D047A9D0042CE81 /* Subviews */,
 				68CDC0402D047A5F0042CE81 /* FoldersListEvent.swift */,
 				68CDC0412D047A5F0042CE81 /* FoldersListPresenter.swift */,
@@ -1607,7 +1648,7 @@
 		68D8E1862CE51A3600660E24 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
-				6859C0322D721A8A00F8F2B8 /* FoldersDependencies.swift */,
+				6859C0322D721A8A00F8F2B8 /* FoldersComponent.swift */,
 				6890F9412D29937900BBB87A /* ImagePicker */,
 				68BA40142D0D8097006A86FE /* RememberItems */,
 				68BA3FEF2D0CB41A006A86FE /* CategoryDetails */,
@@ -1623,6 +1664,7 @@
 		68D8E1892CE51A4D00660E24 /* EditFolder */ = {
 			isa = PBXGroup;
 			children = (
+				682037892D7B1DAB006CA5E6 /* EditFolderAccessibilityIdentifier.swift */,
 				68D8E1B32CE9250900660E24 /* EditFolderFactory.swift */,
 				68D8E18A2CE51A7C00660E24 /* EditFolderReducer.swift */,
 				68D8E18B2CE51A7C00660E24 /* EditFolderPresenter.swift */,
@@ -1724,6 +1766,9 @@
 			);
 			dependencies = (
 				68167AB12C4E99E900D30E97 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				68729F652D7CC3DF00DEC303 /* Mocks */,
 			);
 			name = MemoryUITests;
 			productName = MemoryUITests;
@@ -1847,7 +1892,7 @@
 				68BD86222CBD269000DD0A2B /* CoordinatorRootView.swift in Sources */,
 				68CDC03E2D046CFD0042CE81 /* PressButtonStyle.swift in Sources */,
 				6827E0B62D1CAE9E00C69638 /* AppTabBarTabs.swift in Sources */,
-				6859C0332D721A8A00F8F2B8 /* FoldersDependencies.swift in Sources */,
+				6859C0332D721A8A00F8F2B8 /* FoldersComponent.swift in Sources */,
 				683A17612D10B227003CD1BF /* LearnRow.swift in Sources */,
 				6890F9EA2D32D27000BBB87A /* PixabayImage.swift in Sources */,
 				683A17BC2D142B98003CD1BF /* ActionButton.swift in Sources */,
@@ -1855,10 +1900,12 @@
 				68D8E1B22CE917A100660E24 /* Thread+Extensions.swift in Sources */,
 				68D8E1A22CE5279000660E24 /* EmojiFormatter.swift in Sources */,
 				68D8E1AF2CE9177200660E24 /* DefaultStateMachine.swift in Sources */,
+				68729F6A2D7CC4D700DEC303 /* FolderDetailsAccessibilityIdentifier.swift in Sources */,
 				68D235042D031B6D00A5B5C9 /* TaskPublisher.swift in Sources */,
 				68BA3FF92D0CB42F006A86FE /* CategoryDetailsFactory.swift in Sources */,
 				68BA3FFA2D0CB42F006A86FE /* CategoryDetailsViewState.swift in Sources */,
 				68BA3FFC2D0CB42F006A86FE /* CategoryDetailsEvent.swift in Sources */,
+				682037932D7C94CF006CA5E6 /* FoldersListAccessibilityIdentifier.swift in Sources */,
 				68BA3FFD2D0CB42F006A86FE /* CategoryDetailsPresenter.swift in Sources */,
 				68BA3FFE2D0CB42F006A86FE /* CategoryDetailsReducer.swift in Sources */,
 				68BA3FFF2D0CB42F006A86FE /* CategoryDetailsRouterProtocol.swift in Sources */,
@@ -1922,6 +1969,7 @@
 				683A17A62D1419C1003CD1BF /* LearnCardRouterProtocol.swift in Sources */,
 				683A17A72D1419C1003CD1BF /* LearnCardView.swift in Sources */,
 				6890F9672D29B3DE00BBB87A /* RememberItemCoordinatorView.swift in Sources */,
+				682037912D7C7F56006CA5E6 /* RememberItemsComponent.swift in Sources */,
 				6827E0C72D1DDCC700C69638 /* FoldersServiceDecorator.swift in Sources */,
 				683A17A82D1419C1003CD1BF /* LearnCardReducer.swift in Sources */,
 				683A17A92D1419C1003CD1BF /* LearnCardFactory.swift in Sources */,
@@ -1933,6 +1981,7 @@
 				683A17AC2D1419C1003CD1BF /* LearnCardEvent.swift in Sources */,
 				683A17AD2D1419C1003CD1BF /* LearnCardPresenter.swift in Sources */,
 				683A17B82D1427B2003CD1BF /* LearnNewWortTypeItemView.swift in Sources */,
+				6820378A2D7B1DB7006CA5E6 /* EditFolderAccessibilityIdentifier.swift in Sources */,
 				68CDC00E2D0380FC0042CE81 /* LearnMainFactory.swift in Sources */,
 				68BA402B2D0DE197006A86FE /* CreateWordModel.swift in Sources */,
 				68CDC00F2D0380FC0042CE81 /* LearnMainState.swift in Sources */,
@@ -2035,6 +2084,7 @@
 				683A17B12D141B00003CD1BF /* LearnNewItemView+Subviews.swift in Sources */,
 				6827E1132D26926000C69638 /* LearnFoldersListPresenter.swift in Sources */,
 				6827E1152D26926000C69638 /* LearnFoldersListView.swift in Sources */,
+				6820378F2D7C77C7006CA5E6 /* LearnComponent.swift in Sources */,
 				6827E1162D26926000C69638 /* LearnFoldersListFactory.swift in Sources */,
 				6827E1172D26926000C69638 /* LearnFoldersListState.swift in Sources */,
 				6827E1182D26926000C69638 /* LearnFoldersListRouterProtocol.swift in Sources */,
@@ -2092,7 +2142,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				68167AB42C4E99E900D30E97 /* MemoryUITests.swift in Sources */,
+				68729F6B2D7CC5D600DEC303 /* FolderDetailsAccessibilityIdentifier.swift in Sources */,
+				6820378D2D7C5338006CA5E6 /* EditFolderUITests.swift in Sources */,
 				68167AB62C4E99E900D30E97 /* MemoryUITestsLaunchTests.swift in Sources */,
+				6820378B2D7B251D006CA5E6 /* EditFolderAccessibilityIdentifier.swift in Sources */,
+				682037942D7C95EE006CA5E6 /* FoldersListAccessibilityIdentifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

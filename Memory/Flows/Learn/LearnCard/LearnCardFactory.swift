@@ -20,6 +20,8 @@ struct LearnCardFactory {
         let speechUtteranceService: SpeechUtteranceServiceProtocol
         let appEventsClient: AppEventsClientProtocol
         let rememberItemsService: RememberItemsServiceProtocol
+        let learnNewItemsService: LearnCardsServiceProtocol
+        let reviewItemsService: LearnCardsServiceProtocol
     }
 
     let dependencies: Dependencies
@@ -33,9 +35,9 @@ struct LearnCardFactory {
 
         switch arguments.mode {
         case .learnNew:
-            learnService = MemoryApp.learnNewItemsService
+            learnService = dependencies.learnNewItemsService
         case .review:
-            learnService = MemoryApp.reviewItemsService
+            learnService = dependencies.reviewItemsService
         }
 
         let store = DefaultStateMachine(

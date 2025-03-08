@@ -8,11 +8,13 @@ import Combine
 
 final class FoldersCoordinatorState: ObservableObject {
     struct Dependencies {
-        var appEventsClient: AppEventsClientProtocol
-        var foldersService: FoldersServiceProtocol
-        var categoriesService: CategoriesServiceProtocol
-        var rememberItemsService: RememberItemsServiceProtocol
-        var foldersCoordinatorFactory: any FoldersCoordinatorFactoryProtocol
+        let foldersCoordinatorFactory: FoldersCoordinatorFactoryProtocol
+        let rememberItemCoordinatorFactory: RememberItemCoordinatorFactoryProtocol
+        let foldersListScreenFactory: FoldersListScreenFactory
+        let editFolderFactory: EditFolderFactory
+        let editCategoryFactory: EditCategoryFactory
+        let folderDetailsFactory: FolderDetailsFactory
+        let categoryDetailsFactory: CategoryDetailsFactory
     }
 
     @Published var route: FoldersRoute
@@ -45,13 +47,7 @@ final class FoldersCoordinatorState: ObservableObject {
     @MainActor
     func foldersListStore() -> DefaultStateMachine<FoldersListState, FoldersListEvent, FoldersListViewState> {
         guard let _foldersListStore else {
-            let store = FoldersListScreenFactory(
-                dependencies: FoldersListScreenFactory.Dependencies(
-                    foldersService: dependencies.foldersService,
-                    appEventsClient: dependencies.appEventsClient
-                )
-            )
-                .makeStore(router: self)
+            let store = dependencies.foldersListScreenFactory.makeStore(router: self)
             _foldersListStore = store
 
             return store
@@ -63,12 +59,7 @@ final class FoldersCoordinatorState: ObservableObject {
     @MainActor
     func folderStore(id: Int?) -> DefaultStateMachine<EditFolderState, EditFolderEvent, EditFolderViewState> {
         guard let _editFolderStore else {
-            let store = EditFolderFactory(
-                dependencies: EditFolderFactory.Dependencies(
-                    foldersService: dependencies.foldersService
-                )
-            ).makeStore(id: id, router: self)
-
+            let store = dependencies.editFolderFactory.makeStore(id: id, router: self)
             _editFolderStore = store
 
             return store
@@ -80,9 +71,7 @@ final class FoldersCoordinatorState: ObservableObject {
     @MainActor
     func categoryStore(id: Int?, folderId: Int?) -> DefaultStateMachine<EditCategoryState, EditCategoryEvent, EditCategoryViewState> {
         guard let _editCategoryStore else {
-            let store = EditCategoryFactory(
-                dependencies: EditCategoryFactory.Dependencies(categoriesService: dependencies.categoriesService)
-            ).makeStore(
+            let store = dependencies.editCategoryFactory.makeStore(
                 arguments: .init(
                     id: id,
                     folderId: folderId
@@ -101,13 +90,7 @@ final class FoldersCoordinatorState: ObservableObject {
     @MainActor
     func folderDetailsStore(id: Int) -> DefaultStateMachine<FolderDetailsState, FolderDetailsEvent, FolderDetailsViewState> {
         guard let _folderDetailsStore else {
-            let store = FolderDetailsFactory(
-                dependencies: FolderDetailsFactory.Dependencies(
-                    foldersService: dependencies.foldersService,
-                    categoriesService: dependencies.categoriesService,
-                    appEventsClient: dependencies.appEventsClient
-                )
-            ).makeStore(id: id, router: FolderDetailsRouter(state: self))
+            let store = dependencies.folderDetailsFactory.makeStore(id: id, router: FolderDetailsRouter(state: self))
             _folderDetailsStore = store
             
             return store
@@ -119,13 +102,10 @@ final class FoldersCoordinatorState: ObservableObject {
     @MainActor
     func categoryDetailsStore(id: Int) -> DefaultStateMachine<CategoryDetailsState, CategoryDetailsEvent, CategoryDetailsViewState> {
         guard let _categoryDetailsStore else {
-            let store = CategoryDetailsFactory(
-                dependencies: .init(
-                    categoriesService: dependencies.categoriesService,
-                    rememberItemsService: dependencies.rememberItemsService,
-                    appEventsClient: dependencies.appEventsClient
-                )
-            ).makeStore(arguments: .init(id: id), router: CategoryDetailsRouter(state: self))
+            let store = dependencies.categoryDetailsFactory.makeStore(
+                arguments: .init(id: id),
+                router: CategoryDetailsRouter(state: self)
+            )
             _categoryDetailsStore = store
 
             return store
@@ -137,7 +117,7 @@ final class FoldersCoordinatorState: ObservableObject {
     @MainActor
     func rememberItemCoordinatorState(router: RememberItemRouter) -> RememberItemCoordinatorState {
         guard let _rememberItemCoordinatorState else {
-            let store = RememberItemCoordinatorState(route: router) { [weak self] in
+            let store = dependencies.rememberItemCoordinatorFactory.makeState(route: router) { [weak self] in
                 self?.presentedItem = nil
             }
             _rememberItemCoordinatorState = store

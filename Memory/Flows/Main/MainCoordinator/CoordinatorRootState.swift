@@ -8,7 +8,8 @@ import Combine
 
 final class CoordinatorRootState: ObservableObject {
     struct Dependencies {
-        let foldersCoordinatorFactory: any FoldersCoordinatorFactoryProtocol
+        let foldersCoordinatorFactory: FoldersCoordinatorFactoryProtocol
+        let learnCoordinatorFactory: LearnCoordinatorFactoryProtocol
     }
 
     @Published var path = NavigationPath()
@@ -36,9 +37,7 @@ final class CoordinatorRootState: ObservableObject {
 
     func learnCoordinatorState() -> LearnCoordinatorState {
         guard let _learnCoordinatorState else {
-            let state = LearnCoordinatorFactory().makeState(route: .main) {
-
-            }
+            let state = dependencies.learnCoordinatorFactory.makeState(for: .main) { }
             _learnCoordinatorState = state
 
             return state

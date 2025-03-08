@@ -16,7 +16,7 @@ struct RememberItemCoordinatorView: View {
                 switch $0 {
                 default:
                     if let state = state.nextItemCoordinatorState(for: $0) {
-                        RememberItemCoordinatorFactory().makeView(for: state)
+                        RememberItemCoordinatorView(state: state)
                     } else {
                         EmptyView()
                     }
@@ -30,7 +30,7 @@ struct RememberItemCoordinatorView: View {
         NavigationStack {
             switch item {
             case let .imagePicker(text, completion):
-                ImagePickerFactory.makeView(for: state.imagePickerStore(text: text, completion: completion))
+                ImagePickerView(store: state.imagePickerStore(text: text, completion: completion))
             default:
                 EmptyView()
             }

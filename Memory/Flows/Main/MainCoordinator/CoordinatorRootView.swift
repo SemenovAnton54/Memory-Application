@@ -6,8 +6,6 @@
 import SwiftUI
 
 struct CoordinatorRootView: View {
-    let foldersCoordinatorFactory: any FoldersCoordinatorFactoryProtocol
-
     @ObservedObject var state: CoordinatorRootState
 
     var body: some View {
@@ -36,13 +34,13 @@ struct CoordinatorRootView: View {
                         AppTabBarTabs.Tab(
                             id: .learn,
                             view: AnyView(
-                                LearnCoordinatorFactory().makeView(for: state.learnCoordinatorState())
+                                LearnCoordinatorView(state: state.learnCoordinatorState())
                             )
                         ),
                         AppTabBarTabs.Tab(
                             id: .list,
                             view: AnyView(
-                                foldersCoordinatorFactory.makeView(for: state.foldersCoordinatorState())
+                                FoldersCoordinatorView(state: state.foldersCoordinatorState())
                             )
                         ),
                     ]

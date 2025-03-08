@@ -32,6 +32,7 @@ struct FolderDetailsFactory {
                 makeDeleteFolderRequestLoop(),
                 makeFetchCategoriesRequestLoop(),
                 makeCategoryEventsLoop(),
+                makeFoldersEventsLoop(id: id),
                 makeRoutingLoop(router: router),
             ]
         )
@@ -90,6 +91,21 @@ extension FolderDetailsFactory {
             } catch {
                 return .categoriesFetched(.failure(error))
             }
+        }
+    }
+
+    func makeFoldersEventsLoop(id: Int) -> FolderDetailsFeedbackLoop {
+        feedbackLoop { _ in
+            dependencies
+                .appEventsClient
+                .subscribe(for: FolderEvent.self)
+                .filter { event in
+                    event == .folderUpdated(id: id)
+                }
+                .map { _ in
+                    .folderChanged
+                }
+                .eraseToAnyPublisher()
         }
     }
 }

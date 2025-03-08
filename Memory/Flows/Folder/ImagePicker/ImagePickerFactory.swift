@@ -51,11 +51,6 @@ struct ImagePickerFactory {
 
         return store
     }
-
-    @MainActor
-    static func makeView(for store: DefaultStateMachine<ImagePickerState, ImagePickerEvent, ImagePickerViewState>) -> some View {
-        ImagePickerView(store: store)
-    }
 }
 
 // MARK: - Feedback loops
