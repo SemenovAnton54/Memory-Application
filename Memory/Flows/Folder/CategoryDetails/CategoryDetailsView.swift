@@ -7,6 +7,8 @@ import SwiftUI
 import Combine
 
 struct CategoryDetailsView<T: StateMachine>: View where T.ViewState == CategoryDetailsViewState, T.Event == CategoryDetailsEvent {
+    typealias AccessibilityIdentifier = CategoryDetailsAccessibilityIdentifier
+
     @ObservedObject var store: T
 
     @State private var showingOptions = false
@@ -59,20 +61,24 @@ struct CategoryDetailsView<T: StateMachine>: View where T.ViewState == CategoryD
                 .listRowSeparatorTint(.white.opacity(0.1))
                 .listRowBackground(Colors.backgroundSecondary)
             }
+            .accessibilityIdentifier(AccessibilityIdentifier.collectionView)
             .background(Colors.background)
             .scrollContentBackground(.hidden)
             .toolbar {
                 Button(action: { showingOptions = true }) {
                     Image(systemName: "ellipsis.circle")
                 }
+                .accessibilityIdentifier(AccessibilityIdentifier.options)
                 .confirmationDialog("Select option", isPresented: $showingOptions, titleVisibility: .visible) {
                     Button("Edit") {
                         store.event(.editCategory)
                     }
+                    .accessibilityIdentifier(AccessibilityIdentifier.editButton)
 
                     Button("Delete", role: .destructive) {
                         showingDeleteConfirmation = true
                     }
+                    .accessibilityIdentifier(AccessibilityIdentifier.deleteButton)
                 }
                 .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
                     Button("Yes", role: .destructive) {

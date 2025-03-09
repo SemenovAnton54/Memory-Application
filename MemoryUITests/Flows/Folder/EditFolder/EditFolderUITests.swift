@@ -10,24 +10,10 @@ import Foundation
 
 @testable import Memory
 
-final class EditFolderUITests: XCTestCase {
+final class EditFolderUITests: SCTestBase {
     let folderName = "Test folder name"
     let folderIcon = "😍"
     let folderDescription = "Test folder description"
-
-    var app: XCUIApplication!
-
-    override func setUpWithError() throws {
-        continueAfterFailure = false
-
-        app = XCUIApplication()
-        app.launchArguments = ["UITests"]
-        app.launch()
-    }
-
-    override func tearDownWithError() throws {
-        app = nil
-    }
 
     func testEditFolder() throws {
         UITestsMocks.mockFolder(
@@ -72,11 +58,11 @@ final class EditFolderUITests: XCTestCase {
 
         app.navigationBars.buttons.element(boundBy: 0).tap()
         let editedFolder = notEmptyList.cells.element(boundBy: 1)
-        let title = editedFolder.staticTexts[FoldersListAccessibilityIdentifier.folderCellTitle(id: 1)]
+        let title = editedFolder.staticTexts[EditItemListAccessibilityIdentifier.itemListCellTitle(id: 1)]
         XCTAssertEqual(title.label, editedFolderName)
-        let icon = editedFolder.staticTexts[FoldersListAccessibilityIdentifier.folderCellIcon(id: 1)]
+        let icon = editedFolder.staticTexts[EditItemListAccessibilityIdentifier.itemListCellIcon(id: 1)]
         XCTAssertEqual(icon.label, editedFolderIcon)
-        let description = editedFolder.staticTexts[FoldersListAccessibilityIdentifier.folderCellDescription(id: 1)]
+        let description = editedFolder.staticTexts[EditItemListAccessibilityIdentifier.itemListCellDescription(id: 1)]
         XCTAssertEqual(description.label, editedFolderDescription)
     }
 
@@ -94,11 +80,11 @@ final class EditFolderUITests: XCTestCase {
         XCTAssertEqual(notEmptyList.cells.count, 2)
 
         let newFolder = notEmptyList.cells.element(boundBy: 1)
-        let title = newFolder.staticTexts[FoldersListAccessibilityIdentifier.folderCellTitle(id: 1)]
+        let title = newFolder.staticTexts[EditItemListAccessibilityIdentifier.itemListCellTitle(id: 1)]
         XCTAssertEqual(title.label, folderName)
-        let icon = newFolder.staticTexts[FoldersListAccessibilityIdentifier.folderCellIcon(id: 1)]
+        let icon = newFolder.staticTexts[EditItemListAccessibilityIdentifier.itemListCellIcon(id: 1)]
         XCTAssertEqual(icon.label, folderIcon)
-        let description = newFolder.staticTexts[FoldersListAccessibilityIdentifier.folderCellDescription(id: 1)]
+        let description = newFolder.staticTexts[EditItemListAccessibilityIdentifier.itemListCellDescription(id: 1)]
         XCTAssertEqual(description.label, folderDescription)
     }
 }

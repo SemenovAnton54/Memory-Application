@@ -38,7 +38,7 @@ struct FolderDetailsView<T: StateMachine>: View where T.ViewState == FolderDetai
                 Section(
                     content: {
                         ForEach(store.viewState.categories) { category in
-                            FolderRow(
+                            ItemListRow(
                                 id: category.id,
                                 icon: category.icon,
                                 name: category.name,
@@ -47,6 +47,7 @@ struct FolderDetailsView<T: StateMachine>: View where T.ViewState == FolderDetai
                                 store.event(.categoryDetails(id: category.id))
                             }
                             .listRowInsets(EdgeInsets())
+                            .accessibilityIdentifier(FolderDetailsAccessibilityIdentifier.categoryCell(id: category.id))
                         }
                     },
                     header: {
@@ -101,6 +102,7 @@ struct FolderDetailsView<T: StateMachine>: View where T.ViewState == FolderDetai
                 .buttonStyle(PressButtonStyle())
                 .background(Colors.actionColor)
                 .cornerRadius(12)
+                .accessibilityIdentifier(FolderDetailsAccessibilityIdentifier.addCategoryButton)
 
                 Spacer()
                     .frame(height: 30)

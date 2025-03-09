@@ -17,4 +17,9 @@ public enum FolderDetailsAccessibilityIdentifier {
     public static let iconValue = "folderDetailsIconValue"
     public static let descriptionTitle = "folderDetailsDescriptionTitle"
     public static let descriptionValue = "folderDetailsDescriptionValue"
+    public static let addCategoryButton = "folderDetailsAddCategoryButton"
+
+    public static func categoryCell(id: Int) -> String {
+        "category_cell_\(id)"
+    }
 }

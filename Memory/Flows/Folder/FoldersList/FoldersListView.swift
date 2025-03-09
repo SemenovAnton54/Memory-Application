@@ -34,7 +34,7 @@ struct FoldersListView<T: StateMachine>: View where T.ViewState == FoldersListVi
                 .accessibilityIdentifier(FoldersListAccessibilityIdentifier.newFolderButton)
 
                 ForEach(store.viewState.favoriteFolders) { folder in
-                    FolderRow(
+                    ItemListRow(
                         id: folder.id,
                         icon: folder.icon,
                         name: folder.name,
@@ -42,8 +42,8 @@ struct FoldersListView<T: StateMachine>: View where T.ViewState == FoldersListVi
                     ) {
                         store.event(.folderSelected(id: folder.id))
                     }
+                    .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCell(id: folder.id))
                     .listRowInsets(EdgeInsets())
-
                 }
             }
             .listRowSeparatorTint(.white.opacity(0.1))

@@ -17,7 +17,7 @@ struct LearnFoldersListView<T: StateMachine>: View where T.ViewState == LearnFol
         List {
             Section() {
                 ForEach(store.viewState.folders) { folder in
-                    FolderRow(
+                    ItemListRow(
                         id: folder.id,
                         icon: folder.icon,
                         name: folder.name,
@@ -26,7 +26,6 @@ struct LearnFoldersListView<T: StateMachine>: View where T.ViewState == LearnFol
                         store.event(.folderSelected(id: folder.id))
                     }
                     .listRowInsets(EdgeInsets())
-
                 }
             }
             .listRowSeparatorTint(.white.opacity(0.1))

@@ -21,14 +21,17 @@ struct EditCategoryView<T: StateMachine>: View where T.ViewState == EditCategory
                 ZStack {
                     HStack {
                         Button("Cancel", action: { store.event(.cancel) })
+                            .accessibilityIdentifier(EditCategoryAccessibilityIdentifier.cancelButton)
                         Spacer()
                         Button("Save", action: { store.event(.save) })
+                            .accessibilityIdentifier(EditCategoryAccessibilityIdentifier.saveButton)
                     }
 
                     Text(store.viewState.isNewCategory ? "New Category" : "Edit category")
                         .frame(maxWidth: .infinity, alignment: .center)
                         .multilineTextAlignment(.leading)
                         .foregroundStyle(Colors.text)
+                        .accessibilityIdentifier(EditCategoryAccessibilityIdentifier.title)
                 }
 
                 ZStack {
@@ -64,33 +67,39 @@ struct EditCategoryView<T: StateMachine>: View where T.ViewState == EditCategory
                     "",
                     text: binding(store.viewState.title) { store.event(.nameDidChange($0)) },
                     prompt: Text("Name").foregroundStyle(Colors.textSecondary)
-                ).defaultStyle()
+                )
+                .defaultStyle()
+                .accessibilityIdentifier(EditCategoryAccessibilityIdentifier.nameField)
 
                 TextField(
                     "",
                     text: $icon,
                     prompt: Text("Icon (only emoji)").foregroundStyle(Colors.textSecondary)
-                ).defaultStyle()
-                    .onReceive(Just(icon)) { newValue in
-                        let newValue = newValue.onlyEmoji().last?.toString() ?? store.viewState.icon
+                )
+                .defaultStyle()
+                .accessibilityIdentifier(EditCategoryAccessibilityIdentifier.iconField)
+                .onReceive(Just(icon)) { newValue in
+                    let newValue = newValue.onlyEmoji().last?.toString() ?? store.viewState.icon
 
-                        if newValue != icon {
-                            icon = newValue
-                        }
-
-                        guard newValue != store.viewState.icon else {
-                            return
-                        }
-
-                        icon = newValue.onlyEmoji().last?.toString() ?? ""
-                        store.event(.iconDidChanged(icon))
+                    if newValue != icon {
+                        icon = newValue
                     }
+
+                    guard newValue != store.viewState.icon else {
+                        return
+                    }
+
+                    icon = newValue.onlyEmoji().last?.toString() ?? ""
+                    store.event(.iconDidChanged(icon))
+                }
 
                 TextField(
                     "",
                     text: binding(store.viewState.description) { store.event(.descDidChanged($0)) },
                     prompt: Text("Description").foregroundStyle(Colors.textSecondary)
-                ).defaultStyle()
+                )
+                .defaultStyle()
+                .accessibilityIdentifier(EditCategoryAccessibilityIdentifier.descriptionField)
 
                 Spacer()
             }

@@ -1,11 +1,11 @@
 //
-//  FolderRow.swift
+//  ItemListRow.swift
 //  Memory
 //
 
 import SwiftUI
 
-struct FolderRow: View {
+struct ItemListRow: View {
     let id: Int
     let icon: String
     let name: String
@@ -19,19 +19,19 @@ struct FolderRow: View {
                     Image(systemName: "folder")
                         .frame(maxWidth: .infinity)
                         .frame(width: 40)
-                        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCellIcon(id: id))
+                        .accessibilityIdentifier(EditItemListAccessibilityIdentifier.itemListCellIcon(id: id))
                 } else {
                     Text(icon)
                         .frame(maxWidth: .infinity)
                         .frame(width: 40)
-                        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCellIcon(id: id))
+                        .accessibilityIdentifier(EditItemListAccessibilityIdentifier.itemListCellIcon(id: id))
                 }
 
                 VStack(alignment: .leading, spacing: 5) {
                     MainText(name)
-                        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCellTitle(id: id))
+                        .accessibilityIdentifier(EditItemListAccessibilityIdentifier.itemListCellTitle(id: id))
                     SecondText(description)
-                        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCellDescription(id: id))
+                        .accessibilityIdentifier(EditItemListAccessibilityIdentifier.itemListCellDescription(id: id))
                 }
                 Spacer()
             }
@@ -41,6 +41,5 @@ struct FolderRow: View {
             }
         }
         .buttonStyle(PressButtonStyle())
-        .accessibilityIdentifier(FoldersListAccessibilityIdentifier.folderCell(id: id))
     }
 }
