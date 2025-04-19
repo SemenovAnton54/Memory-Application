@@ -42,7 +42,8 @@ struct CategoryDetailsView<T: StateMachine>: View where T.ViewState == CategoryD
                         switch rememberItem.type {
                         case .word, .card:
                             if let word = rememberItem.word {
-                                WordListView(
+                                CategoryDetailsWordListView(
+                                    id: rememberItem.id,
                                     level: rememberItem.repeatLevel,
                                     word: word.word,
                                     translation: word.translation,
@@ -98,6 +99,7 @@ struct CategoryDetailsView<T: StateMachine>: View where T.ViewState == CategoryD
                         Image(systemName: "plus")
                             .foregroundStyle(.white)
                         MainText("New Remember Item")
+                            .accessibilityIdentifier(AccessibilityIdentifier.newRememberItemButton)
                     }
                 }
                 .buttonStyle(PressButtonStyle())

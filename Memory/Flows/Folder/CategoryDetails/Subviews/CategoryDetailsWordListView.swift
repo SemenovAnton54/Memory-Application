@@ -1,15 +1,18 @@
 //
-//  WordListView.swift
+//  CategoryDetailsWordListView.swift
 //  Memory
 //
 
 
 import SwiftUI
 
-struct WordListView: View {
+struct CategoryDetailsWordListView: View {
+    typealias AccessibilityIdentifier = CategoryDetailsAccessibilityIdentifier
+
     @State private var showingOptions: Bool = false
     @State private var showingDeleteConfirmation: Bool = false
 
+    let id: Int
     let level: RepeatLevel
     let word: String
     let translation: String
@@ -28,7 +31,9 @@ struct WordListView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     SecondText(level.title)
                     MainText(word, fontWeight: .black)
+                        .accessibilityIdentifier(AccessibilityIdentifier.wordValueCellTitle(id: id))
                     MainText(translation)
+                        .accessibilityIdentifier(AccessibilityIdentifier.wordTranslationCellTitle(id: id))
                 }
                 
                 Spacer()
@@ -40,10 +45,12 @@ struct WordListView: View {
             Button("Edit") {
                 editAction()
             }
+            .accessibilityIdentifier(AccessibilityIdentifier.editButton)
 
             Button("Delete", role: .destructive) {
                 showingDeleteConfirmation = true
             }
+            .accessibilityIdentifier(AccessibilityIdentifier.deleteButton)
         }
         .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
             Button("Yes", role: .destructive) {

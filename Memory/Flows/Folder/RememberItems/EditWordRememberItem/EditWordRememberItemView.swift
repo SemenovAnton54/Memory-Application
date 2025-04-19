@@ -8,6 +8,7 @@ import Combine
 import PhotosUI
 
 struct EditWordRememberItemView<T: StateMachine>: View where T.ViewState == EditWordRememberItemViewState, T.Event == EditWordRememberItemEvent {
+    typealias AccessibilityIdentifier = EditWordRememberItemAccessibilityIdentifier
     @ObservedObject var store: T
 
     init(store: T) {
@@ -19,11 +20,14 @@ struct EditWordRememberItemView<T: StateMachine>: View where T.ViewState == Edit
             ZStack {
                 HStack {
                     Button("Cancel", action: { store.event(.cancel) })
+                        .accessibilityIdentifier(AccessibilityIdentifier.cancelButton)
                     Spacer()
                     Button("Save", action: { store.event(.save) })
+                        .accessibilityIdentifier(AccessibilityIdentifier.saveButton)
                 }
 
                 Text(store.viewState.isNewRememberItem ? "New Word" : "EditWord")
+                    .accessibilityIdentifier(AccessibilityIdentifier.titleLabel)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .multilineTextAlignment(.leading)
                     .foregroundStyle(Colors.text)
@@ -38,20 +42,26 @@ struct EditWordRememberItemView<T: StateMachine>: View where T.ViewState == Edit
                         TextField(
                             "",
                             text: binding(store.viewState.word) { store.event(.wordDidChange($0)) },
-                            prompt: Text("Name").foregroundStyle(Colors.textSecondary)
-                        ).defaultStyle()
+                            prompt: Text("Word").foregroundStyle(Colors.textSecondary)
+                        )
+                        .defaultStyle()
+                        .accessibilityIdentifier(AccessibilityIdentifier.wordTextField)
 
                         TextField(
                             "",
                             text: binding(store.viewState.transcription) { store.event(.transcriptionDidChange($0)) },
                             prompt: Text("Transcription (optional)").foregroundStyle(Colors.textSecondary)
-                        ).defaultStyle()
+                        )
+                        .defaultStyle()
+                        .accessibilityIdentifier(AccessibilityIdentifier.transcriptionTextField)
 
                         TextField(
                             "",
                             text: binding(store.viewState.translation) { store.event(.translationDidChange($0)) },
                             prompt: Text("Translation").foregroundStyle(Colors.textSecondary)
-                        ).defaultStyle()
+                        )
+                        .defaultStyle()
+                        .accessibilityIdentifier(AccessibilityIdentifier.translationTextField)
 
                         ZStack {
                             HStack {
@@ -76,6 +86,7 @@ struct EditWordRememberItemView<T: StateMachine>: View where T.ViewState == Edit
                                     .onTapGesture {
                                         store.event(.addImage)
                                     }
+                                    .accessibilityIdentifier(AccessibilityIdentifier.addImageButton)
 
                                 Spacer()
                             }
@@ -105,6 +116,7 @@ struct EditWordRememberItemView<T: StateMachine>: View where T.ViewState == Edit
                             .foregroundStyle(Colors.text)
                             .cornerRadius(8)
                         }
+                        .accessibilityIdentifier(AccessibilityIdentifier.newExampleButton)
 
                         Toggle(isOn: binding(store.viewState.isLearning) { store.event(.isLearningChanged($0)) }) {
                             HStack {
@@ -118,6 +130,7 @@ struct EditWordRememberItemView<T: StateMachine>: View where T.ViewState == Edit
                         .padding()
                         .background(Colors.backgroundSecondary)
                         .cornerRadius(8)
+                        .accessibilityIdentifier(AccessibilityIdentifier.startLearnSwitcher)
 
                         Spacer()
                     }
@@ -147,10 +160,12 @@ extension EditWordRememberItemView {
             ZStack(alignment: .trailing) {
                 VStack {
                     exampleTextField(prompt: "Example", text: $example)
+                        .accessibilityIdentifier(AccessibilityIdentifier.newExampleTextField)
 
                     Divider()
 
                     exampleTextField(prompt: "Translation", text: $exampleTranslation)
+                        .accessibilityIdentifier(AccessibilityIdentifier.newExampleTranslationTextField)
                 }
                 .background(Colors.backgroundSecondary)
                 .cornerRadius(8)
@@ -165,6 +180,7 @@ extension EditWordRememberItemView {
                     .frame(width: 50, height: 50, alignment: .trailing)
                     .padding(.top, -25)
                     .padding(.trailing, -25)
+                    .accessibilityIdentifier(AccessibilityIdentifier.deleteNewExampleTranslationButton)
                     Spacer()
                 }
             }

@@ -54,6 +54,7 @@
 				Flows/Folder/FolderDetails/FolderDetailsAccessibilityIdentifier.swift,
 				Flows/Folder/FoldersList/FoldersListAccessibilityIdentifier.swift,
 				Flows/Folder/FoldersList/Subviews/ItemListRowAccessibilityIdentifier.swift,
+				Flows/Folder/RememberItems/EditWordRememberItem/EditWordRememberItemAccessibilityIdentifier.swift,
 			);
 			target = 68167AAE2C4E99E900D30E97 /* MemoryUITests */;
 		};

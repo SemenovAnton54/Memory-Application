@@ -15,12 +15,6 @@ enum UITestsMocks {
         let description: String
     }
 
-    struct CategoryMock {
-        let name: String
-        let icon: String
-        let description: String
-    }
-
     static func mockFolder(
         app: XCUIApplication,
         folder: FolderMock = .init(
@@ -54,6 +48,12 @@ enum UITestsMocks {
         saveButton.tap()
     }
 
+    struct CategoryMock {
+        let name: String
+        let icon: String
+        let description: String
+    }
+
     static func mockCategory(
         app: XCUIApplication,
         category: CategoryMock = .init(
@@ -81,6 +81,75 @@ enum UITestsMocks {
         descriptionTextField.typeText(category.description)
 
         let saveButton = app.buttons[EditCategoryAccessibilityIdentifier.saveButton]
+        saveButton.tap()
+    }
+
+    struct WordMock {
+        let word: String
+        let transcription: String
+        let translation: String
+        let examples: [Example]
+
+        struct Example {
+            let example: String
+            let translation: String
+        }
+    }
+
+    static func mockWordRememberItem(
+        app: XCUIApplication,
+        word: WordMock = WordMock(
+            word: "Word",
+            transcription: "wɜːrd",
+            translation: "Слово",
+            examples: [
+                WordMock.Example(example: "First example", translation: "Первый пример")
+            ]
+        )
+    ) {
+        Self.mockCategory(app: app)
+
+        app.staticTexts[EditItemListAccessibilityIdentifier.itemListCellDescription(id: 1)].tap()
+
+        app.buttons[CategoryDetailsAccessibilityIdentifier.newRememberItemButton].tap()
+        let nameTextField = app.textFields[EditWordRememberItemAccessibilityIdentifier.wordTextField]
+        nameTextField.tap()
+        nameTextField.typeText(word.word)
+
+        let iconTextField = app.textFields[EditWordRememberItemAccessibilityIdentifier.transcriptionTextField]
+        iconTextField.tap()
+        iconTextField.typeText(word.transcription)
+
+        let descriptionTextField = app.textFields[EditWordRememberItemAccessibilityIdentifier.translationTextField]
+        descriptionTextField.tap()
+        descriptionTextField.typeText(word.translation)
+
+        word.examples.forEach {
+            app.buttons[EditWordRememberItemAccessibilityIdentifier.newExampleButton].tap()
+
+            let exampleTextField = app.textViews
+                .matching(identifier: EditWordRememberItemAccessibilityIdentifier.newExampleTextField)
+                .allElementsBoundByIndex
+                .last!
+//                .textFields
+//                .firstMatch
+            exampleTextField.tap()
+            exampleTextField.typeText($0.example)
+
+            let exampleTranslationTextField = app.textViews
+                .matching(identifier: EditWordRememberItemAccessibilityIdentifier.newExampleTranslationTextField)
+                .allElementsBoundByIndex
+                .last!
+//                .textFields
+//                .firstMatch
+
+            exampleTranslationTextField.tap()
+            exampleTranslationTextField.typeText($0.translation)
+        }
+
+        app.switches[EditWordRememberItemAccessibilityIdentifier.startLearnSwitcher].tap()
+
+        let saveButton = app.buttons[EditWordRememberItemAccessibilityIdentifier.saveButton]
         saveButton.tap()
     }
 }

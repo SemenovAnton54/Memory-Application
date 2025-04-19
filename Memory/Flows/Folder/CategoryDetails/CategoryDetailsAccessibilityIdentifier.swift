@@ -17,9 +17,13 @@ public enum CategoryDetailsAccessibilityIdentifier {
     public static let iconValue = "categoryDetailsIconValue"
     public static let descriptionTitle = "categoryDetailsDescriptionTitle"
     public static let descriptionValue = "categoryDetailsDescriptionValue"
-    public static let addCategoryButton = "categoryDetailsAddCategoryButton"
+    public static let newRememberItemButton = "newRememberItemButton"
 
-    public static func categoryCell(id: Int) -> String {
-        "category_cell_\(id)"
+    public static func wordValueCellTitle(id: Int) -> String {
+        "wordValueCellTitle\(id)"
+    }
+
+    public static func wordTranslationCellTitle(id: Int) -> String {
+        "wordTranslationCellTitle\(id)"
     }
 }
